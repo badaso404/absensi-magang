@@ -1,0 +1,11 @@
+.sidebar-menu-item.active {
+    /* 1. LATAR BELAKANG (background-color): Ganti Ungu menjadi Kuning */
+    background-color: #FFC107; 
+
+    /* 2. TEKS & IKON (color): Ganti Putih menjadi Hitam agar kontras */
+    color: black; 
+
+    /* Biarkan properti lain seperti border-radius dan padding */
+    border-radius: 15px; 
+    padding: 10px 15px;
+}

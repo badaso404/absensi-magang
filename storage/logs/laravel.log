@@ -1,0 +1,558 @@
+[2026-08-09 15:54:23] local.ERROR: Call to a member function text() on null {"view":{"view":"/Users/bgsprtm/Herd/magang-kominfotik/resources/views/layout/navbar.blade.php","data":{"errors":"<pre class=sf-dump id=sf-dump-554777997 data-indent-pad=\"  \"><span class=sf-dump-note>Illuminate\\Support\\ViewErrorBag</span> {<a class=sf-dump-ref>#387</a><samp data-depth=1 class=sf-dump-expanded>
+  #<span class=sf-dump-protected title=\"Protected property\">bags</span>: []
+</samp>}
+</pre><script>Sfdump(\"sf-dump-554777997\", {\"maxDepth\":3,\"maxStringLength\":160})</script>
+","mainMenu":"<pre class=sf-dump id=sf-dump-1139763885 data-indent-pad=\"  \">\"<span class=sf-dump-str title=\"4 characters\">Home</span>\"
+</pre><script>Sfdump(\"sf-dump-1139763885\", {\"maxDepth\":3,\"maxStringLength\":160})</script>
+","absensi":"<pre class=sf-dump id=sf-dump-1379244014 data-indent-pad=\"  \"><span class=sf-dump-note>Illuminate\\Database\\Eloquent\\Collection</span> {<a class=sf-dump-ref>#1098</a><samp data-depth=1 class=sf-dump-expanded>
+  #<span class=sf-dump-protected title=\"Protected property\">items</span>: []
+  #<span class=sf-dump-protected title=\"Protected property\">escapeWhenCastingToString</span>: <span class=sf-dump-const>false</span>
+</samp>}
+</pre><script>Sfdump(\"sf-dump-1379244014\", {\"maxDepth\":3,\"maxStringLength\":160})</script>
+","kalkulasiKeterlambatan":"<pre class=sf-dump id=sf-dump-1570355250 data-indent-pad=\"  \"><span class=sf-dump-note>array:3</span> [<samp data-depth=1 class=sf-dump-expanded>
+  \"<span class=sf-dump-key>total_telat</span>\" => \"<span class=sf-dump-str title=\"8 characters\">00:00:00</span>\"
+  \"<span class=sf-dump-key>total_pulang_cepat</span>\" => \"<span class=sf-dump-str title=\"8 characters\">00:00:00</span>\"
+  \"<span class=sf-dump-key>total_keterlambatan</span>\" => \"<span class=sf-dump-str title=\"8 characters\">00:00:00</span>\"
+</samp>]
+</pre><script>Sfdump(\"sf-dump-1570355250\", {\"maxDepth\":3,\"maxStringLength\":160})</script>
+","absensiChart":"<pre class=sf-dump id=sf-dump-491605573 data-indent-pad=\"  \"><span class=sf-dump-note>array:3</span> [<samp data-depth=1 class=sf-dump-expanded>
+  \"<span class=sf-dump-key>x</span>\" => <span class=sf-dump-note>array:31</span> [<samp data-depth=2 class=sf-dump-compact>
+    <span class=sf-dump-index>0</span> => \"<span class=sf-dump-str title=\"10 characters\">08/01/2026</span>\"
+    <span class=sf-dump-index>1</span> => \"<span class=sf-dump-str title=\"10 characters\">08/02/2026</span>\"
+    <span class=sf-dump-index>2</span> => \"<span class=sf-dump-str title=\"10 characters\">08/03/2026</span>\"
+    <span class=sf-dump-index>3</span> => \"<span class=sf-dump-str title=\"10 characters\">08/04/2026</span>\"
+    <span class=sf-dump-index>4</span> => \"<span class=sf-dump-str title=\"10 characters\">08/05/2026</span>\"
+    <span class=sf-dump-index>5</span> => \"<span class=sf-dump-str title=\"10 characters\">08/06/2026</span>\"
+    <span class=sf-dump-index>6</span> => \"<span class=sf-dump-str title=\"10 characters\">08/07/2026</span>\"
+    <span class=sf-dump-index>7</span> => \"<span class=sf-dump-str title=\"10 characters\">08/08/2026</span>\"
+    <span class=sf-dump-index>8</span> => \"<span class=sf-dump-str title=\"10 characters\">08/09/2026</span>\"
+    <span class=sf-dump-index>9</span> => \"<span class=sf-dump-str title=\"10 characters\">08/10/2026</span>\"
+    <span class=sf-dump-index>10</span> => \"<span class=sf-dump-str title=\"10 characters\">08/11/2026</span>\"
+    <span class=sf-dump-index>11</span> => \"<span class=sf-dump-str title=\"10 characters\">08/12/2026</span>\"
+    <span class=sf-dump-index>12</span> => \"<span class=sf-dump-str title=\"10 characters\">08/13/2026</span>\"
+    <span class=sf-dump-index>13</span> => \"<span class=sf-dump-str title=\"10 characters\">08/14/2026</span>\"
+    <span class=sf-dump-index>14</span> => \"<span class=sf-dump-str title=\"10 characters\">08/15/2026</span>\"
+    <span class=sf-dump-index>15</span> => \"<span class=sf-dump-str title=\"10 characters\">08/16/2026</span>\"
+    <span class=sf-dump-index>16</span> => \"<span class=sf-dump-str title=\"10 characters\">08/17/2026</span>\"
+    <span class=sf-dump-index>17</span> => \"<span class=sf-dump-str title=\"10 characters\">08/18/2026</span>\"
+    <span class=sf-dump-index>18</span> => \"<span class=sf-dump-str title=\"10 characters\">08/19/2026</span>\"
+    <span class=sf-dump-index>19</span> => \"<span class=sf-dump-str title=\"10 characters\">08/20/2026</span>\"
+    <span class=sf-dump-index>20</span> => \"<span class=sf-dump-str title=\"10 characters\">08/21/2026</span>\"
+    <span class=sf-dump-index>21</span> => \"<span class=sf-dump-str title=\"10 characters\">08/22/2026</span>\"
+    <span class=sf-dump-index>22</span> => \"<span class=sf-dump-str title=\"10 characters\">08/23/2026</span>\"
+    <span class=sf-dump-index>23</span> => \"<span class=sf-dump-str title=\"10 characters\">08/24/2026</span>\"
+    <span class=sf-dump-index>24</span> => \"<span class=sf-dump-str title=\"10 characters\">08/25/2026</span>\"
+    <span class=sf-dump-index>25</span> => \"<span class=sf-dump-str title=\"10 characters\">08/26/2026</span>\"
+    <span class=sf-dump-index>26</span> => \"<span class=sf-dump-str title=\"10 characters\">08/27/2026</span>\"
+    <span class=sf-dump-index>27</span> => \"<span class=sf-dump-str title=\"10 characters\">08/28/2026</span>\"
+    <span class=sf-dump-index>28</span> => \"<span class=sf-dump-str title=\"10 characters\">08/29/2026</span>\"
+    <span class=sf-dump-index>29</span> => \"<span class=sf-dump-str title=\"10 characters\">08/30/2026</span>\"
+    <span class=sf-dump-index>30</span> => \"<span class=sf-dump-str title=\"10 characters\">08/31/2026</span>\"
+  </samp>]
+  \"<span class=sf-dump-key>y</span>\" => <span class=sf-dump-note>array:31</span> [<samp data-depth=2 class=sf-dump-compact>
+    <span class=sf-dump-index>0</span> => <span class=sf-dump-const>null</span>
+    <span class=sf-dump-index>1</span> => <span class=sf-dump-const>null</span>
+    <span class=sf-dump-index>2</span> => <span class=sf-dump-const>null</span>
+    <span class=sf-dump-index>3</span> => <span class=sf-dump-const>null</span>
+    <span class=sf-dump-index>4</span> => <span class=sf-dump-const>null</span>
+    <span class=sf-dump-index>5</span> => <span class=sf-dump-const>null</span>
+    <span class=sf-dump-index>6</span> => <span class=sf-dump-const>null</span>
+    <span class=sf-dump-index>7</span> => <span class=sf-dump-const>null</span>
+    <span class=sf-dump-index>8</span> => <span class=sf-dump-const>null</span>
+    <span class=sf-dump-index>9</span> => <span class=sf-dump-const>null</span>
+    <span class=sf-dump-index>10</span> => <span class=sf-dump-const>null</span>
+    <span class=sf-dump-index>11</span> => <span class=sf-dump-const>null</span>
+    <span class=sf-dump-index>12</span> => <span class=sf-dump-const>null</span>
+    <span class=sf-dump-index>13</span> => <span class=sf-dump-const>null</span>
+    <span class=sf-dump-index>14</span> => <span class=sf-dump-const>null</span>
+    <span class=sf-dump-index>15</span> => <span class=sf-dump-const>null</span>
+    <span class=sf-dump-index>16</span> => <span class=sf-dump-const>null</span>
+    <span class=sf-dump-index>17</span> => <span class=sf-dump-const>null</span>
+    <span class=sf-dump-index>18</span> => <span class=sf-dump-const>null</span>
+    <span class=sf-dump-index>19</span> => <span class=sf-dump-const>null</span>
+    <span class=sf-dump-index>20</span> => <span class=sf-dump-const>null</span>
+    <span class=sf-dump-index>21</span> => <span class=sf-dump-const>null</span>
+    <span class=sf-dump-index>22</span> => <span class=sf-dump-const>null</span>
+    <span class=sf-dump-index>23</span> => <span class=sf-dump-const>null</span>
+    <span class=sf-dump-index>24</span> => <span class=sf-dump-const>null</span>
+    <span class=sf-dump-index>25</span> => <span class=sf-dump-const>null</span>
+    <span class=sf-dump-index>26</span> => <span class=sf-dump-const>null</span>
+    <span class=sf-dump-index>27</span> => <span class=sf-dump-const>null</span>
+    <span class=sf-dump-index>28</span> => <span class=sf-dump-const>null</span>
+    <span class=sf-dump-index>29</span> => <span class=sf-dump-const>null</span>
+    <span class=sf-dump-index>30</span> => <span class=sf-dump-const>null</span>
+  </samp>]
+  \"<span class=sf-dump-key>z</span>\" => <span class=sf-dump-note>array:31</span> [<samp data-depth=2 class=sf-dump-compact>
+    <span class=sf-dump-index>0</span> => <span class=sf-dump-const>null</span>
+    <span class=sf-dump-index>1</span> => <span class=sf-dump-const>null</span>
+    <span class=sf-dump-index>2</span> => <span class=sf-dump-const>null</span>
+    <span class=sf-dump-index>3</span> => <span class=sf-dump-const>null</span>
+    <span class=sf-dump-index>4</span> => <span class=sf-dump-const>null</span>
+    <span class=sf-dump-index>5</span> => <span class=sf-dump-const>null</span>
+    <span class=sf-dump-index>6</span> => <span class=sf-dump-const>null</span>
+    <span class=sf-dump-index>7</span> => <span class=sf-dump-const>null</span>
+    <span class=sf-dump-index>8</span> => <span class=sf-dump-const>null</span>
+    <span class=sf-dump-index>9</span> => <span class=sf-dump-const>null</span>
+    <span class=sf-dump-index>10</span> => <span class=sf-dump-const>null</span>
+    <span class=sf-dump-index>11</span> => <span class=sf-dump-const>null</span>
+    <span class=sf-dump-index>12</span> => <span class=sf-dump-const>null</span>
+    <span class=sf-dump-index>13</span> => <span class=sf-dump-const>null</span>
+    <span class=sf-dump-index>14</span> => <span class=sf-dump-const>null</span>
+    <span class=sf-dump-index>15</span> => <span class=sf-dump-const>null</span>
+    <span class=sf-dump-index>16</span> => <span class=sf-dump-const>null</span>
+    <span class=sf-dump-index>17</span> => <span class=sf-dump-const>null</span>
+    <span class=sf-dump-index>18</span> => <span class=sf-dump-const>null</span>
+    <span class=sf-dump-index>19</span> => <span class=sf-dump-const>null</span>
+    <span class=sf-dump-index>20</span> => <span class=sf-dump-const>null</span>
+    <span class=sf-dump-index>21</span> => <span class=sf-dump-const>null</span>
+    <span class=sf-dump-index>22</span> => <span class=sf-dump-const>null</span>
+    <span class=sf-dump-index>23</span> => <span class=sf-dump-const>null</span>
+    <span class=sf-dump-index>24</span> => <span class=sf-dump-const>null</span>
+    <span class=sf-dump-index>25</span> => <span class=sf-dump-const>null</span>
+    <span class=sf-dump-index>26</span> => <span class=sf-dump-const>null</span>
+    <span class=sf-dump-index>27</span> => <span class=sf-dump-const>null</span>
+    <span class=sf-dump-index>28</span> => <span class=sf-dump-const>null</span>
+    <span class=sf-dump-index>29</span> => <span class=sf-dump-const>null</span>
+    <span class=sf-dump-index>30</span> => <span class=sf-dump-const>null</span>
+  </samp>]
+</samp>]
+</pre><script>Sfdump(\"sf-dump-491605573\", {\"maxDepth\":3,\"maxStringLength\":160})</script>
+","schedule_in":"<pre class=sf-dump id=sf-dump-1415429408 data-indent-pad=\"  \">\"<span class=sf-dump-str title=\"5 characters\">09:00</span>\"
+</pre><script>Sfdump(\"sf-dump-1415429408\", {\"maxDepth\":3,\"maxStringLength\":160})</script>
+","schedule_out":"<pre class=sf-dump id=sf-dump-430841511 data-indent-pad=\"  \">\"<span class=sf-dump-str title=\"5 characters\">14:00</span>\"
+</pre><script>Sfdump(\"sf-dump-430841511\", {\"maxDepth\":3,\"maxStringLength\":160})</script>
+","toggleAbsenPagi":"<pre class=sf-dump id=sf-dump-2015062517 data-indent-pad=\"  \">\"<span class=sf-dump-str title=\"4 characters\">pagi</span>\"
+</pre><script>Sfdump(\"sf-dump-2015062517\", {\"maxDepth\":3,\"maxStringLength\":160})</script>
+","__empty_1":"<pre class=sf-dump id=sf-dump-1717893104 data-indent-pad=\"  \"><span class=sf-dump-const>true</span>
+</pre><script>Sfdump(\"sf-dump-1717893104\", {\"maxDepth\":3,\"maxStringLength\":160})</script>
+","__currentLoopData":"<pre class=sf-dump id=sf-dump-470961360 data-indent-pad=\"  \"><span class=sf-dump-note>Illuminate\\Database\\Eloquent\\Collection</span> {<a class=sf-dump-ref>#1098</a><samp data-depth=1 class=sf-dump-expanded>
+  #<span class=sf-dump-protected title=\"Protected property\">items</span>: []
+  #<span class=sf-dump-protected title=\"Protected property\">escapeWhenCastingToString</span>: <span class=sf-dump-const>false</span>
+</samp>}
+</pre><script>Sfdump(\"sf-dump-470961360\", {\"maxDepth\":3,\"maxStringLength\":160})</script>
+","loop":"<pre class=sf-dump id=sf-dump-291308875 data-indent-pad=\"  \"><span class=sf-dump-const>null</span>
+</pre><script>Sfdump(\"sf-dump-291308875\", {\"maxDepth\":3,\"maxStringLength\":160})</script>
+"}},"userId":122,"exception":"[object] (Spatie\\LaravelIgnition\\Exceptions\\ViewException(code: 0): Call to a member function text() on null at /Users/bgsprtm/Herd/magang-kominfotik/resources/views/layout/navbar.blade.php:24)
+[stacktrace]
+#0 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php(123): require('/Users/bgsprtm/...')
+#1 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php(124): Illuminate\\Filesystem\\Filesystem::Illuminate\\Filesystem\\{closure}()
+#2 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/View/Engines/PhpEngine.php(58): Illuminate\\Filesystem\\Filesystem->getRequire('/Users/bgsprtm/...', Array)
+#3 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/View/Engines/CompilerEngine.php(72): Illuminate\\View\\Engines\\PhpEngine->evaluatePath('/Users/bgsprtm/...', Array)
+#4 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/View/View.php(207): Illuminate\\View\\Engines\\CompilerEngine->get('/Users/bgsprtm/...', Array)
+#5 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/View/View.php(190): Illuminate\\View\\View->getContents()
+#6 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/View/View.php(159): Illuminate\\View\\View->renderContents()
+#7 /Users/bgsprtm/Herd/magang-kominfotik/resources/views/beranda/index.blade.php(348): Illuminate\\View\\View->render()
+#8 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php(123): require('/Users/bgsprtm/...')
+#9 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php(124): Illuminate\\Filesystem\\Filesystem::Illuminate\\Filesystem\\{closure}()
+#10 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/View/Engines/PhpEngine.php(58): Illuminate\\Filesystem\\Filesystem->getRequire('/Users/bgsprtm/...', Array)
+#11 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/View/Engines/CompilerEngine.php(72): Illuminate\\View\\Engines\\PhpEngine->evaluatePath('/Users/bgsprtm/...', Array)
+#12 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/View/View.php(207): Illuminate\\View\\Engines\\CompilerEngine->get('/Users/bgsprtm/...', Array)
+#13 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/View/View.php(190): Illuminate\\View\\View->getContents()
+#14 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/View/View.php(159): Illuminate\\View\\View->renderContents()
+#15 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Http/Response.php(69): Illuminate\\View\\View->render()
+#16 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Http/Response.php(35): Illuminate\\Http\\Response->setContent(Object(Illuminate\\View\\View))
+#17 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Routing/Router.php(918): Illuminate\\Http\\Response->__construct(Object(Illuminate\\View\\View), 200, Array)
+#18 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Routing/Router.php(885): Illuminate\\Routing\\Router::toResponse(Object(Illuminate\\Http\\Request), Object(Illuminate\\View\\View))
+#19 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Routing/Router.php(806): Illuminate\\Routing\\Router->prepareResponse(Object(Illuminate\\Http\\Request), Object(Illuminate\\View\\View))
+#20 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(144): Illuminate\\Routing\\Router->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#21 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Routing/Middleware/SubstituteBindings.php(50): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#22 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(183): Illuminate\\Routing\\Middleware\\SubstituteBindings->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#23 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Auth/Middleware/Authenticate.php(57): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#24 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(183): Illuminate\\Auth\\Middleware\\Authenticate->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#25 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/VerifyCsrfToken.php(78): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#26 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(183): Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#27 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/View/Middleware/ShareErrorsFromSession.php(49): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#28 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(183): Illuminate\\View\\Middleware\\ShareErrorsFromSession->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#29 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Session/Middleware/StartSession.php(121): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#30 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Session/Middleware/StartSession.php(64): Illuminate\\Session\\Middleware\\StartSession->handleStatefulRequest(Object(Illuminate\\Http\\Request), Object(Illuminate\\Session\\Store), Object(Closure))
+#31 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(183): Illuminate\\Session\\Middleware\\StartSession->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#32 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/AddQueuedCookiesToResponse.php(37): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#33 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(183): Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#34 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/EncryptCookies.php(67): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#35 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(183): Illuminate\\Cookie\\Middleware\\EncryptCookies->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#36 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(119): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#37 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Routing/Router.php(807): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#38 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Routing/Router.php(784): Illuminate\\Routing\\Router->runRouteWithinStack(Object(Illuminate\\Routing\\Route), Object(Illuminate\\Http\\Request))
+#39 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Routing/Router.php(748): Illuminate\\Routing\\Router->runRoute(Object(Illuminate\\Http\\Request), Object(Illuminate\\Routing\\Route))
+#40 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Routing/Router.php(737): Illuminate\\Routing\\Router->dispatchToRoute(Object(Illuminate\\Http\\Request))
+#41 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(200): Illuminate\\Routing\\Router->dispatch(Object(Illuminate\\Http\\Request))
+#42 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(144): Illuminate\\Foundation\\Http\\Kernel->Illuminate\\Foundation\\Http\\{closure}(Object(Illuminate\\Http\\Request))
+#43 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#44 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/ConvertEmptyStringsToNull.php(31): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#45 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(183): Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#46 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#47 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TrimStrings.php(40): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#48 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(183): Illuminate\\Foundation\\Http\\Middleware\\TrimStrings->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#49 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/ValidatePostSize.php(27): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#50 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(183): Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#51 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/PreventRequestsDuringMaintenance.php(99): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#52 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(183): Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#53 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Http/Middleware/HandleCors.php(49): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#54 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(183): Illuminate\\Http\\Middleware\\HandleCors->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#55 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Http/Middleware/TrustProxies.php(39): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#56 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(183): Illuminate\\Http\\Middleware\\TrustProxies->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#57 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(119): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#58 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(175): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#59 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(144): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
+#60 /Users/bgsprtm/Herd/magang-kominfotik/public/index.php(52): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
+#61 /Applications/Herd.app/Contents/Resources/valet/server.php(167): require('/Users/bgsprtm/...')
+#62 {main}
+
+[previous exception] [object] (Error(code: 0): Call to a member function text() on null at /Users/bgsprtm/Herd/magang-kominfotik/storage/framework/views/f6241e92a4213fb5383f0d8b73c0c4fa.php:24)
+[stacktrace]
+#0 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php(123): require()
+#1 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php(124): Illuminate\\Filesystem\\Filesystem::Illuminate\\Filesystem\\{closure}()
+#2 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/View/Engines/PhpEngine.php(58): Illuminate\\Filesystem\\Filesystem->getRequire('/Users/bgsprtm/...', Array)
+#3 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/View/Engines/CompilerEngine.php(72): Illuminate\\View\\Engines\\PhpEngine->evaluatePath('/Users/bgsprtm/...', Array)
+#4 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/View/View.php(207): Illuminate\\View\\Engines\\CompilerEngine->get('/Users/bgsprtm/...', Array)
+#5 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/View/View.php(190): Illuminate\\View\\View->getContents()
+#6 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/View/View.php(159): Illuminate\\View\\View->renderContents()
+#7 /Users/bgsprtm/Herd/magang-kominfotik/storage/framework/views/38db56e2a05cbf16b155c34162844428.php(40): Illuminate\\View\\View->render()
+#8 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php(123): require('/Users/bgsprtm/...')
+#9 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php(124): Illuminate\\Filesystem\\Filesystem::Illuminate\\Filesystem\\{closure}()
+#10 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/View/Engines/PhpEngine.php(58): Illuminate\\Filesystem\\Filesystem->getRequire('/Users/bgsprtm/...', Array)
+#11 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/View/Engines/CompilerEngine.php(72): Illuminate\\View\\Engines\\PhpEngine->evaluatePath('/Users/bgsprtm/...', Array)
+#12 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/View/View.php(207): Illuminate\\View\\Engines\\CompilerEngine->get('/Users/bgsprtm/...', Array)
+#13 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/View/View.php(190): Illuminate\\View\\View->getContents()
+#14 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/View/View.php(159): Illuminate\\View\\View->renderContents()
+#15 /Users/bgsprtm/Herd/magang-kominfotik/storage/framework/views/e456a34a830978c2905907e1f1a58845.php(373): Illuminate\\View\\View->render()
+#16 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php(123): require('/Users/bgsprtm/...')
+#17 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php(124): Illuminate\\Filesystem\\Filesystem::Illuminate\\Filesystem\\{closure}()
+#18 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/View/Engines/PhpEngine.php(58): Illuminate\\Filesystem\\Filesystem->getRequire('/Users/bgsprtm/...', Array)
+#19 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/View/Engines/CompilerEngine.php(72): Illuminate\\View\\Engines\\PhpEngine->evaluatePath('/Users/bgsprtm/...', Array)
+#20 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/View/View.php(207): Illuminate\\View\\Engines\\CompilerEngine->get('/Users/bgsprtm/...', Array)
+#21 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/View/View.php(190): Illuminate\\View\\View->getContents()
+#22 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/View/View.php(159): Illuminate\\View\\View->renderContents()
+#23 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Http/Response.php(69): Illuminate\\View\\View->render()
+#24 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Http/Response.php(35): Illuminate\\Http\\Response->setContent(Object(Illuminate\\View\\View))
+#25 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Routing/Router.php(918): Illuminate\\Http\\Response->__construct(Object(Illuminate\\View\\View), 200, Array)
+#26 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Routing/Router.php(885): Illuminate\\Routing\\Router::toResponse(Object(Illuminate\\Http\\Request), Object(Illuminate\\View\\View))
+#27 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Routing/Router.php(806): Illuminate\\Routing\\Router->prepareResponse(Object(Illuminate\\Http\\Request), Object(Illuminate\\View\\View))
+#28 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(144): Illuminate\\Routing\\Router->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#29 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Routing/Middleware/SubstituteBindings.php(50): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#30 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(183): Illuminate\\Routing\\Middleware\\SubstituteBindings->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#31 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Auth/Middleware/Authenticate.php(57): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#32 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(183): Illuminate\\Auth\\Middleware\\Authenticate->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#33 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/VerifyCsrfToken.php(78): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#34 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(183): Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#35 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/View/Middleware/ShareErrorsFromSession.php(49): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#36 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(183): Illuminate\\View\\Middleware\\ShareErrorsFromSession->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#37 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Session/Middleware/StartSession.php(121): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#38 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Session/Middleware/StartSession.php(64): Illuminate\\Session\\Middleware\\StartSession->handleStatefulRequest(Object(Illuminate\\Http\\Request), Object(Illuminate\\Session\\Store), Object(Closure))
+#39 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(183): Illuminate\\Session\\Middleware\\StartSession->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#40 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/AddQueuedCookiesToResponse.php(37): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#41 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(183): Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#42 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/EncryptCookies.php(67): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#43 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(183): Illuminate\\Cookie\\Middleware\\EncryptCookies->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#44 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(119): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#45 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Routing/Router.php(807): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#46 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Routing/Router.php(784): Illuminate\\Routing\\Router->runRouteWithinStack(Object(Illuminate\\Routing\\Route), Object(Illuminate\\Http\\Request))
+#47 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Routing/Router.php(748): Illuminate\\Routing\\Router->runRoute(Object(Illuminate\\Http\\Request), Object(Illuminate\\Routing\\Route))
+#48 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Routing/Router.php(737): Illuminate\\Routing\\Router->dispatchToRoute(Object(Illuminate\\Http\\Request))
+#49 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(200): Illuminate\\Routing\\Router->dispatch(Object(Illuminate\\Http\\Request))
+#50 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(144): Illuminate\\Foundation\\Http\\Kernel->Illuminate\\Foundation\\Http\\{closure}(Object(Illuminate\\Http\\Request))
+#51 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#52 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/ConvertEmptyStringsToNull.php(31): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#53 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(183): Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#54 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#55 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TrimStrings.php(40): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#56 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(183): Illuminate\\Foundation\\Http\\Middleware\\TrimStrings->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#57 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/ValidatePostSize.php(27): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#58 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(183): Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#59 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/PreventRequestsDuringMaintenance.php(99): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#60 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(183): Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#61 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Http/Middleware/HandleCors.php(49): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#62 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(183): Illuminate\\Http\\Middleware\\HandleCors->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#63 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Http/Middleware/TrustProxies.php(39): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#64 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(183): Illuminate\\Http\\Middleware\\TrustProxies->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#65 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(119): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#66 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(175): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#67 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(144): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
+#68 /Users/bgsprtm/Herd/magang-kominfotik/public/index.php(52): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
+#69 /Applications/Herd.app/Contents/Resources/valet/server.php(167): require('/Users/bgsprtm/...')
+#70 {main}
+"} 
+[2026-08-09 15:59:46] local.ERROR: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'identity_number' in 'where clause' (Connection: mysql, SQL: select count(*) as aggregate from `users` where `identity_number` = 321421421) {"userId":122,"exception":"[object] (Illuminate\\Database\\QueryException(code: 42S22): SQLSTATE[42S22]: Column not found: 1054 Unknown column 'identity_number' in 'where clause' (Connection: mysql, SQL: select count(*) as aggregate from `users` where `identity_number` = 321421421) at /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Database/Connection.php:829)
+[stacktrace]
+#0 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Database/Connection.php(783): Illuminate\\Database\\Connection->runQueryCallback('select count(*)...', Array, Object(Closure))
+#1 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Database/Connection.php(431): Illuminate\\Database\\Connection->run('select count(*)...', Array, Object(Closure))
+#2 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Database/Query/Builder.php(2914): Illuminate\\Database\\Connection->select('select count(*)...', Array, false)
+#3 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Database/Query/Builder.php(2902): Illuminate\\Database\\Query\\Builder->runSelect()
+#4 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Database/Query/Builder.php(3456): Illuminate\\Database\\Query\\Builder->Illuminate\\Database\\Query\\{closure}()
+#5 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Database/Query/Builder.php(2903): Illuminate\\Database\\Query\\Builder->onceWithColumns(Array, Object(Closure))
+#6 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Database/Query/Builder.php(3383): Illuminate\\Database\\Query\\Builder->get(Array)
+#7 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Database/Query/Builder.php(3311): Illuminate\\Database\\Query\\Builder->aggregate('count', Array)
+#8 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Validation/DatabasePresenceVerifier.php(54): Illuminate\\Database\\Query\\Builder->count()
+#9 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Validation/Concerns/ValidatesAttributes.php(949): Illuminate\\Validation\\DatabasePresenceVerifier->getCount('users', 'identity_number', '321421421', NULL, NULL, Array)
+#10 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Validation/Validator.php(660): Illuminate\\Validation\\Validator->validateUnique('identity_number', '321421421', Array, Object(Illuminate\\Validation\\Validator))
+#11 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Validation/Validator.php(459): Illuminate\\Validation\\Validator->validateAttribute('identity_number', 'Unique')
+#12 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Validation/Validator.php(494): Illuminate\\Validation\\Validator->passes()
+#13 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Validation/Validator.php(536): Illuminate\\Validation\\Validator->fails()
+#14 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Foundation/Providers/FoundationServiceProvider.php(124): Illuminate\\Validation\\Validator->validate()
+#15 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Macroable/Traits/Macroable.php(123): Illuminate\\Http\\Request->Illuminate\\Foundation\\Providers\\{closure}(Array)
+#16 /Users/bgsprtm/Herd/magang-kominfotik/app/Http/Controllers/AdminUserController.php(102): Illuminate\\Http\\Request->__call('validate', Array)
+#17 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Routing/Controller.php(54): App\\Http\\Controllers\\AdminUserController->store(Object(Illuminate\\Http\\Request))
+#18 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(43): Illuminate\\Routing\\Controller->callAction('store', Array)
+#19 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Routing/Route.php(260): Illuminate\\Routing\\ControllerDispatcher->dispatch(Object(Illuminate\\Routing\\Route), Object(App\\Http\\Controllers\\AdminUserController), 'store')
+#20 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Routing/Route.php(205): Illuminate\\Routing\\Route->runController()
+#21 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Routing/Router.php(806): Illuminate\\Routing\\Route->run()
+#22 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(144): Illuminate\\Routing\\Router->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#23 /Users/bgsprtm/Herd/magang-kominfotik/app/Http/Controllers/AdminUserController.php(24): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#24 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(165): App\\Http\\Controllers\\AdminUserController->App\\Http\\Controllers\\{closure}(Object(Illuminate\\Http\\Request), Object(Closure))
+#25 /Users/bgsprtm/Herd/magang-kominfotik/app/Http/Middleware/AdminCheck.php(24): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#26 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(183): App\\Http\\Middleware\\AdminCheck->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#27 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Routing/Middleware/SubstituteBindings.php(50): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#28 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(183): Illuminate\\Routing\\Middleware\\SubstituteBindings->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#29 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Auth/Middleware/Authenticate.php(57): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#30 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(183): Illuminate\\Auth\\Middleware\\Authenticate->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#31 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/VerifyCsrfToken.php(78): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#32 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(183): Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#33 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/View/Middleware/ShareErrorsFromSession.php(49): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#34 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(183): Illuminate\\View\\Middleware\\ShareErrorsFromSession->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#35 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Session/Middleware/StartSession.php(121): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#36 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Session/Middleware/StartSession.php(64): Illuminate\\Session\\Middleware\\StartSession->handleStatefulRequest(Object(Illuminate\\Http\\Request), Object(Illuminate\\Session\\Store), Object(Closure))
+#37 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(183): Illuminate\\Session\\Middleware\\StartSession->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#38 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/AddQueuedCookiesToResponse.php(37): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#39 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(183): Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#40 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/EncryptCookies.php(67): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#41 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(183): Illuminate\\Cookie\\Middleware\\EncryptCookies->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#42 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(119): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#43 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Routing/Router.php(807): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#44 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Routing/Router.php(784): Illuminate\\Routing\\Router->runRouteWithinStack(Object(Illuminate\\Routing\\Route), Object(Illuminate\\Http\\Request))
+#45 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Routing/Router.php(748): Illuminate\\Routing\\Router->runRoute(Object(Illuminate\\Http\\Request), Object(Illuminate\\Routing\\Route))
+#46 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Routing/Router.php(737): Illuminate\\Routing\\Router->dispatchToRoute(Object(Illuminate\\Http\\Request))
+#47 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(200): Illuminate\\Routing\\Router->dispatch(Object(Illuminate\\Http\\Request))
+#48 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(144): Illuminate\\Foundation\\Http\\Kernel->Illuminate\\Foundation\\Http\\{closure}(Object(Illuminate\\Http\\Request))
+#49 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#50 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/ConvertEmptyStringsToNull.php(31): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#51 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(183): Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#52 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#53 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TrimStrings.php(40): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#54 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(183): Illuminate\\Foundation\\Http\\Middleware\\TrimStrings->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#55 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/ValidatePostSize.php(27): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#56 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(183): Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#57 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/PreventRequestsDuringMaintenance.php(99): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#58 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(183): Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#59 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Http/Middleware/HandleCors.php(49): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#60 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(183): Illuminate\\Http\\Middleware\\HandleCors->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#61 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Http/Middleware/TrustProxies.php(39): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#62 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(183): Illuminate\\Http\\Middleware\\TrustProxies->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#63 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(119): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#64 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(175): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#65 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(144): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
+#66 /Users/bgsprtm/Herd/magang-kominfotik/public/index.php(52): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
+#67 /Applications/Herd.app/Contents/Resources/valet/server.php(167): require('/Users/bgsprtm/...')
+#68 {main}
+
+[previous exception] [object] (PDOException(code: 42S22): SQLSTATE[42S22]: Column not found: 1054 Unknown column 'identity_number' in 'where clause' at /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Database/Connection.php:423)
+[stacktrace]
+#0 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Database/Connection.php(423): PDO->prepare('select count(*)...')
+#1 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Database/Connection.php(816): Illuminate\\Database\\Connection->Illuminate\\Database\\{closure}('select count(*)...', Array)
+#2 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Database/Connection.php(783): Illuminate\\Database\\Connection->runQueryCallback('select count(*)...', Array, Object(Closure))
+#3 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Database/Connection.php(431): Illuminate\\Database\\Connection->run('select count(*)...', Array, Object(Closure))
+#4 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Database/Query/Builder.php(2914): Illuminate\\Database\\Connection->select('select count(*)...', Array, false)
+#5 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Database/Query/Builder.php(2902): Illuminate\\Database\\Query\\Builder->runSelect()
+#6 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Database/Query/Builder.php(3456): Illuminate\\Database\\Query\\Builder->Illuminate\\Database\\Query\\{closure}()
+#7 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Database/Query/Builder.php(2903): Illuminate\\Database\\Query\\Builder->onceWithColumns(Array, Object(Closure))
+#8 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Database/Query/Builder.php(3383): Illuminate\\Database\\Query\\Builder->get(Array)
+#9 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Database/Query/Builder.php(3311): Illuminate\\Database\\Query\\Builder->aggregate('count', Array)
+#10 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Validation/DatabasePresenceVerifier.php(54): Illuminate\\Database\\Query\\Builder->count()
+#11 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Validation/Concerns/ValidatesAttributes.php(949): Illuminate\\Validation\\DatabasePresenceVerifier->getCount('users', 'identity_number', '321421421', NULL, NULL, Array)
+#12 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Validation/Validator.php(660): Illuminate\\Validation\\Validator->validateUnique('identity_number', '321421421', Array, Object(Illuminate\\Validation\\Validator))
+#13 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Validation/Validator.php(459): Illuminate\\Validation\\Validator->validateAttribute('identity_number', 'Unique')
+#14 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Validation/Validator.php(494): Illuminate\\Validation\\Validator->passes()
+#15 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Validation/Validator.php(536): Illuminate\\Validation\\Validator->fails()
+#16 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Foundation/Providers/FoundationServiceProvider.php(124): Illuminate\\Validation\\Validator->validate()
+#17 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Macroable/Traits/Macroable.php(123): Illuminate\\Http\\Request->Illuminate\\Foundation\\Providers\\{closure}(Array)
+#18 /Users/bgsprtm/Herd/magang-kominfotik/app/Http/Controllers/AdminUserController.php(102): Illuminate\\Http\\Request->__call('validate', Array)
+#19 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Routing/Controller.php(54): App\\Http\\Controllers\\AdminUserController->store(Object(Illuminate\\Http\\Request))
+#20 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(43): Illuminate\\Routing\\Controller->callAction('store', Array)
+#21 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Routing/Route.php(260): Illuminate\\Routing\\ControllerDispatcher->dispatch(Object(Illuminate\\Routing\\Route), Object(App\\Http\\Controllers\\AdminUserController), 'store')
+#22 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Routing/Route.php(205): Illuminate\\Routing\\Route->runController()
+#23 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Routing/Router.php(806): Illuminate\\Routing\\Route->run()
+#24 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(144): Illuminate\\Routing\\Router->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#25 /Users/bgsprtm/Herd/magang-kominfotik/app/Http/Controllers/AdminUserController.php(24): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#26 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(165): App\\Http\\Controllers\\AdminUserController->App\\Http\\Controllers\\{closure}(Object(Illuminate\\Http\\Request), Object(Closure))
+#27 /Users/bgsprtm/Herd/magang-kominfotik/app/Http/Middleware/AdminCheck.php(24): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#28 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(183): App\\Http\\Middleware\\AdminCheck->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#29 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Routing/Middleware/SubstituteBindings.php(50): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#30 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(183): Illuminate\\Routing\\Middleware\\SubstituteBindings->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#31 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Auth/Middleware/Authenticate.php(57): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#32 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(183): Illuminate\\Auth\\Middleware\\Authenticate->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#33 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/VerifyCsrfToken.php(78): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#34 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(183): Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#35 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/View/Middleware/ShareErrorsFromSession.php(49): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#36 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(183): Illuminate\\View\\Middleware\\ShareErrorsFromSession->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#37 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Session/Middleware/StartSession.php(121): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#38 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Session/Middleware/StartSession.php(64): Illuminate\\Session\\Middleware\\StartSession->handleStatefulRequest(Object(Illuminate\\Http\\Request), Object(Illuminate\\Session\\Store), Object(Closure))
+#39 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(183): Illuminate\\Session\\Middleware\\StartSession->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#40 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/AddQueuedCookiesToResponse.php(37): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#41 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(183): Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#42 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/EncryptCookies.php(67): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#43 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(183): Illuminate\\Cookie\\Middleware\\EncryptCookies->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#44 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(119): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#45 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Routing/Router.php(807): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#46 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Routing/Router.php(784): Illuminate\\Routing\\Router->runRouteWithinStack(Object(Illuminate\\Routing\\Route), Object(Illuminate\\Http\\Request))
+#47 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Routing/Router.php(748): Illuminate\\Routing\\Router->runRoute(Object(Illuminate\\Http\\Request), Object(Illuminate\\Routing\\Route))
+#48 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Routing/Router.php(737): Illuminate\\Routing\\Router->dispatchToRoute(Object(Illuminate\\Http\\Request))
+#49 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(200): Illuminate\\Routing\\Router->dispatch(Object(Illuminate\\Http\\Request))
+#50 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(144): Illuminate\\Foundation\\Http\\Kernel->Illuminate\\Foundation\\Http\\{closure}(Object(Illuminate\\Http\\Request))
+#51 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#52 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/ConvertEmptyStringsToNull.php(31): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#53 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(183): Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#54 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#55 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TrimStrings.php(40): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#56 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(183): Illuminate\\Foundation\\Http\\Middleware\\TrimStrings->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#57 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/ValidatePostSize.php(27): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#58 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(183): Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#59 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/PreventRequestsDuringMaintenance.php(99): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#60 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(183): Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#61 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Http/Middleware/HandleCors.php(49): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#62 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(183): Illuminate\\Http\\Middleware\\HandleCors->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#63 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Http/Middleware/TrustProxies.php(39): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#64 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(183): Illuminate\\Http\\Middleware\\TrustProxies->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#65 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(119): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#66 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(175): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#67 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(144): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
+#68 /Users/bgsprtm/Herd/magang-kominfotik/public/index.php(52): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
+#69 /Applications/Herd.app/Contents/Resources/valet/server.php(167): require('/Users/bgsprtm/...')
+#70 {main}
+"} 
+[2026-08-09 16:34:20] local.ERROR: The "--columns" option does not exist. {"exception":"[object] (Symfony\\Component\\Console\\Exception\\RuntimeException(code: 0): The \"--columns\" option does not exist. at /Users/bgsprtm/Herd/magang-kominfotik/vendor/symfony/console/Input/ArgvInput.php:222)
+[stacktrace]
+#0 /Users/bgsprtm/Herd/magang-kominfotik/vendor/symfony/console/Input/ArgvInput.php(149): Symfony\\Component\\Console\\Input\\ArgvInput->addLongOption('columns', 'method,uri,name...')
+#1 /Users/bgsprtm/Herd/magang-kominfotik/vendor/symfony/console/Input/ArgvInput.php(85): Symfony\\Component\\Console\\Input\\ArgvInput->parseLongOption('--columns=metho...')
+#2 /Users/bgsprtm/Herd/magang-kominfotik/vendor/symfony/console/Input/ArgvInput.php(74): Symfony\\Component\\Console\\Input\\ArgvInput->parseToken('--columns=metho...', true)
+#3 /Users/bgsprtm/Herd/magang-kominfotik/vendor/symfony/console/Input/Input.php(56): Symfony\\Component\\Console\\Input\\ArgvInput->parse()
+#4 /Users/bgsprtm/Herd/magang-kominfotik/vendor/symfony/console/Command/Command.php(285): Symfony\\Component\\Console\\Input\\Input->bind(Object(Symfony\\Component\\Console\\Input\\InputDefinition))
+#5 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Console/Command.php(181): Symfony\\Component\\Console\\Command\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#6 /Users/bgsprtm/Herd/magang-kominfotik/vendor/symfony/console/Application.php(1121): Illuminate\\Console\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#7 /Users/bgsprtm/Herd/magang-kominfotik/vendor/symfony/console/Application.php(324): Symfony\\Component\\Console\\Application->doRunCommand(Object(Illuminate\\Foundation\\Console\\RouteListCommand), Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#8 /Users/bgsprtm/Herd/magang-kominfotik/vendor/symfony/console/Application.php(175): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#9 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(201): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#10 /Users/bgsprtm/Herd/magang-kominfotik/artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#11 {main}
+"} 
+[2026-08-09 16:36:40] testing.WARNING: Reverse geocoding gagal {"status":500} 
+[2026-08-09 16:37:57] testing.WARNING: Reverse geocoding gagal {"status":500} 
+[2026-08-09 16:38:17] testing.WARNING: Reverse geocoding gagal {"status":500} 
+[2026-08-09 16:39:01] local.ERROR: Undefined variable $totalUsers (View: /Users/bgsprtm/Herd/magang-kominfotik/resources/views/admin/absensi/index.blade.php) {"userId":1,"exception":"[object] (Illuminate\\View\\ViewException(code: 0): Undefined variable $totalUsers (View: /Users/bgsprtm/Herd/magang-kominfotik/resources/views/admin/absensi/index.blade.php) at /Users/bgsprtm/Herd/magang-kominfotik/storage/framework/views/f6d726e153151e984ac820a09ec065e4.php:34)
+[stacktrace]
+#0 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/View/Engines/PhpEngine.php(60): Illuminate\\View\\Engines\\CompilerEngine->handleViewException(Object(ErrorException), 0)
+#1 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/View/Engines/CompilerEngine.php(72): Illuminate\\View\\Engines\\PhpEngine->evaluatePath('/Users/bgsprtm/...', Array)
+#2 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/View/View.php(207): Illuminate\\View\\Engines\\CompilerEngine->get('/Users/bgsprtm/...', Array)
+#3 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/View/View.php(190): Illuminate\\View\\View->getContents()
+#4 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/View/View.php(159): Illuminate\\View\\View->renderContents()
+#5 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Http/Response.php(69): Illuminate\\View\\View->render()
+#6 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Http/Response.php(35): Illuminate\\Http\\Response->setContent(Object(Illuminate\\View\\View))
+#7 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Routing/Router.php(918): Illuminate\\Http\\Response->__construct(Object(Illuminate\\View\\View), 200, Array)
+#8 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Routing/Router.php(885): Illuminate\\Routing\\Router::toResponse(Object(Illuminate\\Http\\Request), Object(Illuminate\\View\\View))
+#9 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Routing/Router.php(806): Illuminate\\Routing\\Router->prepareResponse(Object(Illuminate\\Http\\Request), Object(Illuminate\\View\\View))
+#10 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(144): Illuminate\\Routing\\Router->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#11 /Users/bgsprtm/Herd/magang-kominfotik/app/Http/Middleware/AdminCheck.php(27): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#12 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(183): App\\Http\\Middleware\\AdminCheck->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#13 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Routing/Middleware/SubstituteBindings.php(50): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#14 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(183): Illuminate\\Routing\\Middleware\\SubstituteBindings->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#15 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Auth/Middleware/Authenticate.php(57): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#16 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(183): Illuminate\\Auth\\Middleware\\Authenticate->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#17 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/VerifyCsrfToken.php(78): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#18 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(183): Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#19 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/View/Middleware/ShareErrorsFromSession.php(49): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#20 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(183): Illuminate\\View\\Middleware\\ShareErrorsFromSession->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#21 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Session/Middleware/StartSession.php(121): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#22 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Session/Middleware/StartSession.php(64): Illuminate\\Session\\Middleware\\StartSession->handleStatefulRequest(Object(Illuminate\\Http\\Request), Object(Illuminate\\Session\\Store), Object(Closure))
+#23 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(183): Illuminate\\Session\\Middleware\\StartSession->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#24 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/AddQueuedCookiesToResponse.php(37): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#25 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(183): Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#26 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/EncryptCookies.php(67): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#27 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(183): Illuminate\\Cookie\\Middleware\\EncryptCookies->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#28 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(119): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#29 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Routing/Router.php(807): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#30 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Routing/Router.php(784): Illuminate\\Routing\\Router->runRouteWithinStack(Object(Illuminate\\Routing\\Route), Object(Illuminate\\Http\\Request))
+#31 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Routing/Router.php(748): Illuminate\\Routing\\Router->runRoute(Object(Illuminate\\Http\\Request), Object(Illuminate\\Routing\\Route))
+#32 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Routing/Router.php(737): Illuminate\\Routing\\Router->dispatchToRoute(Object(Illuminate\\Http\\Request))
+#33 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(200): Illuminate\\Routing\\Router->dispatch(Object(Illuminate\\Http\\Request))
+#34 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(144): Illuminate\\Foundation\\Http\\Kernel->Illuminate\\Foundation\\Http\\{closure}(Object(Illuminate\\Http\\Request))
+#35 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#36 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/ConvertEmptyStringsToNull.php(31): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#37 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(183): Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#38 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#39 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TrimStrings.php(40): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#40 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(183): Illuminate\\Foundation\\Http\\Middleware\\TrimStrings->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#41 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/ValidatePostSize.php(27): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#42 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(183): Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#43 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/PreventRequestsDuringMaintenance.php(99): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#44 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(183): Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#45 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Http/Middleware/HandleCors.php(49): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#46 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(183): Illuminate\\Http\\Middleware\\HandleCors->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#47 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Http/Middleware/TrustProxies.php(39): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#48 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(183): Illuminate\\Http\\Middleware\\TrustProxies->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#49 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(119): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#50 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(175): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#51 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(144): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
+#52 /private/tmp/claude-501/-Users-bgsprtm-Herd-magang-kominfotik/4dfa6192-684f-428a-9358-e95a00b30880/scratchpad/smoke.php(37): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
+#53 {main}
+
+[previous exception] [object] (ErrorException(code: 0): Undefined variable $totalUsers at /Users/bgsprtm/Herd/magang-kominfotik/storage/framework/views/f6d726e153151e984ac820a09ec065e4.php:34)
+[stacktrace]
+#0 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(255): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError(2, 'Undefined varia...', '/Users/bgsprtm/...', 34)
+#1 /Users/bgsprtm/Herd/magang-kominfotik/storage/framework/views/f6d726e153151e984ac820a09ec065e4.php(34): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->Illuminate\\Foundation\\Bootstrap\\{closure}(2, 'Undefined varia...', '/Users/bgsprtm/...', 34)
+#2 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php(123): require('/Users/bgsprtm/...')
+#3 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php(124): Illuminate\\Filesystem\\Filesystem::Illuminate\\Filesystem\\{closure}()
+#4 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/View/Engines/PhpEngine.php(58): Illuminate\\Filesystem\\Filesystem->getRequire('/Users/bgsprtm/...', Array)
+#5 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/View/Engines/CompilerEngine.php(72): Illuminate\\View\\Engines\\PhpEngine->evaluatePath('/Users/bgsprtm/...', Array)
+#6 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/View/View.php(207): Illuminate\\View\\Engines\\CompilerEngine->get('/Users/bgsprtm/...', Array)
+#7 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/View/View.php(190): Illuminate\\View\\View->getContents()
+#8 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/View/View.php(159): Illuminate\\View\\View->renderContents()
+#9 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Http/Response.php(69): Illuminate\\View\\View->render()
+#10 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Http/Response.php(35): Illuminate\\Http\\Response->setContent(Object(Illuminate\\View\\View))
+#11 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Routing/Router.php(918): Illuminate\\Http\\Response->__construct(Object(Illuminate\\View\\View), 200, Array)
+#12 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Routing/Router.php(885): Illuminate\\Routing\\Router::toResponse(Object(Illuminate\\Http\\Request), Object(Illuminate\\View\\View))
+#13 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Routing/Router.php(806): Illuminate\\Routing\\Router->prepareResponse(Object(Illuminate\\Http\\Request), Object(Illuminate\\View\\View))
+#14 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(144): Illuminate\\Routing\\Router->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#15 /Users/bgsprtm/Herd/magang-kominfotik/app/Http/Middleware/AdminCheck.php(27): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#16 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(183): App\\Http\\Middleware\\AdminCheck->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#17 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Routing/Middleware/SubstituteBindings.php(50): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#18 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(183): Illuminate\\Routing\\Middleware\\SubstituteBindings->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#19 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Auth/Middleware/Authenticate.php(57): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#20 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(183): Illuminate\\Auth\\Middleware\\Authenticate->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#21 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/VerifyCsrfToken.php(78): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#22 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(183): Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#23 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/View/Middleware/ShareErrorsFromSession.php(49): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#24 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(183): Illuminate\\View\\Middleware\\ShareErrorsFromSession->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#25 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Session/Middleware/StartSession.php(121): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#26 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Session/Middleware/StartSession.php(64): Illuminate\\Session\\Middleware\\StartSession->handleStatefulRequest(Object(Illuminate\\Http\\Request), Object(Illuminate\\Session\\Store), Object(Closure))
+#27 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(183): Illuminate\\Session\\Middleware\\StartSession->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#28 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/AddQueuedCookiesToResponse.php(37): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#29 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(183): Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#30 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/EncryptCookies.php(67): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#31 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(183): Illuminate\\Cookie\\Middleware\\EncryptCookies->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#32 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(119): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#33 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Routing/Router.php(807): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#34 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Routing/Router.php(784): Illuminate\\Routing\\Router->runRouteWithinStack(Object(Illuminate\\Routing\\Route), Object(Illuminate\\Http\\Request))
+#35 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Routing/Router.php(748): Illuminate\\Routing\\Router->runRoute(Object(Illuminate\\Http\\Request), Object(Illuminate\\Routing\\Route))
+#36 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Routing/Router.php(737): Illuminate\\Routing\\Router->dispatchToRoute(Object(Illuminate\\Http\\Request))
+#37 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(200): Illuminate\\Routing\\Router->dispatch(Object(Illuminate\\Http\\Request))
+#38 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(144): Illuminate\\Foundation\\Http\\Kernel->Illuminate\\Foundation\\Http\\{closure}(Object(Illuminate\\Http\\Request))
+#39 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#40 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/ConvertEmptyStringsToNull.php(31): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#41 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(183): Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#42 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#43 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TrimStrings.php(40): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#44 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(183): Illuminate\\Foundation\\Http\\Middleware\\TrimStrings->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#45 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/ValidatePostSize.php(27): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#46 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(183): Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#47 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/PreventRequestsDuringMaintenance.php(99): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#48 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(183): Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#49 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Http/Middleware/HandleCors.php(49): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#50 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(183): Illuminate\\Http\\Middleware\\HandleCors->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#51 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Http/Middleware/TrustProxies.php(39): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#52 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(183): Illuminate\\Http\\Middleware\\TrustProxies->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#53 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(119): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#54 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(175): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#55 /Users/bgsprtm/Herd/magang-kominfotik/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(144): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
+#56 /private/tmp/claude-501/-Users-bgsprtm-Herd-magang-kominfotik/4dfa6192-684f-428a-9358-e95a00b30880/scratchpad/smoke.php(37): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
+#57 {main}
+"} 
+[2026-08-09 16:40:34] testing.WARNING: Reverse geocoding gagal {"status":500} 
+[2026-08-09 16:49:52] testing.WARNING: Reverse geocoding gagal {"status":500} 

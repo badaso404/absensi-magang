@@ -35,7 +35,7 @@ class AbsensiTest extends TestCase
     public function test_absen_pagi_sebelum_jam_masuk_berstatus_tepat_waktu(): void
     {
         $response = $this->actingAs($this->user)
-            ->postJson('/absen/pagi', ['wfhwfo' => 'WFO']);
+            ->postJson('/absen/pagi', $this->payloadPagi('WFO'));
 
         $response->assertOk()->assertJson(['success' => true]);
 
@@ -52,7 +52,7 @@ class AbsensiTest extends TestCase
         Carbon::setTestNow(Carbon::parse('2026-08-10 09:15:00'));
 
         $this->actingAs($this->user)
-            ->postJson('/absen/pagi', ['wfhwfo' => 'WFH'])
+            ->postJson('/absen/pagi', $this->payloadPagi('WFH'))
             ->assertOk();
 
         $this->assertSame(
@@ -63,10 +63,10 @@ class AbsensiTest extends TestCase
 
     public function test_absen_pagi_kedua_kali_ditolak(): void
     {
-        $this->actingAs($this->user)->postJson('/absen/pagi', ['wfhwfo' => 'WFO'])->assertOk();
+        $this->actingAs($this->user)->postJson('/absen/pagi', $this->payloadPagi('WFO'))->assertOk();
 
         $this->actingAs($this->user)
-            ->postJson('/absen/pagi', ['wfhwfo' => 'WFO'])
+            ->postJson('/absen/pagi', $this->payloadPagi('WFO'))
             ->assertStatus(422)
             ->assertJson(['success' => false]);
 
@@ -84,18 +84,18 @@ class AbsensiTest extends TestCase
     public function test_absen_sore_tanpa_absen_pagi_ditolak(): void
     {
         $this->actingAs($this->user)
-            ->postJson('/absen/sore')
+            ->postJson('/absen/sore', $this->payloadSore())
             ->assertStatus(404);
     }
 
     public function test_absen_sore_sebelum_jam_pulang_berstatus_pulang_cepat(): void
     {
-        $this->actingAs($this->user)->postJson('/absen/pagi', ['wfhwfo' => 'WFO'])->assertOk();
+        $this->actingAs($this->user)->postJson('/absen/pagi', $this->payloadPagi('WFO'))->assertOk();
 
         // Jam pulang Senin adalah 15:00.
         Carbon::setTestNow(Carbon::parse('2026-08-10 14:00:00'));
 
-        $this->actingAs($this->user)->postJson('/absen/sore')->assertOk();
+        $this->actingAs($this->user)->postJson('/absen/sore', $this->payloadSore())->assertOk();
 
         $absensi = Absensi::where('user_id', $this->user->id)->sole();
 
@@ -108,10 +108,10 @@ class AbsensiTest extends TestCase
         // Jumat 14:45 — sudah lewat jam pulang biasa (15:00? belum), tapi
         // jadwal Jumat 15:30 membuatnya tetap terhitung pulang cepat.
         Carbon::setTestNow(Carbon::parse('2026-08-14 08:30:00'));
-        $this->actingAs($this->user)->postJson('/absen/pagi', ['wfhwfo' => 'WFO'])->assertOk();
+        $this->actingAs($this->user)->postJson('/absen/pagi', $this->payloadPagi('WFO'))->assertOk();
 
         Carbon::setTestNow(Carbon::parse('2026-08-14 15:15:00'));
-        $this->actingAs($this->user)->postJson('/absen/sore')->assertOk();
+        $this->actingAs($this->user)->postJson('/absen/sore', $this->payloadSore())->assertOk();
 
         $absensi = Absensi::where('user_id', $this->user->id)->sole();
 
@@ -121,11 +121,11 @@ class AbsensiTest extends TestCase
 
     public function test_absen_sore_kedua_kali_ditolak(): void
     {
-        $this->actingAs($this->user)->postJson('/absen/pagi', ['wfhwfo' => 'WFO'])->assertOk();
-        $this->actingAs($this->user)->postJson('/absen/sore')->assertOk();
+        $this->actingAs($this->user)->postJson('/absen/pagi', $this->payloadPagi('WFO'))->assertOk();
+        $this->actingAs($this->user)->postJson('/absen/sore', $this->payloadSore())->assertOk();
 
         $this->actingAs($this->user)
-            ->postJson('/absen/sore')
+            ->postJson('/absen/sore', $this->payloadSore())
             ->assertStatus(422);
     }
 
@@ -170,18 +170,18 @@ class AbsensiTest extends TestCase
         );
     }
 
-    public function test_koordinat_nol_tidak_dianggap_lokasi(): void
+    public function test_koordinat_nol_ditolak(): void
     {
         $this->actingAs($this->user)->postJson('/absen/pagi', [
             'wfhwfo'    => 'WFO',
             'latitude'  => 0,
             'longitude' => 0,
-        ])->assertOk();
+        ])->assertStatus(422)->assertJsonValidationErrors('latitude');
 
-        $this->assertNull(Absensi::where('user_id', $this->user->id)->sole()->lokasi_user);
+        $this->assertSame(0, Absensi::where('user_id', $this->user->id)->count());
     }
 
-    public function test_absen_sore_tidak_menghapus_lokasi_absen_pagi(): void
+    public function test_absen_sore_mencatat_lokasi_saat_pulang(): void
     {
         config(['magang.geoapify.key' => null]);
 
@@ -193,11 +193,14 @@ class AbsensiTest extends TestCase
 
         Carbon::setTestNow(Carbon::parse('2026-08-10 15:30:00'));
 
-        // Absen sore tanpa GPS.
-        $this->actingAs($this->user)->postJson('/absen/sore')->assertOk();
+        // Lokasi pulang boleh berbeda dari lokasi masuk.
+        $this->actingAs($this->user)->postJson('/absen/sore', [
+            'latitude'  => -6.175,
+            'longitude' => 106.827,
+        ])->assertOk();
 
         $this->assertSame(
-            'Lat: -6.168, Lon: 106.766',
+            'Lat: -6.175, Lon: 106.827',
             Absensi::where('user_id', $this->user->id)->sole()->lokasi_user
         );
     }
@@ -212,5 +215,19 @@ class AbsensiTest extends TestCase
     public function test_tamu_tidak_bisa_absen(): void
     {
         $this->postJson('/absen/pagi', ['wfhwfo' => 'WFO'])->assertStatus(401);
+    }
+
+    /**
+     * Koordinat wajib dikirim di setiap absen, jadi test yang tidak sedang
+     * menguji lokasi tetap perlu menyertakannya.
+     */
+    private function payloadPagi(string $mode): array
+    {
+        return ['wfhwfo' => $mode] + $this->payloadSore();
+    }
+
+    private function payloadSore(): array
+    {
+        return ['latitude' => -6.168, 'longitude' => 106.766];
     }
 }

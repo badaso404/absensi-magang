@@ -121,8 +121,9 @@ class AksesKontrolTest extends TestCase
     }
 
     /**
-     * Regresi: view admin/absensi butuh $users dan statistiknya, tapi
-     * controller hanya mengirim $absensi sehingga halaman selalu 500.
+     * Halaman ini kini papan pantau absensi harian: satu baris per magang
+     * aktif berikut status absennya, bukan lagi salinan halaman manajemen user
+     * (yang dulu mengirim $users/$totalUsers dan tidak memakai data absensi).
      */
     public function test_halaman_absensi_admin_bisa_dibuka(): void
     {
@@ -132,8 +133,8 @@ class AksesKontrolTest extends TestCase
             ->get('/admin/absensi');
 
         $response->assertOk();
-        $this->assertNotNull($response->viewData('users'));
-        $this->assertSame(4, $response->viewData('totalUsers'));
+        $this->assertCount(3, $response->viewData('baris'));
+        $this->assertSame(3, $response->viewData('totalMagang'));
     }
 
     public function test_magang_tidak_bisa_membuka_absensi_admin(): void

@@ -144,7 +144,10 @@
                                             id="seksi" name="seksi" required>
                                         <option value="">Pilih Seksi</option>
                                         @foreach($seksiList as $seksi)
-                                            <option value="{{ $seksi->value }}" {{ old('seksi', $user->seksi) == $seksi->value ? 'selected' : '' }}>
+                                            {{-- $user->seksi adalah objek enum, jadi membandingkannya
+                                                 langsung dengan angka selalu false dan tidak ada opsi
+                                                 yang terpilih. Bandingkan ->value-nya. --}}
+                                            <option value="{{ $seksi->value }}" {{ (int) old('seksi', $user->seksi?->value) === $seksi->value ? 'selected' : '' }}>
                                                 {{ $seksi->name }}
                                             </option>
                                         @endforeach

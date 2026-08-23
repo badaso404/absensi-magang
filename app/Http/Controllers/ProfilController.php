@@ -33,13 +33,25 @@ class ProfilController extends Controller
     {
         $user = User::findOrFail(Auth::id());
 
+        // Catatan: tanggal_awal_magang & tanggal_akhir_magang sengaja TIDAK ada
+        // di sini. Keduanya hanya boleh diubah admin — tanggal_akhir_magang
+        // dipakai middleware MagangAktif untuk memutus akses, jadi kalau magang
+        // bisa mengeditnya sendiri dia tinggal memundurkan tanggal untuk
+        // memperpanjang masa aktifnya tanpa persetujuan siapa pun.
         $validated = $request->validate([
             'name'          => 'required|string|max:255',
             'asal'          => 'required|string|max:255',
             'jurusan'       => 'required|string|max:255',
             'jenis_kelamin' => 'required|in:Laki-laki,Perempuan',
             'alamat'        => 'required|string',
+            'tanggal_lahir' => 'nullable|date|before:today',
+            'no_telp'       => 'nullable|string|max:20|regex:/^[0-9+\-\s()]+$/',
+            'instagram'     => 'nullable|string|max:255',
+            'linkedin'      => 'nullable|string|max:255',
             'avatar'        => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+        ], [
+            'no_telp.regex'        => 'No. WhatsApp hanya boleh berisi angka.',
+            'tanggal_lahir.before' => 'Tanggal lahir tidak valid.',
         ]);
 
         if ($request->hasFile('avatar')) {
@@ -65,7 +77,15 @@ class ProfilController extends Controller
         // encrypt($password) ke kolom remember_temp — itu reversibel, jadi
         // siapa pun yang punya APP_KEY bisa membaca password asli semua user.
         $user->password = Hash::make($request->validated()['password']);
+
         $user->save();
+
+        // Login selalu memasang cookie "remember me", dan cookie itu tetap sah
+        // walau password sudah diganti. Login ulang memutar remember_token,
+        // sehingga perangkat lain (termasuk yang mencuri cookie) kehilangan
+        // akses sementara perangkat ini mendapat cookie baru.
+        Auth::login($user, true);
+        $request->session()->regenerate();
 
         session()->flash('alert', [
             'type'    => 'success',

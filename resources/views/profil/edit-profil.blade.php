@@ -59,9 +59,64 @@
                                     <option value="Perempuan" {{ auth()->user()->jenis_kelamin == 'Perempuan' ? 'selected' : '' }}>Perempuan</option>
                                 </select>
                             </div>
+                            <div class="col-md-6 form-group">
+                                <label class="form-control-label">Tanggal Lahir</label>
+                                <input class="form-control" name="tanggal_lahir" type="date"
+                                       value="{{ old('tanggal_lahir', auth()->user()->tanggal_lahir ? \Carbon\Carbon::parse(auth()->user()->tanggal_lahir)->format('Y-m-d') : '') }}">
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label class="form-control-label">No. WhatsApp</label>
+                                <input class="form-control" name="no_telp" type="text" inputmode="numeric"
+                                       placeholder="08xxxxxxxxxx"
+                                       value="{{ old('no_telp', auth()->user()->no_telp) }}">
+                                <small class="form-text text-muted">Hanya angka, diawali 0. Dipakai untuk tautan WhatsApp di profil.</small>
+                            </div>
                             <div class="col-md-12 form-group">
                                 <label class="form-control-label">Alamat Lengkap</label>
                                 <textarea class="form-control" name="alamat" rows="2" required>{{ auth()->user()->alamat }}</textarea>
+                            </div>
+                        </div>
+
+                        <hr class="my-4">
+                        <h6 class="heading-small text-muted mb-4">Media Sosial</h6>
+
+                        <div class="row">
+                            <div class="col-md-6 form-group">
+                                <label class="form-control-label"><i class="fab fa-instagram mr-1"></i> Instagram</label>
+                                <input class="form-control" name="instagram" type="text"
+                                       placeholder="https://instagram.com/username"
+                                       value="{{ old('instagram', auth()->user()->instagram) }}">
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label class="form-control-label"><i class="fab fa-linkedin mr-1"></i> LinkedIn</label>
+                                <input class="form-control" name="linkedin" type="text"
+                                       placeholder="https://linkedin.com/in/username"
+                                       value="{{ old('linkedin', auth()->user()->linkedin) }}">
+                            </div>
+                        </div>
+
+                        <hr class="my-4">
+                        <h6 class="heading-small text-muted mb-4">Periode Magang</h6>
+
+                        {{-- Sengaja read-only: tanggal akhir magang menentukan apakah akun masih
+                             boleh login (middleware MagangAktif). Kalau magang bisa mengubahnya
+                             sendiri, blokir masa magang berakhir jadi tidak ada artinya. --}}
+                        <div class="row">
+                            <div class="col-md-6 form-group">
+                                <label class="form-control-label">Awal Magang</label>
+                                <input class="form-control bg-light" type="text" disabled
+                                       value="{{ auth()->user()->tanggal_awal_magang ? \Carbon\Carbon::parse(auth()->user()->tanggal_awal_magang)->isoFormat('D MMMM Y') : 'Belum diatur' }}">
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label class="form-control-label">Akhir Magang</label>
+                                <input class="form-control bg-light" type="text" disabled
+                                       value="{{ auth()->user()->tanggal_akhir_magang ? \Carbon\Carbon::parse(auth()->user()->tanggal_akhir_magang)->isoFormat('D MMMM Y') : 'Belum diatur' }}">
+                            </div>
+                            <div class="col-12">
+                                <small class="form-text text-muted">
+                                    <i class="fas fa-lock mr-1"></i>
+                                    Periode magang hanya dapat diubah oleh admin. Hubungi admin bila tanggalnya keliru.
+                                </small>
                             </div>
                         </div>
                     </div>

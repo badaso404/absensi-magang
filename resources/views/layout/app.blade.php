@@ -30,7 +30,56 @@
 .tahun-scroll::-webkit-scrollbar {
   display: none;             /* Chrome, Safari */
 }
+
+/* --- Footer menempel di bawah --------------------------------------------
+   Sebelumnya footer mengikuti tinggi konten, jadi saat tabel kosong ia naik
+   dan menggantung di tengah layar. Main-content dijadikan kolom flex setinggi
+   minimal satu layar, lalu footer didorong ke dasar dengan margin-top:auto. */
+.application .main-content {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.application .main-content > .footer {
+    margin-top: auto;
+}
+
+/* Header kartu berisi judul + beberapa tombol jadi berdesakan di layar kecil:
+   judulnya terpecah beberapa baris dan tombolnya menumpuk rapat. Dibiarkan
+   membungkus dan diberi jarak. */
+@media (max-width: 767.98px) {
+    .card-header.d-flex {
+        flex-wrap: wrap;
+        gap: .5rem;
+    }
+    .card-header.d-flex > * { min-width: 0; }
+}
+
+/* --- Latar header dashboard ----------------------------------------------
+   Versi lama memakai satu warna ungu rata dengan opasitas .6 di atas foto
+   gedung: fotonya jadi keruh, warnanya datar, dan potongan bawahnya keras
+   karena hanya sudut kiri yang dibulatkan. Sekarang gradient diagonal dengan
+   kedalaman, kedua sudut dibulatkan, dan tepi bawah diberi bayangan lembut. */
+.application-offset .container-application:before {
+    height: 420px;
+    background-image:
+        linear-gradient(135deg,
+            rgba(88, 36, 226, 0.94) 0%,
+            rgba(124, 58, 237, 0.86) 42%,
+            rgba(58, 24, 152, 0.94) 100%),
+        url("/images/bg-dashboard.jpeg");
+    background-size: cover;
+    background-position: center 30%;
+    border-bottom-left-radius: 2rem;
+    border-bottom-right-radius: 2rem;
+    box-shadow: 0 18px 40px -18px rgba(58, 24, 152, 0.55);
+}
     </style>
+
+    {{-- Tanpa stack ini, setiap @push('styles') di view dibuang diam-diam:
+         CSS halaman login, absensi, dan manajemen user tidak pernah termuat. --}}
+    @stack('styles')
 
 </head>
 

@@ -42,42 +42,45 @@
         </div> -->
     </div>
 
+    {{-- Satu grid menu untuk semua peran; menu admin ikut di dalamnya, tanpa
+         pemisah "Admin Menu" tersendiri.
+
+         Profil sengaja tidak ada di sini — jalur ke Profil dan Pengaturan
+         cukup lewat dropdown avatar di pojok kanan atas, supaya tidak ada dua
+         pintu ke halaman yang sama. --}}
     <div class="nav-application clearfix">
         <a href="{{ route('home') }}" class="btn btn-square text-sm {{ $mainMenu == 'Home' ? 'active' : ''}}">
             <span class="btn-inner--icon d-block"><i class="fa fa-home fa-2x"></i></span>
             <span class="btn-inner--icon d-block pt-2">Beranda</span>
         </a>
-        <a href="{{ route('absensi') }}" class="btn btn-square text-sm {{ $mainMenu == 'Absensi' ? 'active' : ''}}">
-            <span class="btn-inner--icon d-block"><i class="fa fa-tasks fa-2x"></i></span>
-            <span class="btn-inner--icon d-block pt-2">Absensi</span>
-        </a>
-        <a href="{{ route('profil') }}" class="btn btn-square text-sm {{ $mainMenu == 'Profil' ? 'active' : ''}}">
-            <span class="btn-inner--icon d-block"><i class="fa fa-user-ninja fa-2x"></i></span>
-            <span class="btn-inner--icon d-block pt-2">Profil</span>
-        </a>
 
-      <a href="{{ route('laporan-kegiatan.index') }}" class="btn btn-square text-sm {{ $mainMenu == 'laporankegiatan' ? 'active' : ''}}">
-    <span class="btn-inner--icon d-block"><i class="fa fa-calendar-check fa-2x"></i></span>
-    <span class="btn-inner--icon d-block pt-2">Laporan Kegiatan</span>
-</a>
-        <!-- <a href="#" class="btn btn-square text-sm">
-            <span class="btn-inner--icon d-block"><i class="fa fa-project-diagram fa-2x"></i></span>
-            <span class="btn-inner--icon d-block pt-2">Kegiatan</span>
-        </a> -->
+        @if(auth()->user()->role_id == App\Enums\Role::Admin->value)
+            {{-- Admin: memantau, bukan mengisi. --}}
+            <a href="{{ route('admin-absensi') }}" class="btn btn-square text-sm {{ $mainMenu == 'Admin Absensi' ? 'active' : ''}}">
+                <span class="btn-inner--icon d-block"><i class="fa fa-clipboard-check fa-2x"></i></span>
+                <span class="btn-inner--icon d-block pt-2">Absensi</span>
+            </a>
+            <a href="{{ route('admin-laporan.index') }}" class="btn btn-square text-sm {{ $mainMenu == 'laporanmagang' ? 'active' : ''}}">
+                <span class="btn-inner--icon d-block"><i class="fa fa-book fa-2x"></i></span>
+                <span class="btn-inner--icon d-block pt-2">Laporan Magang</span>
+            </a>
+            <a href="{{ route('admin-user') }}" class="btn btn-square text-sm {{ $mainMenu == 'Admin User' ? 'active' : ''}}">
+                <span class="btn-inner--icon d-block"><i class="fa fa-users fa-2x"></i></span>
+                <span class="btn-inner--icon d-block pt-2">Users</span>
+            </a>
+        @else
+            <a href="{{ route('absensi') }}" class="btn btn-square text-sm {{ $mainMenu == 'Absensi' ? 'active' : ''}}">
+                <span class="btn-inner--icon d-block"><i class="fa fa-tasks fa-2x"></i></span>
+                <span class="btn-inner--icon d-block pt-2">Absensi</span>
+            </a>
+            <a href="{{ route('laporan-kegiatan.index') }}" class="btn btn-square text-sm {{ $mainMenu == 'laporankegiatan' ? 'active' : ''}}">
+                <span class="btn-inner--icon d-block"><i class="fa fa-calendar-check fa-2x"></i></span>
+                <span class="btn-inner--icon d-block pt-2">Laporan Kegiatan</span>
+            </a>
+            <a href="{{ route('tim') }}" class="btn btn-square text-sm {{ $mainMenu == 'Tim' ? 'active' : ''}}">
+                <span class="btn-inner--icon d-block"><i class="fa fa-user-friends fa-2x"></i></span>
+                <span class="btn-inner--icon d-block pt-2">Tim Saya</span>
+            </a>
+        @endif
     </div>
-
-    @if(auth()->user()->role_id == App\Enums\Role::Admin->value)
-    <hr><p class="text-center">Admin Menu</p>
-    <div class="nav-application clearfix">
-        <a href="{{ route('admin-user') }}" class="btn btn-square text-sm {{ $mainMenu == 'Admin User' ? 'active' : ''}}">
-            <span class="btn-inner--icon d-block"><i class="fa fa-users fa-2x"></i></span>
-            <span class="btn-inner--icon d-block pt-2">Users</span>
-        </a>
-        <a href="{{ route('admin-laporan.index') }}" class="btn btn-square text-sm {{ $mainMenu == 'laporanmagang' ? 'active' : ''}}">
-            <span class="btn-inner--icon d-block"><i class="fa fa-book fa-2x"></i></span>
-            <span class="btn-inner--icon d-block pt-2">Laporan Magang</span>
-        </a>
-    </div>
-    
-    @endif
 </div>

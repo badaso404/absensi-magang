@@ -1,9 +1,10 @@
 <nav class="navbar navbar-main navbar-expand-lg navbar-dark bg-transparent navbar-border" id="navbar-main">
     <div class="container-fluid">
 
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-main-collapse" aria-controls="navbar-main-collapse" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+        {{-- Tombol collapse Bootstrap dihapus: di layar kecil ia memunculkan
+             hamburger KEDUA di samping tombol sidenav (fa-bars), dan keduanya
+             membuka menu yang berbeda. Navigasi utama ada di sidenav, jadi
+             satu hamburger itu saja yang dipertahankan. --}}
 
         <form id="logout-form" method="post" action="{{ route('logout') }}" style="display: none;">
             @csrf
@@ -51,12 +52,12 @@
                         </span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right dropdown-menu-arrow">
-                        <h6 class="dropdown-header px-0">Hi, Heather!</h6>
-                        <a href="#" class="dropdown-item">
+                        <h6 class="dropdown-header px-0">Hai, {{ explode(' ', auth()->user()->name)[0] }}!</h6>
+                        <a href="{{ route('profil') }}" class="dropdown-item">
                             <i class="fa fa-user"></i>
                             <span>Profil</span>
                         </a>
-                        <a href="#" class="dropdown-item">
+                        <a href="{{ route('profil-edit') }}" class="dropdown-item">
                             <i class="fa fa-cog"></i>
                             <span>Pengaturan</span>
                         </a>
@@ -113,7 +114,12 @@
                                     Fitur
                                 </a>
                                 <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="{{ route('absensi') }}">Absensi</a>
+                                    {{-- Admin memantau lewat /admin/absensi, tidak mengisi absensi sendiri. --}}
+                                    @if(auth()->user()->role_id == App\Enums\Role::Admin->value)
+                                        <a class="dropdown-item" href="{{ route('admin-absensi') }}">Absensi Magang</a>
+                                    @else
+                                        <a class="dropdown-item" href="{{ route('absensi') }}">Absensi</a>
+                                    @endif
                                     <a class="dropdown-item" href="{{ route('profil') }}">Profil</a>
                                 </div>
                             </div>
@@ -168,11 +174,11 @@
                     </a>
                     <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right dropdown-menu-arrow">
                         <h6 class="dropdown-header px-0">Hai, {{ explode(' ', auth()->user()->name)[0] }}!</h6>
-                        <a href="#" class="dropdown-item">
+                        <a href="{{ route('profil') }}" class="dropdown-item">
                             <i class="fa fa-user"></i>
                             <span>Profil</span>
                         </a>
-                        <a href="#" class="dropdown-item">
+                        <a href="{{ route('profil-edit') }}" class="dropdown-item">
                             <i class="fa fa-cog"></i>
                             <span>Pengaturan</span>
                         </a>

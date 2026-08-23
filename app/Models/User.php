@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Enums\UserSeksi;
 use Carbon\Carbon;
+use Carbon\CarbonInterface;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -99,5 +100,49 @@ class User extends Authenticatable
     {
         return $query->whereNotNull('tanggal_akhir_magang')
                      ->where('tanggal_akhir_magang', '<', Carbon::today());
+    }
+
+    /**
+     * User yang masa magangnya mencakup tanggal tertentu.
+     *
+     * Dipakai papan pantau absensi harian. scopeActive() tidak bisa dipakai di
+     * sana karena hanya melihat tanggal_akhir_magang dan selalu diukur
+     * terhadap HARI INI, sehingga:
+     *
+     * - magang yang baru mulai Agustus ikut muncul "Belum Absen" saat admin
+     *   membuka tanggal sebelum dia masuk, padahal saat itu dia belum magang;
+     * - magang yang sudah selesai justru hilang dari tanggal-tanggal saat dia
+     *   masih aktif, sehingga riwayatnya tampak bolong.
+     *
+     * Tanggal yang NULL diperlakukan sebagai "tidak dibatasi".
+     */
+    public function scopeAktifPada($query, CarbonInterface $tanggal)
+    {
+        return $query->aktifDalamRentang($tanggal, $tanggal);
+    }
+
+    /**
+     * User yang masa magangnya bersinggungan dengan rentang tanggal tertentu.
+     *
+     * Dipakai halaman laporan magang yang difilter per bulan: yang dicari
+     * adalah siapa saja yang magang SELAMA bulan itu, bukan siapa yang magang
+     * hari ini. Tanpa ini, memfilter ke bulan lampau menampilkan angkatan
+     * sekarang (yang laporannya nol) dan menyembunyikan angkatan yang benar-
+     * benar menulis laporan pada bulan tersebut.
+     *
+     * Bersinggungan = mulai sebelum rentang berakhir DAN selesai setelah
+     * rentang dimulai. Tanggal NULL berarti tidak dibatasi.
+     */
+    public function scopeAktifDalamRentang($query, CarbonInterface $mulai, CarbonInterface $selesai)
+    {
+        return $query
+            ->where(function ($q) use ($selesai) {
+                $q->whereNull('tanggal_awal_magang')
+                  ->orWhereDate('tanggal_awal_magang', '<=', $selesai);
+            })
+            ->where(function ($q) use ($mulai) {
+                $q->whereNull('tanggal_akhir_magang')
+                  ->orWhereDate('tanggal_akhir_magang', '>=', $mulai);
+            });
     }
 }

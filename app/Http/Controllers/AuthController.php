@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\Role;
 use App\Http\Requests\LoginRequest;
 use Illuminate\Http\Request; // Tambahkan ini
 use Illuminate\Contracts\View\View;
@@ -20,6 +21,20 @@ class AuthController extends Controller
 
         if (!Auth::attempt(['email' => $data['email'], 'password' => $data['password']], true)) {
             return response()->json(['error' => 'Email atau password salah'], 401);
+        }
+
+        // Kredensial sengaja diverifikasi lebih dulu supaya pesan "masa magang
+        // berakhir" tidak bisa dipakai menebak email mana yang terdaftar.
+        $user = Auth::user();
+
+        if ($user->role_id == Role::Magang->value && !$user->isActive()) {
+            Auth::logout();
+            $request->session()->invalidate();
+            $request->session()->regenerateToken();
+
+            return response()->json([
+                'error' => 'Masa magang Anda sudah berakhir. Hubungi admin bila ini keliru.',
+            ], 403);
         }
 
         $request->session()->regenerate();

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Enums\Role;
-use App\Enums\Seksi;
+use App\Enums\UserSeksi;
 use App\Models\User;
 use App\Queries\DaftarUser;
 use App\Services\AvatarStorage;
@@ -29,7 +29,7 @@ class AdminUserController extends Controller
     public function create(): View
     {
         return $this->createView('admin.user.create', [
-            'seksiList' => Seksi::cases()
+            'seksiList' => UserSeksi::cases()
         ]);
     }
 
@@ -57,7 +57,7 @@ class AdminUserController extends Controller
     {
         return $this->createView('admin.user.edit', [
             'user'      => User::findOrFail($id),
-            'seksiList' => Seksi::cases(),
+            'seksiList' => UserSeksi::cases(),
         ]);
     }
 
@@ -86,9 +86,20 @@ class AdminUserController extends Controller
         ]);
     }
 
-    public function destroy(int $id)
+    public function destroy(Request $request, int $id)
     {
         $user = User::findOrFail($id);
+
+        // Tanpa dua penjagaan ini admin bisa menghapus akunnya sendiri sampai
+        // tidak ada admin tersisa, dan panel jadi terkunci permanen karena
+        // tidak ada jalur untuk mengangkat admin baru dari dalam aplikasi.
+        if ($request->user()->is($user)) {
+            return $this->gagal('Anda tidak bisa menghapus akun Anda sendiri.');
+        }
+
+        if ($user->role_id == Role::Admin->value && User::where('role_id', Role::Admin)->count() <= 1) {
+            return $this->gagal('Admin terakhir tidak bisa dihapus.');
+        }
 
         $this->avatars->delete($user->avatar);
         $user->delete();
@@ -97,6 +108,16 @@ class AdminUserController extends Controller
             'type'    => 'success',
             'title'   => 'Berhasil!',
             'message' => 'User magang berhasil dihapus.'
+        ]);
+    }
+
+    private function gagal(string $pesan)
+    {
+        return redirect()->route('admin-user')->with('alert', [
+            // Nilai type dipakai langsung sebagai kelas Bootstrap (alert-*).
+            'type'    => 'danger',
+            'title'   => 'Gagal!',
+            'message' => $pesan,
         ]);
     }
 
@@ -117,7 +138,7 @@ class AdminUserController extends Controller
             'jurusan'              => 'nullable|string|max:255',
             'tanggal_awal_magang'  => 'nullable|date',
             'tanggal_akhir_magang' => 'nullable|date|after_or_equal:tanggal_awal_magang',
-            'seksi'                => ['required', Rule::enum(Seksi::class)],
+            'seksi'                => ['required', Rule::enum(UserSeksi::class)],
             'no_telp'              => 'nullable|string|max:20',
             'instagram'            => 'nullable|url',
             'linkedin'             => 'nullable|url',

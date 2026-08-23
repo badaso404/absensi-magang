@@ -9,9 +9,10 @@ use App\Http\Controllers\{
     ProfilController,
     RekapabsenController,
     LaporanKegiatanController,
-    AdminLaporanController
+    AdminLaporanController,
+    TimController
 };
-use App\Http\Middleware\{AdminCheck, Authenticate, Unauthenticated};
+use App\Http\Middleware\{AdminCheck, Authenticate, HanyaMagang, MagangAktif, Unauthenticated};
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -33,15 +34,23 @@ Route::middleware(Unauthenticated::class)->group(function () {
 });
 
 // --- GRUP: USER SUDAH LOGIN (AUTH) ---
-Route::middleware(Authenticate::class)->group(function () {
+// MagangAktif memutus sesi magang yang masa magangnya sudah lewat, termasuk
+// sesi lama yang dibuat sebelum tanggal akhir magang terlampaui.
+Route::middleware([Authenticate::class, MagangAktif::class])->group(function () {
 
     // Autentikasi Dasar
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
     Route::get('/', [HomeController::class, 'index'])->name('home');
 
-    // --- FITUR: ABSENSI ---
-    Route::get('/absensi', [AbsensiController::class, 'index'])->name('absensi');
-    Route::post('/absen/{tipe}', [AbsensiController::class, 'absen'])->name('absen');
+    // --- FITUR: ABSENSI (peserta magang saja) ---
+    // Admin hanya memantau; absensinya sendiri tidak dicatat di sistem ini.
+    Route::middleware(HanyaMagang::class)->group(function () {
+        Route::get('/absensi', [AbsensiController::class, 'index'])->name('absensi');
+        Route::post('/absen/{tipe}', [AbsensiController::class, 'absen'])->name('absen');
+
+        // Perkenalan antar peserta satu unit. Admin sudah punya menu Users.
+        Route::get('/tim', [TimController::class, 'index'])->name('tim');
+    });
 
     // --- FITUR: PROFIL ---
     Route::prefix('profil')->name('profil')->group(function () {
@@ -64,8 +73,10 @@ Route::middleware(Authenticate::class)->group(function () {
         });
     });
 
-    // --- FITUR: LAPORAN KEGIATAN (CRUD) ---
-    Route::prefix('laporan-kegiatan')->name('laporan-kegiatan.')->group(function () {
+    // --- FITUR: LAPORAN KEGIATAN (CRUD, peserta magang saja) ---
+    // Sama seperti absensi: admin menilai laporan magang lewat menu admin,
+    // bukan membuat laporan kegiatannya sendiri.
+    Route::middleware(HanyaMagang::class)->prefix('laporan-kegiatan')->name('laporan-kegiatan.')->group(function () {
         Route::get('/', [LaporanKegiatanController::class, 'index'])->name('index');
         Route::get('/create', [LaporanKegiatanController::class, 'create'])->name('create');
         Route::post('/', [LaporanKegiatanController::class, 'store'])->name('store');

@@ -18,7 +18,10 @@ class UserRequest extends FormRequest
         $rules = [
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255',
-            'avatar' => $avatar ? 'nullable|' : 'required|' . 'image|mimes:jpeg,png,jpg|max:2048',
+            // "." mengikat lebih kuat dari "?:", sehingga versi lama menghasilkan
+            // aturan 'nullable|' saja saat user sudah punya avatar — artinya
+            // file apa pun (termasuk .php) lolos tanpa pengecekan tipe.
+            'avatar' => ($avatar ? 'nullable' : 'required') . '|image|mimes:jpeg,png,jpg|max:2048',
             'no_telp' => 'required|numeric',
             'alamat' => 'required|string',
             'jenis_kelamin' => 'required|string|max:255',

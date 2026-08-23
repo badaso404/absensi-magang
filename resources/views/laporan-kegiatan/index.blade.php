@@ -23,71 +23,48 @@
     </div>
     @endif
 
-    <div class="row mb-3">
-        <div class="col-md-4">
-            <div class="card only-gradient-border shadow-sm" style="border-radius: 10px;">
-                <div class="card-body p-3">
-                    <h6 class="mb-3 font-weight-bold text-primary" style="font-size: 1rem;">Filter Bulan & Tahun</h6>
-
-                    <div class="dropdown w-100">
-                        <button class="btn btn-outline-primary btn-sm w-100 d-flex justify-content-between align-items-center"
-                            type="button" id="filterDropdown"
-                            data-toggle="dropdown" data-display="static" aria-expanded="false"
-                            style="border-radius: 8px; border-radius: 10px;">
-                            <span>📅 Pilih Filter</span>
-                            <i class="fas fa-chevron-down ml-2"></i>
-                        </button>
-
-                        <div class="dropdown-menu shadow p-3 w-100" aria-labelledby="filterDropdown"
-                            style="min-width: 280px; border-radius: 10px;">
-
-                            {{-- Tahun --}}
-                            <div class="mb-3">
-                                <div class="text-muted font-weight-bold mb-2" style="font-size:.9rem;">📅 Tahun</div>
-                                <div class="d-flex flex-row flex-nowrap overflow-auto tahun-scroll" style="gap:6px; padding-bottom:4px;">
-                                    @foreach($years as $year)
-                                    <a href="?year={{ $year }}"
-                                        class="badge {{ $selectedYear == $year ? 'badge-primary' : 'badge-light' }} p-2"
-                                        style="cursor:pointer; font-size:.85rem; white-space: nowrap;">
-                                        {{ $year }}
-                                    </a>
-                                    @endforeach
-                                </div>
-                            </div>
-
-                            <div class="dropdown-divider"></div>
-
-                            {{-- Bulan --}}
-                            @if($selectedYear)
-                            <div class="mb-3">
-                                <div class="text-muted font-weight-bold mb-2" style="font-size:.9rem;">🗓️ Bulan</div>
-                                <div class="d-flex flex-wrap" style="gap:6px;">
-                                    @foreach($months as $num => $name)
-                                    <a href="?year={{ $selectedYear }}&month={{ $num }}"
-                                        class="badge {{ $selectedMonth == $num ? 'badge-success' : 'badge-light' }} p-2"
-                                        style="cursor:pointer; font-size:.8rem;">
-                                        {{ mb_substr($name,0,3) }}
-                                    </a>
-                                    @endforeach
-                                </div>
-                            </div>
-                            @endif
-
-                            <div class="dropdown-divider"></div>
-
-                            {{-- Reset --}}
-                            @if($selectedYear)
-                            <div class="text-right">
-                                <a href="{{ route('laporan-kegiatan.index') }}"
-                                    class="btn btn-sm btn-outline-danger" style="border-radius: 6px;">
-                                    🔄 Reset
-                                </a>
-                            </div>
-                            @endif
-                        </div>
-                    </div>
+    {{-- Filter periode. Versi lama memakai dropdown berisi badge: tahun dulu
+         (satu reload), baru bulannya muncul (reload lagi). Sekarang dua select
+         biasa dalam satu form, seragam dengan halaman admin. --}}
+    <div class="card card-fluid shadow-sm mb-3">
+        <div class="card-body py-3">
+            <form method="GET" action="{{ route('laporan-kegiatan.index') }}" class="row align-items-end">
+                <div class="col-md-4 mb-2 mb-md-0">
+                    <label class="form-control-label text-muted small mb-1">
+                        <i class="far fa-calendar mr-1"></i>Bulan
+                    </label>
+                    <select name="month" class="form-control form-control-sm" onchange="this.form.submit()">
+                        <option value="">Semua Bulan</option>
+                        @foreach($months as $num => $name)
+                            <option value="{{ $num }}" {{ (string) $selectedMonth === (string) $num ? 'selected' : '' }}>
+                                {{ $name }}
+                            </option>
+                        @endforeach
+                    </select>
                 </div>
-            </div>
+
+                <div class="col-md-4 mb-2 mb-md-0">
+                    <label class="form-control-label text-muted small mb-1">
+                        <i class="far fa-calendar-alt mr-1"></i>Tahun
+                    </label>
+                    <select name="year" class="form-control form-control-sm" onchange="this.form.submit()">
+                        <option value="">Semua Tahun</option>
+                        @foreach($years as $year)
+                            <option value="{{ $year }}" {{ (string) $selectedYear === (string) $year ? 'selected' : '' }}>
+                                {{ $year }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <div class="col-md-4">
+                    @if($selectedMonth || $selectedYear)
+                        <a href="{{ route('laporan-kegiatan.index') }}" class="btn btn-sm btn-outline-primary btn-block">
+                            <i class="fas fa-times mr-1"></i>Tampilkan Semua
+                        </a>
+                    @endif
+                </div>
+            </form>
         </div>
     </div>
 
@@ -145,9 +122,16 @@
                                 </td>
                                 <td>{{ $item->lokasi }}</td>
                                 <td>
+                                    {{-- Gambar tampil langsung, seperti di halaman admin;
+                                         diklik tetap membuka ukuran penuh. --}}
                                     @if($item->dokumentasi)
-                                    <a href="{{ asset('storage/' . $item->dokumentasi) }}" target="_blank" class="btn btn-sm btn-info">
-                                        <i class="fas fa-image"></i> Lihat
+                                    <a href="{{ asset('storage/' . $item->dokumentasi) }}" target="_blank" rel="noopener"
+                                       title="Buka ukuran penuh">
+                                        <img src="{{ asset('storage/' . $item->dokumentasi) }}"
+                                             alt="Dokumentasi {{ \Carbon\Carbon::parse($item->tanggal)->isoFormat('D/M/YYYY') }}"
+                                             class="rounded shadow-sm"
+                                             style="width:110px;height:74px;object-fit:cover;"
+                                             loading="lazy">
                                     </a>
                                     @else
                                     <span class="text-muted">-</span>

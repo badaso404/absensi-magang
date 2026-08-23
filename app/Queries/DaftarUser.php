@@ -3,7 +3,7 @@
 namespace App\Queries;
 
 use App\Enums\Role;
-use App\Enums\Seksi;
+use App\Enums\UserSeksi;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -61,7 +61,7 @@ class DaftarUser
             'currentRole'   => $role,
             'currentSeksi'  => $seksi,
             'currentSort'   => $sort,
-            'seksiList'     => Seksi::cases(),
+            'seksiList'     => UserSeksi::cases(),
         ];
     }
 

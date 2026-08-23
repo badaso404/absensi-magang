@@ -14,67 +14,49 @@
         </div>
     </div>
 
-    <div class="card only-gradient-border shadow-sm" style="max-width: 310px; border-radius: 10px;">
-        <div class="card-body p-3"> 
-            <h6 class="mb-3 font-weight-bold text-primary" style="font-size: 1rem;">Filter Bulan & Tahun</h6>
+    {{-- Filter periode: dua select dalam satu form, seragam dengan halaman lain. --}}
+    <div class="card card-fluid shadow-sm mb-3">
+        <div class="card-body py-3">
+            <form method="GET"
+                  action="{{ $rekapUser ? route('rekapabsen.user', $rekapUser) : route('rekapabsen') }}"
+                  class="row align-items-end">
+                <div class="col-md-4 mb-2 mb-md-0">
+                    <label class="form-control-label text-muted small mb-1">
+                        <i class="far fa-calendar mr-1"></i>Bulan
+                    </label>
+                    <select name="month" class="form-control form-control-sm" onchange="this.form.submit()">
+                        <option value="">Semua Bulan</option>
+                        @foreach($months as $num => $name)
+                            <option value="{{ $num }}" {{ (string) $selectedMonth === (string) $num ? 'selected' : '' }}>
+                                {{ $name }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
 
-            <div class="dropdown w-100">
-                <button class="btn btn-outline-primary btn-sm w-100 d-flex justify-content-between align-items-center" 
-                    type="button" id="filterDropdown" 
-                    data-toggle="dropdown" data-display="static" aria-expanded="false"
-                    style="border-radius: 8px; max-width: 340px; border-radius: 10px;">
-                    <span>📅 Pilih Filter</span>
-                    <i class="fas fa-chevron-down ml-2"></i>
-                </button>
-
-                <div class="dropdown-menu shadow p-3 w-100" aria-labelledby="filterDropdown" 
-                    style="min-width: 280px; border-radius: 10px; top:100% !important; bottom:auto !important;">
-
-                    {{-- Tahun --}}
-                    <div class="mb-3">
-                        <div class="text-muted font-weight-bold mb-2" style="font-size:.9rem;">📅 Tahun</div>
-                        <div class="d-flex flex-row flex-nowrap overflow-auto tahun-scroll" style="gap:6px; padding-bottom:4px;">
-                            @foreach($years as $year)
-                                <a href="?year={{ $year }}"
-                                class="badge {{ $selectedYear == $year ? 'badge-primary' : 'badge-light' }} p-2"
-                                style="cursor:pointer; font-size:.85rem; white-space: nowrap;">
+                <div class="col-md-4 mb-2 mb-md-0">
+                    <label class="form-control-label text-muted small mb-1">
+                        <i class="far fa-calendar-alt mr-1"></i>Tahun
+                    </label>
+                    <select name="year" class="form-control form-control-sm" onchange="this.form.submit()">
+                        <option value="">Semua Tahun</option>
+                        @foreach($years as $year)
+                            <option value="{{ $year }}" {{ (string) $selectedYear === (string) $year ? 'selected' : '' }}>
                                 {{ $year }}
-                                </a>
-                            @endforeach
-                        </div>
-                    </div>
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
 
-                    <div class="dropdown-divider"></div>
-
-                    {{-- Bulan --}}
-                    @if($selectedYear)
-                    <div class="mb-3">
-                        <div class="text-muted font-weight-bold mb-2" style="font-size:.9rem;">🗓️ Bulan</div>
-                        <div class="d-flex flex-wrap" style="gap:6px;">
-                            @foreach($months as $num => $name)
-                                <a href="?year={{ $selectedYear }}&month={{ $num }}"
-                                class="badge {{ $selectedMonth == $num ? 'badge-success' : 'badge-light' }} p-2"
-                                style="cursor:pointer; font-size:.8rem;">
-                                {{ mb_substr($name,0,3) }}
-                                </a>
-                            @endforeach
-                        </div>
-                    </div>
-                    @endif
-
-                    <div class="dropdown-divider"></div>
-
-                    {{-- Reset --}}
-                    @if($selectedYear)
-                    <div class="text-right">
+                <div class="col-md-4">
+                    @if($selectedMonth || $selectedYear)
                         <a href="{{ $rekapUser ? route('rekapabsen.user', $rekapUser) : route('rekapabsen') }}"
-                            class="btn btn-sm btn-outline-danger" style="border-radius: 6px;">
-                            🔄 Reset
+                           class="btn btn-sm btn-outline-primary btn-block">
+                            <i class="fas fa-times mr-1"></i>Tampilkan Semua
                         </a>
-                    </div>
                     @endif
                 </div>
-            </div>
+            </form>
         </div>
     </div>
 

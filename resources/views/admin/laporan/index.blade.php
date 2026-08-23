@@ -38,8 +38,68 @@
     <!-- Table daftar magang -->
     <div class="card card-fluid shadow-sm">
         <div class="card-header bg-gradient-primary text-white d-flex justify-content-between">
-            <h6 class="mb-0 font-weight-bold">Daftar Magang</h6>
+            <h6 class="mb-0 font-weight-bold">
+                Daftar Magang
+                @if($selectedSeksi !== 'all')
+                    &mdash; {{ $selectedSeksi->code() }}
+                @endif
+            </h6>
             <span class="badge badge-light">{{ $users->count() }} user</span>
+        </div>
+
+        {{-- Filter unit + periode. Controller sudah lama menyiapkan $years dan
+             $months, tapi halaman ini belum pernah punya form untuk memakainya. --}}
+        <div class="p-3 bg-white border-bottom">
+            <form method="GET" action="{{ route('admin-laporan.index') }}" class="row align-items-end">
+                <div class="col-md-4 mb-2 mb-md-0">
+                    <label class="mb-2 text-muted small">
+                        <i class="fas fa-sitemap mr-1"></i>Unit / Seksi:
+                    </label>
+                    <select name="seksi" class="form-control form-control-sm" onchange="this.form.submit()">
+                        <option value="all">Semua Unit</option>
+                        @foreach($seksiList as $s)
+                            <option value="{{ $s->value }}"
+                                {{ $selectedSeksi !== 'all' && $selectedSeksi->value === $s->value ? 'selected' : '' }}>
+                                {{ $s->code() }} &mdash; {{ $s->text() }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <div class="col-md-3 mb-2 mb-md-0">
+                    <label class="mb-2 text-muted small">
+                        <i class="far fa-calendar mr-1"></i>Bulan:
+                    </label>
+                    <select name="month" class="form-control form-control-sm" onchange="this.form.submit()">
+                        <option value="">Semua Bulan</option>
+                        @foreach($months as $nomor => $nama)
+                            <option value="{{ $nomor }}" {{ (string) $selectedMonth === (string) $nomor ? 'selected' : '' }}>
+                                {{ $nama }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <div class="col-md-3 mb-2 mb-md-0">
+                    <label class="mb-2 text-muted small">
+                        <i class="far fa-calendar-alt mr-1"></i>Tahun:
+                    </label>
+                    <select name="year" class="form-control form-control-sm" onchange="this.form.submit()">
+                        <option value="">Semua Tahun</option>
+                        @foreach($years as $tahun)
+                            <option value="{{ $tahun }}" {{ (string) $selectedYear === (string) $tahun ? 'selected' : '' }}>
+                                {{ $tahun }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <div class="col-md-2">
+                    <a href="{{ route('admin-laporan.index') }}" class="btn btn-sm btn-outline-secondary btn-block">
+                        <i class="fas fa-times mr-1"></i>Reset
+                    </a>
+                </div>
+            </form>
         </div>
 
         <div class="table-responsive">
@@ -48,9 +108,9 @@
                     <tr>
                         <th>#</th>
                         <th>Nama</th>
+                        <th>Unit</th>
                         <th>Asal / Jurusan</th>
                         <th>Total Laporan</th>
-                       
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -66,16 +126,34 @@
                                 <small class="text-muted">{{ $u->jenis_kelamin ?? '-' }} / {{ $u->tanggal_lahir ? \Carbon\Carbon::parse($u->tanggal_lahir)->isoFormat('D MMM Y') : '-' }}</small>
                             </td>
                             <td>
+                                @if($u->seksi)
+                                    <span class="badge badge-{{ $u->seksi->color() }}"
+                                          title="{{ $u->seksi->text() }}">{{ $u->seksi->code() }}</span>
+                                @else
+                                    <span class="text-muted">-</span>
+                                @endif
+                            </td>
+                            <td>
                                 <div>{{ $u->asal ?? '-' }}</div>
                                 <small class="text-muted">{{ $u->jurusan ?? '-' }}</small>
                             </td>
                             <td>
                                 <span class="badge badge-pill badge-info">{{ $u->laporan_count ?? 0 }}</span>
                             </td>
-                      
                             <td>
-                                <a href="{{ route('admin-laporan.user', $u->id) }}" class="btn btn-sm btn-info">Lihat Laporan</a>
-                                <a href="{{ route('admin-laporan.export', $u->id) }}" class="btn btn-sm btn-success">Export</a>
+                                {{-- Export dipindah ke halaman detail: dari sini admin
+                                     belum memilih periode, jadi tombolnya selalu
+                                     mengunduh rentang yang belum tentu dia maksud. --}}
+                                {{-- Periode yang sedang difilter ikut dibawa, kalau tidak
+                                     memfilter daftar ke Juni lalu mengklik seseorang akan
+                                     membuka bulan ini yang isinya kosong. --}}
+                                <a href="{{ route('admin-laporan.user', array_filter([
+                                        'user'  => $u->id,
+                                        'month' => $selectedMonth,
+                                        'year'  => $selectedYear,
+                                   ])) }}" class="btn btn-sm btn-info">
+                                    <i class="fas fa-eye mr-1"></i>Lihat Laporan
+                                </a>
                             </td>
                         </tr>
                     @empty

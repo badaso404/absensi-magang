@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Exports\LaporanKegiatanExport;
+use App\Http\Controllers\Concerns\FilterPeriode;
 use App\Models\LaporanKegiatan;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
@@ -14,6 +15,8 @@ use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class LaporanKegiatanController extends Controller
 {
+    use FilterPeriode;
+
     public string $mainMenu = 'laporankegiatan';
 
     private const BULAN = [
@@ -24,9 +27,11 @@ class LaporanKegiatanController extends Controller
 
     public function index(Request $request): View
     {
+        ['month' => $month, 'year' => $year] = $this->filterPeriode($request);
+
         $laporan = LaporanKegiatan::where('user_id', Auth::id())
-            ->when($request->filled('month'), fn ($q) => $q->whereMonth('tanggal', $request->month))
-            ->when($request->filled('year'), fn ($q) => $q->whereYear('tanggal', $request->year))
+            ->when($month, fn ($q) => $q->whereMonth('tanggal', $month))
+            ->when($year, fn ($q) => $q->whereYear('tanggal', $year))
             ->orderByDesc('tanggal')
             ->get();
 
@@ -39,8 +44,8 @@ class LaporanKegiatanController extends Controller
 
         return $this->createView('laporan-kegiatan.index', [
             'laporan'       => $laporan,
-            'selectedMonth' => $request->input('month', ''),
-            'selectedYear'  => $request->input('year', ''),
+            'selectedMonth' => $month ?? '',
+            'selectedYear'  => $year ?? '',
             'years'         => $years,
             'months'        => self::BULAN,
         ]);
@@ -57,7 +62,17 @@ class LaporanKegiatanController extends Controller
             'tanggal'         => 'required|date',
             'detail_kegiatan' => 'required|string',
             'lokasi'          => 'required|string',
+            // Form create punya input file dokumentasi, tapi sebelumnya tidak
+            // pernah divalidasi maupun disimpan — file yang diunggah user
+            // hilang tanpa pesan apa pun.
+            'dokumentasi'     => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ]);
+
+        unset($validated['dokumentasi']);
+
+        if ($request->hasFile('dokumentasi')) {
+            $validated['dokumentasi'] = $this->simpanDokumentasi($request->file('dokumentasi'));
+        }
 
         LaporanKegiatan::create($validated + [
             'user_id' => Auth::id(),
@@ -119,10 +134,7 @@ class LaporanKegiatanController extends Controller
 
     public function export(Request $request): BinaryFileResponse
     {
-        $filters = [
-            'month' => $request->input('month'),
-            'year'  => $request->input('year'),
-        ];
+        $filters = $this->filterPeriode($request);
 
         $fileName = 'laporan_kegiatan_' .
             ($filters['month'] ? $filters['month'] . '_' : '') .

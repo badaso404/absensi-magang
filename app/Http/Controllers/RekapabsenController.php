@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Exports\RekapAbsensiExport;
+use App\Http\Controllers\Concerns\FilterPeriode;
 use App\Models\Absensi;
 use App\Models\User;
 use Illuminate\Contracts\View\View;
@@ -13,6 +14,8 @@ use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class RekapabsenController extends Controller
 {
+    use FilterPeriode;
+
     public string $mainMenu = 'rekapabsen';
 
     private const BULAN = [
@@ -28,8 +31,11 @@ class RekapabsenController extends Controller
     public function index(Request $request, ?User $user = null): View
     {
         $userId = $user?->id ?? Auth::id();
+        ['month' => $month, 'year' => $year] = $this->filterPeriode($request);
 
-        $absensi = $this->filter(Absensi::where('user_id', $userId), $request)
+        $absensi = Absensi::where('user_id', $userId)
+            ->when($month, fn ($q) => $q->whereMonth('created_at', $month))
+            ->when($year, fn ($q) => $q->whereYear('created_at', $year))
             ->orderByDesc('created_at')
             ->get();
 
@@ -43,8 +49,8 @@ class RekapabsenController extends Controller
         return $this->createView('rekap.index', [
             'rekap'         => $absensi,
             'rekapUser'     => $user,
-            'selectedMonth' => $request->input('month', ''),
-            'selectedYear'  => $request->input('year', ''),
+            'selectedMonth' => $month ?? '',
+            'selectedYear'  => $year ?? '',
             'years'         => $years,
             'months'        => self::BULAN,
         ]);
@@ -54,10 +60,7 @@ class RekapabsenController extends Controller
     {
         $target = $user ?? Auth::user();
 
-        $filters = [
-            'month' => $request->input('month'),
-            'year'  => $request->input('year'),
-        ];
+        $filters = $this->filterPeriode($request);
 
         $fileName = sprintf(
             'rekap_absensi_%s.xlsx',
@@ -65,12 +68,5 @@ class RekapabsenController extends Controller
         );
 
         return Excel::download(new RekapAbsensiExport($target->id, $filters), $fileName);
-    }
-
-    private function filter($query, Request $request)
-    {
-        return $query
-            ->when($request->filled('month'), fn ($q) => $q->whereMonth('created_at', $request->month))
-            ->when($request->filled('year'), fn ($q) => $q->whereYear('created_at', $request->year));
     }
 }

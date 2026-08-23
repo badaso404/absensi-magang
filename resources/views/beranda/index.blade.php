@@ -292,34 +292,84 @@ function ambilLokasiDanKirim(mode = null) {
         didOpen: () => { Swal.showLoading(); }
     });
 
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(
-            function(position) {
-                kirimDataAbsen(mode, position.coords.latitude, position.coords.longitude);
-            },
-            function(error) {
-                console.warn("GPS Error: " + error.message);
-                Swal.fire({
-                    icon: 'warning',
-                    title: 'GPS Tidak Aktif',
-                    text: 'Absensi akan dicatat tanpa koordinat lokasi.',
-                    timer: 2000,
-                    showConfirmButton: false
-                }).then(() => {
-                    kirimDataAbsen(mode, 0, 0);
-                });
-            },
-            { enableHighAccuracy: true, timeout: 5000, maximumAge: 0 }
-        );
-    } else {
-        kirimDataAbsen(mode, 0, 0);
+    if (!navigator.geolocation) {
+        tolakTanpaLokasi(mode, 'Browser Anda tidak mendukung fitur lokasi.', false);
+        return;
     }
+
+    // Geolocation API hanya tersedia di secure context (HTTPS atau localhost).
+    // Di HTTP biasa browser menolak dengan kode PERMISSION_DENIED tanpa pernah
+    // memunculkan popup izin, sehingga pesan "aktifkan izin lokasi" menyesatkan
+    // — masalahnya di alamat situs, bukan di setelan browser user.
+    if (window.isSecureContext === false) {
+        tolakTanpaLokasi(
+            mode,
+            'Situs ini diakses lewat koneksi tidak aman (HTTP), sehingga browser ' +
+            'memblokir akses lokasi. Buka situs ini lewat <b>HTTPS</b> untuk bisa absen.',
+            false
+        );
+        return;
+    }
+
+    navigator.geolocation.getCurrentPosition(
+        function(position) {
+            kirimDataAbsen(mode, position.coords.latitude, position.coords.longitude);
+        },
+        function(error) {
+            console.warn("GPS Error: " + error.message);
+            tolakTanpaLokasi(mode, pesanGpsError(error), true);
+        },
+        // Timeout dilonggarkan jadi 10 detik: sekarang lokasi wajib, jadi GPS
+        // yang cuma lambat mengunci tidak boleh langsung dianggap gagal.
+        { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
+    );
+}
+
+function pesanGpsError(error) {
+    switch (error.code) {
+        case error.PERMISSION_DENIED:
+            return 'Izin lokasi ditolak. Aktifkan izin lokasi di pengaturan browser Anda.';
+        case error.POSITION_UNAVAILABLE:
+            return 'Lokasi tidak dapat dideteksi. Pastikan GPS perangkat Anda aktif.';
+        case error.TIMEOUT:
+            return 'Pencarian lokasi memakan waktu terlalu lama.';
+        default:
+            return 'Lokasi tidak dapat diambil.';
+    }
+}
+
+/**
+ * Absen tanpa koordinat ditolak sepenuhnya.
+ *
+ * Ini hanya lapis UX supaya pesannya jelas; penolakan yang sebenarnya ada di
+ * AbsensiController, yang mewajibkan latitude/longitude. Jadi melewati dialog
+ * ini lewat DevTools tetap tidak menghasilkan absensi.
+ */
+function tolakTanpaLokasi(mode, alasan, bolehCobaLagi) {
+    Swal.fire({
+        icon: 'error',
+        title: 'Absen Tidak Dapat Dilakukan',
+        html: alasan + '<br><br>Absensi <b>wajib</b> menyertakan lokasi. ' +
+              'Aktifkan GPS dan izinkan akses lokasi, lalu coba lagi.',
+        showCancelButton: bolehCobaLagi,
+        confirmButtonText: bolehCobaLagi ? 'Coba Lagi' : 'Mengerti',
+        cancelButtonText: 'Tutup',
+        confirmButtonColor: '#fb6340',
+        cancelButtonColor: '#8898aa',
+        reverseButtons: true,
+        allowOutsideClick: false
+    }).then((hasil) => {
+        if (bolehCobaLagi && hasil.isConfirmed) {
+            ambilLokasiDanKirim(mode);
+        }
+    });
 }
 
 function kirimDataAbsen(mode, lat, long) {
     const tipeAbsen = "{{ $toggleAbsenPagi == 'pagi' ? 'pagi' : 'sore' }}";
     const urlAbsen = "{{ route('absen', ':type') }}".replace(':type', tipeAbsen);
 
+    // Fungsi ini hanya dipanggil setelah koordinat benar-benar terbaca.
     $.ajax({
         url: urlAbsen,
         type: 'POST',

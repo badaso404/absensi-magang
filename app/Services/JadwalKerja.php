@@ -14,6 +14,20 @@ use Illuminate\Support\Carbon;
  */
 class JadwalKerja
 {
+    /**
+     * Apakah tanggal ini hari kerja magang (Senin-Jumat).
+     *
+     * Dipakai papan pantau supaya Sabtu-Minggu tidak menandai seluruh magang
+     * "Belum Absen" — di hari libur tidak ada kewajiban absen, jadi menghitung
+     * mereka bolos hanya menghasilkan angka merah palsu setiap akhir pekan.
+     *
+     * Catatan: hari libur nasional belum dikenali, hanya akhir pekan.
+     */
+    public function hariKerja(?CarbonInterface $tanggal = null): bool
+    {
+        return !($tanggal ?? Carbon::today())->isWeekend();
+    }
+
     public function jamMasuk(?CarbonInterface $tanggal = null): Carbon
     {
         return $this->pukul(config('magang.jam_masuk'), $tanggal);

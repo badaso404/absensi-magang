@@ -11,10 +11,13 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\ValidationException;
 
 class AbsensiController extends Controller
 {
     public string $mainMenu = 'Absensi';
+
+    private const PESAN_GPS = 'Lokasi tidak terdeteksi. Aktifkan GPS dan izinkan akses lokasi untuk melakukan absen.';
 
     public function __construct(
         private readonly JadwalKerja $jadwal,
@@ -54,10 +57,20 @@ class AbsensiController extends Controller
             return response()->json(['success' => false, 'message' => 'Tipe absen tidak dikenal.'], 404);
         }
 
+        // Koordinat wajib: absensi tanpa lokasi tidak bisa diverifikasi, jadi
+        // ditolak di sini — bukan sekadar dicegah lewat dialog di browser yang
+        // gampang dilewati dengan request manual.
         $validated = $request->validate([
             'wfhwfo'    => $tipe === 'pagi' ? 'required|in:WFH,WFO,Dinas Luar' : 'nullable',
-            'latitude'  => 'nullable|numeric|between:-90,90',
-            'longitude' => 'nullable|numeric|between:-180,180',
+            'latitude'  => 'required|numeric|between:-90,90',
+            'longitude' => 'required|numeric|between:-180,180',
+        ], [
+            'latitude.required'  => self::PESAN_GPS,
+            'longitude.required' => self::PESAN_GPS,
+            'latitude.numeric'   => self::PESAN_GPS,
+            'longitude.numeric'  => self::PESAN_GPS,
+            'latitude.between'   => self::PESAN_GPS,
+            'longitude.between'  => self::PESAN_GPS,
         ]);
 
         $userId = Auth::id();
@@ -69,8 +82,15 @@ class AbsensiController extends Controller
             ->whereDate('created_at', $now->copy()->startOfDay())
             ->first();
 
-        $latitude = $validated['latitude'] ?? null;
-        $longitude = $validated['longitude'] ?? null;
+        // Koordinat 0,0 (Null Island) adalah nilai default browser saat GPS
+        // gagal dibaca, bukan lokasi sungguhan. Lolos aturan numeric di atas,
+        // jadi harus ditolak terpisah.
+        if ((float) $validated['latitude'] === 0.0 && (float) $validated['longitude'] === 0.0) {
+            throw ValidationException::withMessages(['latitude' => self::PESAN_GPS]);
+        }
+
+        $latitude = (float) $validated['latitude'];
+        $longitude = (float) $validated['longitude'];
         $lokasi = $this->geocoder->resolve($latitude, $longitude);
 
         if ($tipe === 'pagi') {
@@ -126,4 +146,5 @@ class AbsensiController extends Controller
             'location' => $lokasi ?? $absensi->lokasi_user,
         ]);
     }
+
 }

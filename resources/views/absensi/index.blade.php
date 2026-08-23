@@ -89,7 +89,13 @@
                     </thead>
                     <tbody>
                         @forelse($absensi as $a)
-                        <tr class="cursor-pointer" data-toggle="tooltip" title="Klik untuk detail" data-note="{{ $a->note ?? '' }}" data-lokasi="{{ $a->lokasi_user ?? '' }}" data-checked-in="{{ $a->checked_in_at ?? '' }}" data-checked-out="{{ $a->checked_out_at ?? '' }}">
+                        {{-- data-note memakai kolom "description"; kolom "note" tidak pernah ada
+                             di tabel absensi, jadi Catatan di modal selalu kosong. --}}
+                        <tr class="cursor-pointer" data-toggle="tooltip" title="Klik untuk detail"
+                            data-note="{{ $a->description ?? '' }}"
+                            data-lokasi="{{ $a->lokasi_user ?? '' }}"
+                            data-checked-in="{{ $a->checked_in_at?->format('H:i:s') ?? '' }}"
+                            data-checked-out="{{ $a->checked_out_at?->format('H:i:s') ?? '' }}">
                             <td>
                                 <div class="d-flex flex-column">
                                     <span class="text-sm font-weight-600">{{ \Carbon\Carbon::parse($a->created_at)->isoFormat('dddd') }}</span>
@@ -339,15 +345,15 @@ $(function(){
 
     // Klik baris -> buka modal dengan detail minimal
     $('.btn-detail').on('click', function(){
-        var note = $(this).data('note') || '-';
-        var lokasi = $(this).data('lokasi') || '-';
-        var checkedIn = $(this).data('checked-in') || '-';
-        var checkedOut = $(this).data('checked-out') || '-';
+        // Atribut data-* menempel di <tr>, bukan di tombolnya. Versi lama
+        // membacanya dari $(this) (tombol), jadi semua nilai undefined dan
+        // modal selalu menampilkan "-" meski datanya ada di baris tabel.
+        var $baris = $(this).closest('tr');
 
-        $('#modal-note').text(note);
-        $('#modal-lokasi').text(lokasi);
-        $('#modal-checked-in').text(checkedIn ? checkedIn : '-');
-        $('#modal-checked-out').text(checkedOut ? checkedOut : '-');
+        $('#modal-note').text($baris.data('note') || '-');
+        $('#modal-lokasi').text($baris.data('lokasi') || '-');
+        $('#modal-checked-in').text($baris.data('checked-in') || '-');
+        $('#modal-checked-out').text($baris.data('checked-out') || '-');
 
         $('#absenDetailModal').modal('show');
     });

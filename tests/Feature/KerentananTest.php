@@ -1280,11 +1280,12 @@ class KerentananTest extends TestCase
 
         $response = $this->actingAs($saya)->get('/tim')->assertOk();
 
-        $this->assertCount(1, $response->viewData('rekan'));
-
-        $html = $response->getContent();
-        $this->assertStringContainsString('Rekan ASTIK', $html);
-        $this->assertStringNotContainsString('Orang KIP', $html);
+        // Tim Saya hanya berisi unit sendiri. Orang KIP tetap tampil di
+        // halaman, tapi di bagian Lintas Tim — bukan di Tim Saya.
+        $rekan = $response->viewData('rekan');
+        $this->assertCount(1, $rekan);
+        $this->assertSame('Rekan ASTIK', $rekan->first()->name);
+        $this->assertNotContains('Orang KIP', $rekan->pluck('name')->all());
     }
 
     public function test_tim_tidak_menampilkan_alumni_atau_yang_belum_mulai(): void
@@ -1472,5 +1473,119 @@ class KerentananTest extends TestCase
         $this->actingAs(User::factory()->create())
             ->get('/login')
             ->assertRedirect(route('home'));
+    }
+
+    // --- Lintas Tim ---
+
+    public function test_lintas_tim_menampilkan_unit_lain_tanpa_unit_sendiri(): void
+    {
+        $saya = User::factory()->create(['seksi' => \App\Enums\UserSeksi::ASTIK]);
+
+        User::factory()->create(['name' => 'Rekan ASTIK', 'seksi' => \App\Enums\UserSeksi::ASTIK]);
+        User::factory()->create(['name' => 'Orang ID', 'seksi' => \App\Enums\UserSeksi::ID]);
+        User::factory()->create(['name' => 'Orang KIP', 'seksi' => \App\Enums\UserSeksi::KIP]);
+
+        $response = $this->actingAs($saya)->get('/tim')->assertOk();
+
+        // Tim Saya hanya ASTIK; Lintas Tim hanya unit lain.
+        $this->assertCount(1, $response->viewData('rekan'));
+        $this->assertCount(2, $response->viewData('lintas'));
+
+        $namaLintas = $response->viewData('lintas')->pluck('name')->all();
+        $this->assertContains('Orang ID', $namaLintas);
+        $this->assertContains('Orang KIP', $namaLintas);
+        $this->assertNotContains('Rekan ASTIK', $namaLintas);
+    }
+
+    public function test_lintas_tim_bisa_difilter_per_unit(): void
+    {
+        $saya = User::factory()->create(['seksi' => \App\Enums\UserSeksi::ASTIK]);
+
+        User::factory()->create(['name' => 'Orang ID', 'seksi' => \App\Enums\UserSeksi::ID]);
+        User::factory()->create(['name' => 'Orang KIP', 'seksi' => \App\Enums\UserSeksi::KIP]);
+
+        $response = $this->actingAs($saya)
+            ->get('/tim?seksi=' . \App\Enums\UserSeksi::KIP->value)->assertOk();
+
+        $lintas = $response->viewData('lintas');
+        $this->assertCount(1, $lintas);
+        $this->assertSame('Orang KIP', $lintas->first()->name);
+        $this->assertSame(\App\Enums\UserSeksi::KIP, $response->viewData('seksiDipilih'));
+    }
+
+    /**
+     * Memilih unit sendiri di filter Lintas Tim tidak boleh menggandakan
+     * daftar Tim Saya; diperlakukan sebagai "semua unit lain".
+     */
+    public function test_lintas_tim_mengabaikan_filter_unit_sendiri(): void
+    {
+        $saya = User::factory()->create(['seksi' => \App\Enums\UserSeksi::ASTIK]);
+
+        User::factory()->create(['name' => 'Rekan ASTIK', 'seksi' => \App\Enums\UserSeksi::ASTIK]);
+        User::factory()->create(['name' => 'Orang ID', 'seksi' => \App\Enums\UserSeksi::ID]);
+
+        $response = $this->actingAs($saya)
+            ->get('/tim?seksi=' . \App\Enums\UserSeksi::ASTIK->value)->assertOk();
+
+        $this->assertNull($response->viewData('seksiDipilih'));
+        $this->assertNotContains('Rekan ASTIK', $response->viewData('lintas')->pluck('name')->all());
+
+        // Unit sendiri juga tidak ditawarkan di dropdown.
+        $this->assertNotContains(
+            \App\Enums\UserSeksi::ASTIK,
+            $response->viewData('daftarSeksi')->all()
+        );
+    }
+
+    public function test_lintas_tim_tidak_membocorkan_data_sensitif(): void
+    {
+        $saya = User::factory()->create(['seksi' => \App\Enums\UserSeksi::ASTIK]);
+
+        User::factory()->create([
+            'name'            => 'Orang ID',
+            'seksi'           => \App\Enums\UserSeksi::ID,
+            'email'           => 'lintas@rahasia.id',
+            'identity_number' => '5544332211',
+            'alamat'          => 'Jl. Tersembunyi No. 9',
+            'tanggal_lahir'   => '2002-11-30',
+        ]);
+
+        $html = $this->actingAs($saya)->get('/tim')->assertOk()->getContent();
+
+        $this->assertStringContainsString('Orang ID', $html);
+
+        foreach (['lintas@rahasia.id', '5544332211', 'Jl. Tersembunyi No. 9', '2002-11-30'] as $bocor) {
+            $this->assertStringNotContainsString($bocor, $html, "Data sensitif '{$bocor}' tampil di Lintas Tim.");
+        }
+    }
+
+    public function test_lintas_tim_hanya_magang_aktif_dan_bukan_admin(): void
+    {
+        $saya = User::factory()->create(['seksi' => \App\Enums\UserSeksi::ASTIK]);
+
+        User::factory()->create(['name' => 'ID Aktif', 'seksi' => \App\Enums\UserSeksi::ID]);
+        User::factory()->create([
+            'name' => 'ID Alumni', 'seksi' => \App\Enums\UserSeksi::ID,
+            'tanggal_akhir_magang' => now()->subMonth(),
+        ]);
+        User::factory()->admin()->create(['name' => 'Admin ID', 'seksi' => \App\Enums\UserSeksi::ID]);
+
+        $nama = $this->actingAs($saya)->get('/tim')->assertOk()
+            ->viewData('lintas')->pluck('name')->all();
+
+        $this->assertSame(['ID Aktif'], $nama);
+    }
+
+    public function test_magang_tanpa_unit_tetap_bisa_lihat_lintas_tim(): void
+    {
+        $saya = User::factory()->create(['seksi' => null]);
+
+        User::factory()->create(['name' => 'Orang KIP', 'seksi' => \App\Enums\UserSeksi::KIP]);
+
+        $response = $this->actingAs($saya)->get('/tim')->assertOk();
+
+        $this->assertCount(0, $response->viewData('rekan'));
+        $this->assertCount(1, $response->viewData('lintas'));
+        $this->assertStringContainsString('Orang KIP', $response->getContent());
     }
 }

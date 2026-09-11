@@ -3,7 +3,10 @@
 @section('content')
 <div class="page-content">
 
-    <div class="page-title mb-4">
+    {{-- ===================== TIM SAYA ===================== --}}
+    {{-- Area judul dibuat setinggi sisa banner ungu (lihat @push styles) agar
+         kartu rekan tidak terpotong garis batas ungu/putih. --}}
+    <div class="page-title tim-judul mb-4">
         <div class="d-flex align-items-center">
             <div class="rounded-circle bg-white-transparent mr-3 d-flex align-items-center justify-content-center" style="width:48px;height:48px;">
                 <i class="fas fa-user-friends fa-lg text-white"></i>
@@ -29,8 +32,8 @@
     @if(!$saya->seksi)
         <div class="alert alert-warning">
             <i class="fas fa-exclamation-triangle mr-2"></i>
-            Akun Anda belum ditempatkan di unit mana pun, jadi daftar rekan belum bisa ditampilkan.
-            Hubungi admin untuk penempatan unit.
+            Akun Anda belum ditempatkan di unit mana pun, jadi daftar Tim Saya belum bisa ditampilkan.
+            Hubungi admin untuk penempatan unit. Anda tetap bisa melihat rekan di bagian Lintas Tim di bawah.
         </div>
     @elseif($rekan->isEmpty())
         <div class="alert alert-info">
@@ -40,69 +43,89 @@
     @else
         <div class="row">
             @foreach($rekan as $r)
-                <div class="col-lg-4 col-md-6">
-                    <div class="card h-100">
-                        <div class="card-body text-center">
-                            <img src="{{ $r->avatar ? asset('storage/images/avatar/'.$r->avatar) : asset('assets/img/portrait.png') }}"
-                                 alt="{{ $r->name }}"
-                                 class="rounded-circle shadow mb-3"
-                                 style="width:90px;height:90px;object-fit:cover;"
-                                 loading="lazy">
-
-                            <h6 class="h5 mb-1">{{ $r->name }}</h6>
-
-                            <p class="text-sm text-muted mb-1">
-                                {{ $r->jurusan ?? 'Jurusan belum diisi' }}
-                            </p>
-                            <p class="text-sm text-muted mb-3">
-                                <i class="fas fa-university mr-1"></i>{{ $r->asal ?? '-' }}
-                            </p>
-
-                            @if($r->tanggal_awal_magang || $r->tanggal_akhir_magang)
-                                <p class="text-xs text-muted mb-3">
-                                    <i class="far fa-calendar mr-1"></i>
-                                    {{ $r->tanggal_awal_magang ? \Carbon\Carbon::parse($r->tanggal_awal_magang)->isoFormat('MMM Y') : '?' }}
-                                    &ndash;
-                                    {{ $r->tanggal_akhir_magang ? \Carbon\Carbon::parse($r->tanggal_akhir_magang)->isoFormat('MMM Y') : '?' }}
-                                </p>
-                            @endif
-
-                            {{-- Hanya kontak yang diisi sendiri oleh yang bersangkutan
-                                 di profilnya yang ditampilkan di sini. --}}
-                            <div class="d-flex justify-content-center">
-                                @if($r->no_telp)
-                                    <a href="https://wa.me/{{ preg_replace('/^0/', '62', preg_replace('/[^0-9]/', '', $r->no_telp)) }}"
-                                       target="_blank" rel="noopener"
-                                       class="btn btn-sm btn-success btn-icon-only rounded-circle mx-1"
-                                       title="WhatsApp {{ $r->name }}">
-                                        <i class="fab fa-whatsapp"></i>
-                                    </a>
-                                @endif
-                                @if($r->instagram)
-                                    <a href="{{ Str::startsWith($r->instagram, ['http://', 'https://']) ? $r->instagram : 'https://instagram.com/' . ltrim($r->instagram, '@/') }}"
-                                       target="_blank" rel="noopener"
-                                       class="btn btn-sm btn-danger btn-icon-only rounded-circle mx-1"
-                                       title="Instagram {{ $r->name }}">
-                                        <i class="fab fa-instagram"></i>
-                                    </a>
-                                @endif
-                                @if($r->linkedin)
-                                    <a href="{{ Str::startsWith($r->linkedin, ['http://', 'https://']) ? $r->linkedin : 'https://' . ltrim($r->linkedin, '/') }}"
-                                       target="_blank" rel="noopener"
-                                       class="btn btn-sm btn-info btn-icon-only rounded-circle mx-1"
-                                       title="LinkedIn {{ $r->name }}">
-                                        <i class="fab fa-linkedin-in"></i>
-                                    </a>
-                                @endif
-                                @if(!$r->no_telp && !$r->instagram && !$r->linkedin)
-                                    <span class="text-xs text-muted">Belum ada kontak yang dibagikan</span>
-                                @endif
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                @include('tim._kartu', ['r' => $r, 'tampilkanUnit' => false])
             @endforeach
         </div>
     @endif
+
+    {{-- ===================== LINTAS TIM ===================== --}}
+    <div class="card card-fluid shadow-sm mt-4">
+        <div class="card-header bg-gradient-primary text-white d-flex justify-content-between align-items-center">
+            {{-- text-white dipasang langsung di h6: warna dari .card-header
+                 tidak diwariskan ke heading oleh tema. --}}
+            <h6 class="mb-0 font-weight-bold text-white">
+                <i class="fas fa-people-arrows mr-2"></i>Lintas Tim
+                @if($seksiDipilih)
+                    <span class="badge badge-light ml-1">{{ $seksiDipilih->code() }}</span>
+                @endif
+            </h6>
+            <span class="badge badge-light">{{ $lintas->count() }} rekan</span>
+        </div>
+
+        {{-- Filter unit. Unit sendiri tidak ada di pilihan karena sudah tampil
+             di Tim Saya. --}}
+        <div class="p-3 bg-white border-bottom">
+            <form method="GET" action="{{ route('tim') }}" class="row align-items-end">
+                <div class="col-md-5 mb-2 mb-md-0">
+                    <label class="form-control-label text-muted small mb-1">
+                        <i class="fas fa-sitemap mr-1"></i>Tampilkan unit
+                    </label>
+                    <select name="seksi" class="form-control form-control-sm" onchange="this.form.submit()">
+                        <option value="all" {{ !$seksiDipilih ? 'selected' : '' }}>Semua unit lain</option>
+                        @foreach($daftarSeksi as $s)
+                            <option value="{{ $s->value }}" {{ $seksiDipilih?->value === $s->value ? 'selected' : '' }}>
+                                {{ $s->code() }} &mdash; {{ $s->text() }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    @if($seksiDipilih)
+                        <a href="{{ route('tim') }}" class="btn btn-sm btn-outline-primary btn-block">
+                            <i class="fas fa-times mr-1"></i>Semua unit
+                        </a>
+                    @endif
+                </div>
+            </form>
+        </div>
+
+        <div class="card-body">
+            @if($lintas->isEmpty())
+                <p class="text-center text-muted mb-0 py-3">
+                    @if($seksiDipilih)
+                        Belum ada magang aktif di unit {{ $seksiDipilih->code() }} saat ini.
+                    @else
+                        Belum ada magang aktif di unit lain saat ini.
+                    @endif
+                </p>
+            @else
+                <div class="row">
+                    @foreach($lintas as $r)
+                        @include('tim._kartu', ['r' => $r, 'tampilkanUnit' => true])
+                    @endforeach
+                </div>
+            @endif
+        </div>
+    </div>
 </div>
 @endsection
+
+@push('styles')
+<style>
+    /* Banner ungu di layout tingginya 420px dari atas halaman, dan konten
+       mulai ±110px di bawah navbar. Halaman lain memang sengaja membiarkan
+       kartunya "menggantung" melewati batas ungu/putih, tapi untuk halaman
+       ini kartu rekan harus utuh di area putih: judul diberi tinggi minimal
+       sehingga ujung bawahnya tepat melewati batas banner, dan judulnya
+       diletakkan di tengah area itu supaya tidak menggantung di atas. */
+    .tim-judul {
+        min-height: 220px;
+        display: flex;
+        align-items: center;
+    }
+
+    @media (max-width: 767.98px) {
+        .tim-judul { min-height: 160px; }
+    }
+</style>
+@endpush

@@ -1,13 +1,10 @@
-@extends('layout.app')
-
-@section('login')
+<?php $__env->startSection('login'); ?>
 <div class="login-split">
 
-    {{-- Panel branding. Di layar kecil ia menyusut jadi header ringkas
-         (lihat media query) supaya form tidak terdorong ke bawah lipatan. --}}
+    
     <div class="login-brand">
         <div class="login-brand__inner">
-            <img src="{{ asset('images/logo kominfotik.png') }}" alt="Logo Kominfotik Jakarta Barat"
+            <img src="<?php echo e(asset('images/logo kominfotik.png')); ?>" alt="Logo Kominfotik Jakarta Barat"
                  class="login-brand__logo">
             <h1 class="login-brand__title">Sistem Magang</h1>
             <p class="login-brand__subtitle">Suku Dinas Kominfotik<br>Kota Administrasi Jakarta Barat</p>
@@ -21,18 +18,37 @@
         <p class="login-brand__footer">&copy; 2026 by TomGan. All rights reserved.</p>
     </div>
 
-    {{-- Panel form --}}
+    
     <div class="login-form-wrap">
         <div class="login-form">
-            <img src="{{ asset('images/logo kominfotik.png') }}" alt="Logo Kominfotik"
+            <img src="<?php echo e(asset('images/logo kominfotik.png')); ?>" alt="Logo Kominfotik"
                  class="login-form__logo-mobile">
 
             <h2 class="login-form__title">Selamat Datang</h2>
             <p class="login-form__lead">Masuk ke akun Anda untuk melanjutkan.</p>
 
-            <form method="post" action="{{ route('login-attempt') }}" id="login-form">
-                <x-alert :title="'Login Gagal'" :type="'danger'" :messages="[]" :display="'none'" />
-                @csrf
+            <form method="post" action="<?php echo e(route('login-attempt')); ?>" id="login-form">
+                <?php if (isset($component)) { $__componentOriginalb5e767ad160784309dfcad41e788743b = $component; } ?>
+<?php if (isset($attributes)) { $__attributesOriginalb5e767ad160784309dfcad41e788743b = $attributes; } ?>
+<?php $component = App\View\Components\Alert::resolve(['title' => 'Login Gagal','type' => 'danger','messages' => [],'display' => 'none'] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? (array) $attributes->getIterator() : [])); ?>
+<?php $component->withName('alert'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag && $constructor = (new ReflectionClass(App\View\Components\Alert::class))->getConstructor()): ?>
+<?php $attributes = $attributes->except(collect($constructor->getParameters())->map->getName()->all()); ?>
+<?php endif; ?>
+<?php $component->withAttributes([]); ?>
+<?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__attributesOriginalb5e767ad160784309dfcad41e788743b)): ?>
+<?php $attributes = $__attributesOriginalb5e767ad160784309dfcad41e788743b; ?>
+<?php unset($__attributesOriginalb5e767ad160784309dfcad41e788743b); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginalb5e767ad160784309dfcad41e788743b)): ?>
+<?php $component = $__componentOriginalb5e767ad160784309dfcad41e788743b; ?>
+<?php unset($__componentOriginalb5e767ad160784309dfcad41e788743b); ?>
+<?php endif; ?>
+                <?php echo csrf_field(); ?>
 
                 <div class="form-group">
                     <label class="form-control-label" for="input-email">Email</label>
@@ -67,7 +83,7 @@
                 <div class="form-group">
                     <label class="form-control-label" for="input-captcha">Kode Captcha</label>
                     <div class="login-captcha">
-                        <img src="{{ captcha_src() }}" alt="Kode captcha" id="img-captcha"
+                        <img src="<?php echo e(captcha_src()); ?>" alt="Kode captcha" id="img-captcha"
                              class="login-captcha__img">
                         <input type="text" name="captcha" class="form-control" id="input-captcha"
                                placeholder="Ketik kode" autocomplete="off" required>
@@ -91,9 +107,9 @@
         </div>
     </div>
 </div>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@push('styles')
+<?php $__env->startPush('styles'); ?>
 <style>
     /* Halaman login tetap dirender di dalam shell dashboard, yang punya
        max-width 1420px dan banner ungu setinggi 430px (.application-offset
@@ -125,7 +141,7 @@
         color: #fff;
         background:
             linear-gradient(135deg, rgba(94, 44, 237, .84), rgba(45, 20, 120, .90)),
-            url('{{ asset('images/bg-dashboard.jpeg') }}?v=2') center/cover no-repeat;
+            url('<?php echo e(asset('images/bg-dashboard.jpeg')); ?>?v=2') center/cover no-repeat;
     }
 
     .login-brand__inner { margin-top: auto; margin-bottom: auto; }
@@ -339,9 +355,9 @@
         .login-form__lead { text-align: center; }
     }
 </style>
-@endpush
+<?php $__env->stopPush(); ?>
 
-@push('scripts')
+<?php $__env->startPush('scripts'); ?>
 <script type="text/javascript">
     // Handler lama memanggil e.preventDefault() padahal parameter e tidak
     // pernah diterima — setiap klik melempar ReferenceError dan captcha tidak
@@ -355,7 +371,7 @@
     function refreshCaptcha() {
         $.ajax({
             type: 'GET',
-            url: '{{ route('refresh-captcha') }}',
+            url: '<?php echo e(route('refresh-captcha')); ?>',
             success: function (data) {
                 $('#img-captcha').attr('src', data.captcha);
                 $('#input-captcha').val('').focus();
@@ -440,4 +456,6 @@
         $('#alert-container').fadeIn();
     }
 </script>
-@endpush
+<?php $__env->stopPush(); ?>
+
+<?php echo $__env->make('layout.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /Users/bgsprtm/Herd/magang-kominfotik/resources/views/auth/login.blade.php ENDPATH**/ ?>

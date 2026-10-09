@@ -54,6 +54,28 @@ class User extends Authenticatable
     }
 
     /**
+     * Apakah profil wajib belum lengkap (untuk banner "lengkapi profil").
+     *
+     * Hanya memeriksa field yang memang diisi user lewat halaman Profil dan
+     * ditandai required di ProfilController. Versi lama mengecek SELURUH kolom
+     * user (termasuk avatar, instagram, linkedin, tanggal magang, dan
+     * remember_temp yang wajar kosong), sehingga banner tidak pernah hilang
+     * meski data profil sudah diisi lengkap.
+     */
+    public function profilBelumLengkap(): bool
+    {
+        $wajib = ['name', 'asal', 'jurusan', 'jenis_kelamin', 'alamat'];
+
+        foreach ($wajib as $field) {
+            if (blank($this->{$field})) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
      * Check if user magang is still active
      */
     public function isActive(): bool

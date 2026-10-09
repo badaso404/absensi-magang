@@ -98,7 +98,7 @@
 
                                 <div class="form-group mb-3" style="animation-delay: 0.35s;">
                                     <label class="form-label font-weight-bold"><i class="fas fa-venus-mars text-danger mr-1"></i>Jenis Kelamin</label>
-                                    <select class="form-select @error('jenis_kelamin') is-invalid @enderror" name="jenis_kelamin">
+                                    <select class="form-select @error('jenis_kelamin') is-invalid @enderror js-select" name="jenis_kelamin">
                                         <option value="">Pilih Jenis Kelamin</option>
                                         <option value="Laki-laki" {{ old('jenis_kelamin') == 'Laki-laki' ? 'selected' : '' }}>Laki-laki</option>
                                         <option value="Perempuan" {{ old('jenis_kelamin') == 'Perempuan' ? 'selected' : '' }}>Perempuan</option>
@@ -128,7 +128,7 @@
 
                                 <div class="form-group mb-3" style="animation-delay: 0.2s;">
                                     <label class="form-label font-weight-bold"><i class="fas fa-sitemap text-warning mr-1"></i>Seksi <span class="text-danger">*</span></label>
-                                    <select class="form-select @error('seksi') is-invalid @enderror" name="seksi" required>
+                                    <select class="form-select @error('seksi') is-invalid @enderror js-select" name="seksi" required>
                                         <option value="">Pilih Seksi</option>
                                         @foreach($seksiList as $seksi)
                                             <option value="{{ $seksi->value }}" {{ old('seksi') == $seksi->value ? 'selected' : '' }}>{{ $seksi->name }}</option>

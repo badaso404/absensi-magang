@@ -28,7 +28,7 @@
 
     <div class="card card-fluid shadow-sm">
         <div class="card-header bg-gradient-primary text-white d-flex justify-content-between align-items-center">
-            <h6 class="mb-0 font-weight-bold">Data Laporan</h6>
+            <h6 class="mb-0 font-weight-bold text-white">Data Laporan</h6>
             <span class="badge badge-light">{{ $laporan->count() }} kegiatan</span>
         </div>
 
@@ -38,7 +38,7 @@
             <form method="GET" action="{{ route('admin-laporan.user', $user->id) }}" class="row align-items-end">
                 <div class="col-md-3 mb-2 mb-md-0">
                     <label class="mb-2 text-muted small"><i class="far fa-calendar mr-1"></i>Bulan:</label>
-                    <select name="month" class="form-control form-control-sm" onchange="this.form.submit()">
+                    <select name="month" class="form-control form-control-sm js-select" onchange="this.form.submit()">
                         <option value="all" {{ $selectedMonth === 'all' ? 'selected' : '' }}>Semua Bulan</option>
                         @foreach($months as $nomor => $nama)
                             <option value="{{ $nomor }}" {{ (string) $selectedMonth === (string) $nomor ? 'selected' : '' }}>
@@ -50,7 +50,7 @@
 
                 <div class="col-md-3 mb-2 mb-md-0">
                     <label class="mb-2 text-muted small"><i class="far fa-calendar-alt mr-1"></i>Tahun:</label>
-                    <select name="year" class="form-control form-control-sm" onchange="this.form.submit()">
+                    <select name="year" class="form-control form-control-sm js-select" onchange="this.form.submit()">
                         @foreach($years as $tahun)
                             <option value="{{ $tahun }}" {{ (string) $selectedYear === (string) $tahun ? 'selected' : '' }}>
                                 {{ $tahun }}

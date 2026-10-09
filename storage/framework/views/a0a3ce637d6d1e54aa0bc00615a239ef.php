@@ -1,9 +1,14 @@
+<?php
+    $jam = (int) \Carbon\Carbon::now()->format('H');
+    $sapaan = $jam < 11 ? 'Selamat pagi' : ($jam < 15 ? 'Selamat siang' : ($jam < 18 ? 'Selamat sore' : 'Selamat malam'));
+?>
+
 <?php $__env->startSection('content'); ?>
 <div class="page-content">
     <div class="page-title">
         <div class="row justify-content-between align-items-center">
             <div class="col-md-6 mb-3 mb-md-0">
-                <h5 class="h3 font-weight-400 mb-0 text-white">Selamat pagi, <?php echo e(explode(' ', auth()->user()->name)[0]); ?>!</h5>
+                <h5 class="h3 font-weight-400 mb-0 text-white"><?php echo e($sapaan); ?>, <?php echo e(explode(' ', auth()->user()->name)[0]); ?>!</h5>
                 <span class="text-sm text-white opacity-8">Informasi profil akun Anda.</span>
             </div>
         </div>

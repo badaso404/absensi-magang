@@ -42,8 +42,16 @@ class HomeController extends Controller
 
         $jadwal = $this->jadwal->untukTampilan($hariIni);
 
+        // Catatan absensi hari ini (kalau ada) dipakai kartu absen untuk
+        // menampilkan jam masuk/pulang yang sudah tercatat — supaya anak magang
+        // langsung tahu statusnya tanpa menebak dari tabel riwayat.
+        $absensiHariIni = $terbaru->first(
+            fn (Absensi $a) => $a->created_at->isSameDay($hariIni)
+        );
+
         return $this->createView('beranda.index', [
             'absensi'                => $terbaru,
+            'absensiHariIni'         => $absensiHariIni,
             'kalkulasiKeterlambatan' => Absensi::kalkulasiKeterlambatan($bulanIni),
             'absensiChart'           => Absensi::chartHarian($bulanIni),
             'schedule_in'            => $jadwal['masuk'],

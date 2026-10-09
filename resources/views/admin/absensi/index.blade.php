@@ -30,28 +30,14 @@
                 ['Magang Aktif', $totalMagang, 'primary', 'fa-users'],
                 ['Hadir',        $hadir,       'success', 'fa-user-check'],
                 $hariKerja
-                    ? ['Belum Absen', $belumAbsen, 'danger', 'fa-user-clock']
-                    : ['Belum Absen', '—',        'muted',  'fa-mug-hot'],
+                    ? ['Belum Absen', $belumAbsen, 'danger',    'fa-user-clock']
+                    : ['Belum Absen', '—',        'secondary', 'fa-mug-hot'],
                 ['Masuk Telat',  $telat,       'warning', 'fa-exclamation-triangle'],
             ];
         @endphp
         @foreach($kartu as [$label, $nilai, $warna, $ikon])
-            <div class="col-lg-3 col-sm-6">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="row align-items-center">
-                            <div class="col">
-                                <h6 class="text-muted text-sm mb-1">{{ $label }}</h6>
-                                <span class="h2 font-weight-bold mb-0 text-{{ $warna }}">{{ $nilai }}</span>
-                            </div>
-                            <div class="col-auto">
-                                <div class="icon icon-shape bg-{{ $warna }} text-white rounded-circle shadow">
-                                    <i class="fas {{ $ikon }}"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="col-lg-3 col-sm-6 mb-4">
+                <x-stat-card :label="$label" :value="$nilai" :icon="$ikon" :color="$warna" />
             </div>
         @endforeach
     </div>
@@ -65,7 +51,7 @@
 
     <div class="card card-fluid shadow-sm">
         <div class="card-header bg-gradient-primary text-white d-flex justify-content-between align-items-center">
-            <h6 class="mb-0 font-weight-bold">Status Absensi Per Magang</h6>
+            <h6 class="mb-0 font-weight-bold text-white">Status Absensi Per Magang</h6>
             <span class="badge badge-light">{{ $baris->count() }} magang</span>
         </div>
 
@@ -94,7 +80,7 @@
 
                 <div class="col-md-4 mb-2 mb-md-0">
                     <label class="mb-2 text-muted small"><i class="fas fa-sitemap mr-1"></i>Unit / Seksi:</label>
-                    <select name="seksi" class="form-control form-control-sm" onchange="this.form.submit()">
+                    <select name="seksi" class="form-control form-control-sm js-select" onchange="this.form.submit()">
                         <option value="all">Semua Unit</option>
                         @foreach($seksiList as $s)
                             <option value="{{ $s->value }}" {{ $selectedSeksi?->value === $s->value ? 'selected' : '' }}>
@@ -118,7 +104,7 @@
             </form>
         </div>
 
-        <div class="table-responsive">
+        <div class="table-responsive d-none d-md-block">
             <table class="table table-hover align-items-center mb-0">
                 <thead class="thead-light">
                     <tr>
@@ -226,6 +212,99 @@
                 </tbody>
             </table>
         </div>
+
+        {{-- Versi kartu untuk HP (< md) --}}
+        <div class="d-md-none p-3">
+            @forelse($baris as $item)
+                @php $u = $item['user']; $a = $item['absensi']; @endphp
+                <div class="absen-admin-card {{ $a || !$hariKerja ? '' : 'absen-admin-card--alpa' }}">
+                    <div class="d-flex align-items-center mb-2">
+                        <img src="{{ $u->avatar ? asset('storage/images/avatar/'.$u->avatar) : asset('assets/img/portrait.png') }}"
+                             alt="{{ $u->name }}" class="rounded-circle" style="width:40px;height:40px;object-fit:cover;">
+                        <div class="ml-2 flex-grow-1 min-w-0">
+                            <div class="font-weight-bold text-dark text-truncate">{{ $u->name }}</div>
+                            <small class="text-muted">{{ $u->asal ?? '-' }}</small>
+                        </div>
+                        @if(!$a && !$hariKerja)
+                            <span class="badge badge-light text-muted">Libur</span>
+                        @elseif(!$a)
+                            <span class="badge badge-danger">Belum Absen</span>
+                        @elseif($a->checked_out_at)
+                            <span class="badge badge-success">Selesai</span>
+                        @else
+                            <span class="badge badge-info">Bekerja</span>
+                        @endif
+                    </div>
+
+                    <div class="absen-admin-card__grid">
+                        <div>
+                            <span class="absen-admin-card__k">Masuk</span>
+                            @if($a?->checked_in_at)
+                                <span class="font-weight-bold">{{ $a->checked_in_at->format('H:i') }}</span>
+                                <small class="text-{{ $a->checked_in_status === App\Enums\AbsensiStatus::MasukTelat ? 'warning' : 'success' }}">
+                                    {{ $a->checked_in_status === App\Enums\AbsensiStatus::MasukTelat ? 'Telat' : 'Tepat' }}
+                                </small>
+                            @else
+                                <span class="text-muted">-</span>
+                            @endif
+                        </div>
+                        <div>
+                            <span class="absen-admin-card__k">Pulang</span>
+                            @if($a?->checked_out_at)
+                                <span class="font-weight-bold">{{ $a->checked_out_at->format('H:i') }}</span>
+                                @if($a->checked_out_status === App\Enums\AbsensiStatus::PulangCepat)
+                                    <small class="text-warning">Cepat</small>
+                                @endif
+                            @else
+                                <span class="text-muted">-</span>
+                            @endif
+                        </div>
+                        <div>
+                            <span class="absen-admin-card__k">Unit</span>
+                            @if($u->seksi)<span class="badge badge-{{ $u->seksi->color() }}">{{ $u->seksi->code() }}</span>@else<span class="text-muted">-</span>@endif
+                        </div>
+                        <div>
+                            <span class="absen-admin-card__k">Mode</span>
+                            @if($a?->wfhwfo)<span class="badge badge-secondary">{{ $a->wfhwfo }}</span>@else<span class="text-muted">-</span>@endif
+                        </div>
+                    </div>
+
+                    @if($a?->lokasi_user)
+                        <div class="absen-admin-card__lokasi">
+                            <i class="fas fa-map-marker-alt text-danger mr-1"></i>
+                            <span class="text-truncate">{{ $a->lokasi_user }}</span>
+                            @if($a->latitude && $a->longitude)
+                                <a href="https://maps.google.com/maps?q={{ $a->latitude }},{{ $a->longitude }}" target="_blank" rel="noopener" class="ml-1">Peta</a>
+                            @endif
+                        </div>
+                    @endif
+
+                    <a href="{{ route('rekapabsen.user', $u->id) }}" class="btn btn-sm btn-outline-info btn-block mt-2">
+                        <i class="fas fa-history mr-1"></i>Rekap Absensi
+                    </a>
+                </div>
+            @empty
+                <div class="text-center text-muted py-4">
+                    Tidak ada magang aktif
+                    @if($selectedSeksi) pada unit {{ $selectedSeksi->code() }} @endif.
+                </div>
+            @endforelse
+        </div>
     </div>
 </div>
 @endsection
+
+@push('styles')
+<style>
+    .absen-admin-card {
+        border: 1px solid #edf0f5; border-radius: 14px;
+        padding: .9rem 1rem; margin-bottom: .75rem; background: #fff;
+        box-shadow: 0 2px 8px rgba(50,50,93,.04);
+    }
+    .absen-admin-card:last-child { margin-bottom: 0; }
+    .absen-admin-card--alpa { background: rgba(245,54,92,.05); border-color: rgba(245,54,92,.25); }
+    .absen-admin-card__grid { display: grid; grid-template-columns: 1fr 1fr; gap: .5rem .75rem; font-size: .85rem; }
+    .absen-admin-card__k { display: block; font-size: .68rem; text-transform: uppercase; letter-spacing: .03em; color: #8898aa; font-weight: 700; }
+    .absen-admin-card__lokasi { display: flex; align-items: center; font-size: .78rem; color: #8898aa; margin-top: .6rem; padding-top: .5rem; border-top: 1px solid #f1f3f9; }
+</style>
+@endpush

@@ -45,10 +45,14 @@ class TimController extends Controller
             ? $this->magangAktif()->where('seksi', $saya->seksi)->get()
             : collect();
 
+        // Opsi "mentor" pada filter Lintas Tim: alih-alih menampilkan rekan
+        // unit lain, bagian itu menampilkan admin pembimbing.
+        $tampilMentor = $request->input('seksi') === 'mentor';
+
         // Lintas tim: semua unit selain unit saya, atau satu unit tertentu
         // bila difilter. Unit sendiri tidak masuk sini karena sudah ada di
         // bagian atas — menampilkannya dua kali cuma bikin bingung.
-        $seksiDipilih = $this->filterSeksi($request);
+        $seksiDipilih = $tampilMentor ? null : $this->filterSeksi($request);
 
         if ($seksiDipilih && $saya->seksi && $seksiDipilih === $saya->seksi) {
             $seksiDipilih = null;
@@ -64,10 +68,21 @@ class TimController extends Controller
             ->orderBy('name')
             ->get();
 
+        // Admin sebagai pembimbing: anak magang yang bingung bisa menghubungi
+        // mereka langsung. Ditampilkan ke semua magang tanpa memandang unit.
+        // Dibatasi tiga agar ringkas.
+        $admins = User::select(['id', 'name', 'avatar', 'no_telp', 'email', 'seksi'])
+            ->where('role_id', Role::Admin)
+            ->latest()          // admin yang paling baru terdaftar lebih dulu
+            ->take(3)
+            ->get();
+
         return $this->createView('tim.index', [
             'saya'         => $saya,
             'rekan'        => $rekan,
             'lintas'       => $lintas,
+            'admins'       => $admins,
+            'tampilMentor' => $tampilMentor,
             'seksiDipilih' => $seksiDipilih,
             // Pilihan filter tidak menyertakan unit sendiri.
             'daftarSeksi'  => collect(UserSeksi::cases())

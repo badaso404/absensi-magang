@@ -54,7 +54,7 @@
                             </div>
                             <div class="col-md-6 form-group">
                                 <label class="form-control-label">Jenis Kelamin</label>
-                                <select class="form-control" name="jenis_kelamin">
+                                <select class="form-control js-select" name="jenis_kelamin">
                                     <option value="Laki-laki" {{ auth()->user()->jenis_kelamin == 'Laki-laki' ? 'selected' : '' }}>Laki-laki</option>
                                     <option value="Perempuan" {{ auth()->user()->jenis_kelamin == 'Perempuan' ? 'selected' : '' }}>Perempuan</option>
                                 </select>

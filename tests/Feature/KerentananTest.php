@@ -1261,7 +1261,7 @@ class KerentananTest extends TestCase
         $html = $this->actingAs(User::factory()->create())
             ->get('/')->assertOk()->getContent();
 
-        $this->assertStringContainsString('&copy; 2026 by TomGan', $html);
+        $this->assertStringContainsString('&copy; 2026 by Bgs', $html);
 
         foreach (['HideKy', '>Support<', '>Terms<', '>Privacy<'] as $sisa) {
             $this->assertStringNotContainsString($sisa, $html, "Masih ada '{$sisa}' di footer.");
@@ -1322,8 +1322,13 @@ class KerentananTest extends TestCase
 
         $response = $this->actingAs($saya)->get('/tim')->assertOk();
 
+        // Admin bukan rekan: tidak masuk Tim Saya maupun Lintas Tim.
         $this->assertCount(0, $response->viewData('rekan'));
-        $this->assertStringNotContainsString('Pak Admin', $response->getContent());
+        $this->assertFalse($response->viewData('lintas')->contains('name', 'Pak Admin'));
+        $this->assertFalse($response->viewData('lintas')->contains('name', 'Saya Sendiri'));
+
+        // Tapi admin tetap tampil sebagai pembimbing yang bisa dihubungi.
+        $this->assertTrue($response->viewData('admins')->contains('name', 'Pak Admin'));
     }
 
     /**
@@ -1587,5 +1592,88 @@ class KerentananTest extends TestCase
         $this->assertCount(0, $response->viewData('rekan'));
         $this->assertCount(1, $response->viewData('lintas'));
         $this->assertStringContainsString('Orang KIP', $response->getContent());
+    }
+
+    // --- Banner "lengkapi profil" ---
+
+    private const BANNER_PROFIL = 'Anda belum mengisi data yang diperlukan';
+
+    public function test_banner_lengkapi_profil_hilang_saat_data_wajib_terisi(): void
+    {
+        // Avatar/instagram/linkedin/tanggal lahir sengaja dibiarkan kosong:
+        // field opsional tidak boleh membuat banner tetap muncul. Versi lama
+        // mengecek semua kolom null sehingga banner tak pernah hilang.
+        $user = User::factory()->create([
+            'name'          => 'Budi Lengkap',
+            'asal'          => 'Universitas X',
+            'jurusan'       => 'Informatika',
+            'jenis_kelamin' => 'Laki-laki',
+            'alamat'        => 'Jl. Mawar No. 1',
+            'avatar'        => null,
+            'instagram'     => null,
+            'linkedin'      => null,
+            'tanggal_lahir' => null,
+            'no_telp'       => null,
+        ]);
+
+        $html = $this->actingAs($user)->get('/')->assertOk()->getContent();
+
+        $this->assertStringNotContainsString(self::BANNER_PROFIL, $html);
+    }
+
+    public function test_banner_lengkapi_profil_muncul_saat_field_wajib_kosong(): void
+    {
+        $user = User::factory()->create(['alamat' => null]);
+
+        $html = $this->actingAs($user)->get('/')->assertOk()->getContent();
+
+        $this->assertStringContainsString(self::BANNER_PROFIL, $html);
+    }
+
+    public function test_banner_lengkapi_profil_tidak_pernah_muncul_untuk_admin(): void
+    {
+        // Admin tidak punya asal/jurusan dan tidak mengisi profil magang,
+        // jadi banner tidak boleh menghantuinya.
+        $admin = User::factory()->admin()->create(['asal' => null, 'jurusan' => null]);
+
+        $html = $this->actingAs($admin)->get('/')->assertOk()->getContent();
+
+        $this->assertStringNotContainsString(self::BANNER_PROFIL, $html);
+    }
+
+    // --- Admin pembimbing (Tim Saya) ---
+
+    public function test_tim_menampilkan_admin_pembimbing_saat_opsi_mentor_dipilih(): void
+    {
+        User::factory()->admin()->create(['name' => 'Admin Satu']);
+        User::factory()->admin()->create(['name' => 'Admin Dua']);
+
+        // Magang unit mana pun bisa memilih opsi "mentor" dan melihat admin.
+        $saya = User::factory()->create(['seksi' => \App\Enums\UserSeksi::TU]);
+
+        $html = $this->actingAs($saya)->get('/tim?seksi=mentor')->assertOk()->getContent();
+
+        $this->assertStringContainsString('Mentor Pembimbing', $html);
+        $this->assertStringContainsString('Admin Satu', $html);
+        $this->assertStringContainsString('Admin Dua', $html);
+    }
+
+    public function test_tim_default_tidak_menampilkan_kartu_mentor(): void
+    {
+        User::factory()->admin()->create(['name' => 'Admin Rahasia']);
+
+        // Tanpa memilih opsi mentor, Lintas Tim menampilkan rekan — bukan admin.
+        $html = $this->actingAs(User::factory()->create())->get('/tim')->assertOk()->getContent();
+
+        $this->assertStringNotContainsString('Admin Rahasia', $html);
+    }
+
+    public function test_tim_membatasi_admin_pembimbing_maksimal_tiga(): void
+    {
+        User::factory()->admin()->count(5)->create();
+
+        $response = $this->actingAs(User::factory()->create())->get('/tim')->assertOk();
+
+        $this->assertCount(3, $response->viewData('admins'));
     }
 }

@@ -89,7 +89,7 @@
                                     <label for="jenis_kelamin" class="form-label font-weight-bold">
                                         <i class="fas fa-venus-mars text-danger mr-1"></i>Jenis Kelamin
                                     </label>
-                                    <select class="form-control custom-select @error('jenis_kelamin') is-invalid @enderror" 
+                                    <select class="form-control custom-select @error('jenis_kelamin') is-invalid @enderror js-select" 
                                             id="jenis_kelamin" name="jenis_kelamin">
                                         <option value="">Pilih Jenis Kelamin</option>
                                         <option value="Laki-laki" {{ old('jenis_kelamin', $user->jenis_kelamin) == 'Laki-laki' ? 'selected' : '' }}>Laki-laki</option>
@@ -140,7 +140,7 @@
                                     <label for="seksi" class="form-label font-weight-bold">
                                         <i class="fas fa-sitemap text-warning mr-1"></i>Seksi <span class="text-danger">*</span>
                                     </label>
-                                    <select class="form-control custom-select @error('seksi') is-invalid @enderror" 
+                                    <select class="form-control custom-select @error('seksi') is-invalid @enderror js-select" 
                                             id="seksi" name="seksi" required>
                                         <option value="">Pilih Seksi</option>
                                         @foreach($seksiList as $seksi)

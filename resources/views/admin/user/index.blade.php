@@ -16,8 +16,12 @@
 
     <div class="row justify-content-between align-items-center mb-3">
         <div class="col-md-6 mb-3 mb-md-0">
-            <h5 class="h3 font-weight-400 mb-0 text-white">Selamat pagi, {{ explode(' ', auth()->user()->name)[0] }}!</h5>
-            <span class="text-sm text-white opacity-8">Ngerjain tugas apa hari ini kita?</span>
+            @php
+                $jam = (int) \Carbon\Carbon::now()->format('H');
+                $sapaan = $jam < 11 ? 'Selamat pagi' : ($jam < 15 ? 'Selamat siang' : ($jam < 18 ? 'Selamat sore' : 'Selamat malam'));
+            @endphp
+            <h5 class="h3 font-weight-400 mb-0 text-white">{{ $sapaan }}, {{ explode(' ', auth()->user()->name)[0] }}!</h5>
+            <span class="text-sm text-white opacity-8">Kelola akun admin &amp; magang di sini.</span>
         </div>
         <div class="col-md-6 text-md-right">
             <a href="{{ route('admin-user-create') }}" class="btn btn-success shadow-sm">
@@ -28,67 +32,16 @@
 
     <div class="row mb-4">
         <div class="col-xl-3 col-md-6 mb-3">
-            <div class="card shadow-sm border-left-primary">
-                <div class="card-body">
-                    <div class="row no-gutters align-items-center">
-                        <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total User</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $totalUsers }}</div>
-                        </div>
-                        <div class="col-auto">
-                            <i class="fas fa-users fa-2x text-gray-300"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <x-stat-card label="Total User" :value="$totalUsers" icon="fa-users" color="primary" />
         </div>
-
         <div class="col-xl-3 col-md-6 mb-3">
-            <div class="card shadow-sm border-left-info">
-                <div class="card-body">
-                    <div class="row no-gutters align-items-center">
-                        <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Admin</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $totalAdmin }}</div>
-                        </div>
-                        <div class="col-auto">
-                            <i class="fas fa-user-shield fa-2x text-gray-300"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <x-stat-card label="Admin" :value="$totalAdmin" icon="fa-user-shield" color="info" />
         </div>
-
         <div class="col-xl-3 col-md-6 mb-3">
-            <div class="card shadow-sm border-left-warning">
-                <div class="card-body">
-                    <div class="row no-gutters align-items-center">
-                        <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Magang</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $totalMagang }}</div>
-                        </div>
-                        <div class="col-auto">
-                            <i class="fas fa-user-graduate fa-2x text-gray-300"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <x-stat-card label="Magang" :value="$totalMagang" icon="fa-user-graduate" color="warning" />
         </div>
-
         <div class="col-xl-3 col-md-6 mb-3">
-            <div class="card shadow-sm border-left-success">
-                <div class="card-body">
-                    <div class="row no-gutters align-items-center">
-                        <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">User Aktif</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $activeUsers }}</div>
-                        </div>
-                        <div class="col-auto">
-                            <i class="fas fa-user-check fa-2x text-gray-300"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <x-stat-card label="User Aktif" :value="$activeUsers" icon="fa-user-check" color="success" />
         </div>
     </div>
 
@@ -109,15 +62,14 @@
                 </div>
 
                 <div class="p-3 bg-white border-bottom">
-                    <form method="GET" action="{{ route('admin-user') }}" class="row align-items-end">
+                    <form method="GET" action="{{ route('admin-user') }}" class="row align-items-end filter-bar">
                         <div class="col-md-3 mb-3 mb-md-0">
                             <label class="mb-2 text-muted small">
                                 <i class="fas fa-user-tag mr-1"></i>Filter Role:
                             </label>
-                            <div class="btn-group btn-group-toggle d-flex" data-toggle="buttons">
+                            <div class="btn-group btn-group-toggle filter-toggle d-flex" data-toggle="buttons">
                                 <label class="btn btn-sm btn-outline-secondary {{ $currentRole == 'all' ? 'active' : '' }}">
-                                    <input type="radio" name="role" value="all" {{ $currentRole == 'all' ? 'checked' : '' }} onchange="this.form.submit()">
-                                    <i class="fas fa-users"></i> Semua
+                                    <input type="radio" name="role" value="all" {{ $currentRole == 'all' ? 'checked' : '' }} onchange="this.form.submit()"> Semua
                                 </label>
                                 <label class="btn btn-sm btn-outline-info {{ $currentRole == 'admin' ? 'active' : '' }}">
                                     <input type="radio" name="role" value="admin" {{ $currentRole == 'admin' ? 'checked' : '' }} onchange="this.form.submit()"> Admin
@@ -132,7 +84,7 @@
                             <label class="mb-2 text-muted small">
                                 <i class="fas fa-filter mr-1"></i>Filter Status:
                             </label>
-                            <div class="btn-group btn-group-toggle d-flex" data-toggle="buttons">
+                            <div class="btn-group btn-group-toggle filter-toggle d-flex" data-toggle="buttons">
                                 <label class="btn btn-sm btn-outline-secondary {{ $currentStatus == 'all' ? 'active' : '' }}">
                                     <input type="radio" name="status" value="all" {{ $currentStatus == 'all' ? 'checked' : '' }} onchange="this.form.submit()"> Semua
                                 </label>
@@ -149,7 +101,7 @@
                             <label class="mb-2 text-muted small">
                                 <i class="fas fa-layer-group mr-1"></i>Filter Seksi:
                             </label>
-                            <select name="seksi" class="form-control form-control-sm" onchange="this.form.submit()">
+                            <select name="seksi" class="form-control form-control-sm js-select" onchange="this.form.submit()">
                                 <option value="all" {{ $currentSeksi == 'all' ? 'selected' : '' }}>Semua Seksi</option>
                                 @foreach($seksiList as $seksi)
                                     <option value="{{ $seksi->value }}" {{ $currentSeksi == $seksi->value ? 'selected' : '' }}>
@@ -197,30 +149,30 @@
                     </form>
                 </div>
 
-                <div class="table-responsive">
-                    <table class="table table-hover align-items-center mb-0">
-                        <thead class="thead-light">
+                <div class="table-responsive d-none d-md-block">
+                    <table class="table table-hover align-items-center mb-0 table-user">
+                        <thead>
                             <tr>
-                                <th scope="col">seksi</th>
+                                <th scope="col" class="text-center">Foto / Seksi</th>
                                 <th scope="col">Role</th>
                                 <th scope="col">Status</th>
                                 <th scope="col">
-                                    <a href="{{ request()->fullUrlWithQuery(['direction' => request('direction') == 'desc' ? 'asc' : 'desc']) }}" 
-                                       class="text-dark d-flex align-items-center justify-content-between text-decoration-none">
-                                        <span>Nama/JK/Tgl Lahir</span>
-                                        <span class="ml-2">
+                                    <a href="{{ request()->fullUrlWithQuery(['direction' => request('direction') == 'desc' ? 'asc' : 'desc']) }}"
+                                       class="th-sort d-inline-flex align-items-center text-decoration-none">
+                                        <span>Nama / JK / Lahir</span>
+                                        <span class="ml-2 th-sort__badge">
                                             @if(request('direction') == 'asc')
-                                                <i class="fas fa-sort-alpha-down text-primary"></i> <small>(A-Z)</small>
+                                                <i class="fas fa-sort-alpha-down text-primary"></i> A-Z
                                             @else
-                                                <i class="fas fa-sort-alpha-up-alt text-danger"></i> <small>(Z-A)</small>
+                                                <i class="fas fa-sort-alpha-up-alt text-danger"></i> Z-A
                                             @endif
                                         </span>
                                     </a>
                                 </th>
-                                <th scope="col">Asal/Jurusan</th>
+                                <th scope="col">Asal / Jurusan</th>
                                 <th scope="col">Periode Magang</th>
-                                <th scope="col">Alamat/Kontak</th>
-                                <th scope="col">Aksi</th>
+                                <th scope="col">Kontak</th>
+                                <th scope="col" class="text-center">Aksi</th>
                             </tr>
                         </thead>
                         <tbody class="list">
@@ -291,13 +243,13 @@
                                     <span class="d-block text-muted text-xs"><i class="fas fa-envelope"></i> {{ $u->email }}</span>
                                 </td>
                                 <td class="align-middle">
-                                    <div class="d-flex flex-column">
-                                        <a href="{{ route('rekapabsen.user', $u->id) }}" class="btn btn-sm btn-info mb-1" title="Rekap"><i class="fas fa-calendar-check"></i> Rekap</a>
-                                        <a href="{{ route('admin-user-edit', $u->id) }}" class="btn btn-sm btn-warning mb-1" title="Edit"><i class="fas fa-edit"></i> Edit</a>
-                                        <form action="{{ route('admin-user-destroy', $u->id) }}" method="POST" class="delete-form">
+                                    <div class="action-btns d-flex flex-column">
+                                        <a href="{{ route('rekapabsen.user', $u->id) }}" class="btn btn-sm btn-info mb-1" title="Rekap"><i class="fas fa-calendar-check mr-1"></i> Rekap</a>
+                                        <a href="{{ route('admin-user-edit', $u->id) }}" class="btn btn-sm btn-warning mb-1" title="Edit"><i class="fas fa-edit mr-1"></i> Edit</a>
+                                        <form action="{{ route('admin-user-destroy', $u->id) }}" method="POST" class="delete-form mb-0">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-sm btn-danger w-100" title="Hapus"><i class="fas fa-trash"></i> Hapus</button>
+                                            <button type="submit" class="btn btn-sm btn-danger w-100" title="Hapus"><i class="fas fa-trash mr-1"></i> Hapus</button>
                                         </form>
                                     </div>
                                 </td>
@@ -312,10 +264,72 @@
                             @endforelse
                         </tbody>
                     </table>
-                    <div class="p-3 bg-white border-top">
-                        <div class="d-flex justify-content-between">
-                            {{ $users->withQueryString()->links('pagination::bootstrap-5') }}
+                </div>
+
+                {{-- Versi kartu untuk HP (< md) --}}
+                <div class="d-md-none p-3">
+                    @forelse($users as $u)
+                        <div class="user-card {{ !$u->isActive() ? 'user-card--off' : '' }}">
+                            <div class="d-flex align-items-center mb-2">
+                                <img alt="Avatar {{ $u->name }}"
+                                     src="{{ $u->avatar && $u->avatar !== '1' ? asset('storage/images/avatar/'.$u->avatar) : asset('default-avatar.png') }}"
+                                     class="rounded-circle" style="object-fit:cover;width:44px;height:44px;border:2px solid #5e72e4;">
+                                <div class="ml-3 flex-grow-1 min-w-0">
+                                    <div class="font-weight-bold text-dark text-truncate">{{ $u->name }}</div>
+                                    <div class="text-xs text-muted">{{ $u->jenis_kelamin ?? '-' }} · {{ $u->tanggal_lahir ? \Carbon\Carbon::parse($u->tanggal_lahir)->isoFormat('D MMM Y') : '-' }}</div>
+                                </div>
+                                @if($u->role_id == 1)
+                                    <span class="badge badge-info badge-pill px-3 py-2">Admin</span>
+                                @else
+                                    <span class="badge badge-warning badge-pill px-3 py-2">Magang</span>
+                                @endif
+                            </div>
+
+                            <div class="user-card__grid">
+                                <div><span class="user-card__k">Seksi</span>
+                                    @if($u->seksi)
+                                        <span class="badge badge-{{ $u->seksi->color() }}">{{ $u->seksi->code() }}</span>
+                                    @else
+                                        <span class="badge badge-secondary">N/A</span>
+                                    @endif
+                                </div>
+                                <div><span class="user-card__k">Status</span>
+                                    <span class="badge {{ $u->getStatusBadgeClass() }}">{{ $u->getStatusText() }}</span>
+                                </div>
+                                <div><span class="user-card__k">Asal</span>{{ $u->asal ?? '-' }}</div>
+                                <div><span class="user-card__k">Jurusan</span>{{ $u->jurusan ?? '-' }}</div>
+                                <div><span class="user-card__k">Mulai</span>{{ $u->tanggal_awal_magang ? \Carbon\Carbon::parse($u->tanggal_awal_magang)->isoFormat('D MMM Y') : '-' }}</div>
+                                <div><span class="user-card__k">Selesai</span>{{ $u->tanggal_akhir_magang ? \Carbon\Carbon::parse($u->tanggal_akhir_magang)->isoFormat('D MMM Y') : '-' }}</div>
+                            </div>
+
+                            <div class="user-card__contact">
+                                @if($u->no_telp)
+                                    <a href="https://wa.me/{{ preg_replace('/^0/', '62', $u->no_telp) }}" target="_blank" class="text-success text-decoration-none mr-3"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                                @endif
+                                <span class="text-muted"><i class="fas fa-envelope"></i> {{ $u->email }}</span>
+                            </div>
+
+                            <div class="d-flex" style="gap:.5rem;">
+                                <a href="{{ route('rekapabsen.user', $u->id) }}" class="btn btn-sm btn-info flex-fill"><i class="fas fa-calendar-check mr-1"></i>Rekap</a>
+                                <a href="{{ route('admin-user-edit', $u->id) }}" class="btn btn-sm btn-warning flex-fill"><i class="fas fa-edit mr-1"></i>Edit</a>
+                                <form action="{{ route('admin-user-destroy', $u->id) }}" method="POST" class="delete-form flex-fill mb-0">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-sm btn-danger w-100"><i class="fas fa-trash mr-1"></i>Hapus</button>
+                                </form>
+                            </div>
                         </div>
+                    @empty
+                        <div class="text-center text-muted py-4">
+                            <i class="fas fa-info-circle fa-2x mb-2 d-block"></i>
+                            <div>Belum ada data user</div>
+                        </div>
+                    @endforelse
+                </div>
+
+                <div class="p-3 bg-white border-top">
+                    <div class="d-flex justify-content-between">
+                        {{ $users->withQueryString()->links('pagination::bootstrap-5') }}
                     </div>
                 </div>
             </div>
@@ -340,6 +354,81 @@
     .border-left-warning { border-left: 4px solid #f6c23e !important; }
     .border-left-success { border-left: 4px solid #1cc88a !important; }
     .table-secondary { background-color: rgba(108, 117, 125, 0.1) !important; }
+
+    /* ---- Tabel user dirapikan ---- */
+    .table-user thead th {
+        text-transform: uppercase;
+        font-size: .72rem;
+        letter-spacing: .04em;
+        font-weight: 700;
+        color: #8898aa;
+        background: #f6f7fb;
+        border-top: none;
+        border-bottom: 1px solid #e9ecef;
+        padding: .85rem 1rem;
+        white-space: nowrap;
+        vertical-align: middle;
+    }
+    .table-user tbody td {
+        padding: .85rem 1rem;
+        border-top: 1px solid #f1f3f9;
+        vertical-align: middle;
+    }
+    .table-user tbody tr:hover { background: #f9fafe; }
+
+    /* Tombol sort pada header nama */
+    .th-sort { color: #8898aa; }
+    .th-sort:hover { color: #5e72e4; }
+    .th-sort__badge {
+        font-size: .68rem; font-weight: 700;
+        background: #eef1ff; color: #5e72e4;
+        padding: .1rem .4rem; border-radius: 999px;
+    }
+
+    /* Tombol aksi seragam */
+    .action-btns .btn { width: 100%; font-weight: 600; }
+    .action-btns .btn:hover { transform: translateY(-1px); }
+
+    /* ---- Toolbar filter dirapikan ---- */
+    .filter-bar label.small { font-weight: 600; }
+
+    /* Semua kontrol filter setinggi 42px supaya sejajar rapi */
+    .filter-bar .filter-toggle .btn,
+    .filter-bar .dropdown > .btn,
+    .filter-bar .col-md-1 .btn {
+        height: 42px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        white-space: nowrap;        /* cegah teks + ikon turun ke baris kedua */
+        font-weight: 600;
+        border-radius: 10px;
+    }
+    .filter-bar .select2-container--default .select2-selection--single { height: 42px; }
+
+    /* Segmented control: sudut membulat hanya di ujung grup */
+    .filter-toggle .btn { border-radius: 0; }
+    .filter-toggle .btn:first-child { border-top-left-radius: 10px; border-bottom-left-radius: 10px; }
+    .filter-toggle .btn:last-child  { border-top-right-radius: 10px; border-bottom-right-radius: 10px; }
+
+    /* Tombol reset ikut tinggi dan sejajar */
+    .filter-bar .col-md-1 .btn { border-radius: 10px; width: 100%; }
+
+    /* ---- Kartu user untuk HP ---- */
+    .user-card {
+        border: 1px solid #edf0f5; border-radius: 14px;
+        padding: .9rem 1rem; margin-bottom: .75rem; background: #fff;
+        box-shadow: 0 2px 8px rgba(50,50,93,.04);
+    }
+    .user-card:last-child { margin-bottom: 0; }
+    .user-card--off { background: #f7f8fa; opacity: .85; }
+    .user-card__grid {
+        display: grid; grid-template-columns: 1fr 1fr; gap: .5rem .75rem;
+        font-size: .85rem; color: #4a5568; margin-bottom: .65rem;
+    }
+    .user-card__k { display: block; font-size: .68rem; text-transform: uppercase; letter-spacing: .03em; color: #8898aa; font-weight: 700; }
+    .user-card__contact { font-size: .8rem; margin-bottom: .75rem; padding-top: .5rem; border-top: 1px solid #f1f3f9; }
+    .user-card .btn { font-weight: 600; }
 </style>
 @endpush
 

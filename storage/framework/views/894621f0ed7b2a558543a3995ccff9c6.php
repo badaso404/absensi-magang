@@ -30,7 +30,7 @@
                     <label class="form-control-label text-muted small mb-1">
                         <i class="far fa-calendar mr-1"></i>Bulan
                     </label>
-                    <select name="month" class="form-control form-control-sm" onchange="this.form.submit()">
+                    <select name="month" class="form-control form-control-sm js-select" onchange="this.form.submit()">
                         <option value="">Semua Bulan</option>
                         <?php $__currentLoopData = $months; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $num => $name): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             <option value="<?php echo e($num); ?>" <?php echo e((string) $selectedMonth === (string) $num ? 'selected' : ''); ?>>
@@ -45,7 +45,7 @@
                     <label class="form-control-label text-muted small mb-1">
                         <i class="far fa-calendar-alt mr-1"></i>Tahun
                     </label>
-                    <select name="year" class="form-control form-control-sm" onchange="this.form.submit()">
+                    <select name="year" class="form-control form-control-sm js-select" onchange="this.form.submit()">
                         <option value="">Semua Tahun</option>
                         <?php $__currentLoopData = $years; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $year): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             <option value="<?php echo e($year); ?>" <?php echo e((string) $selectedYear === (string) $year ? 'selected' : ''); ?>>

@@ -16,21 +16,11 @@
 
     <!-- Statistik -->
     <div class="row mb-4">
-        <div class="col-md-3">
-            <div class="card shadow-sm border-left-warning">
-                <div class="card-body">
-                    <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Total Magang</div>
-                    <div class="h5 mb-0 font-weight-bold">{{ $totalMagang }}</div>
-                </div>
-            </div>
+        <div class="col-md-3 col-sm-6 mb-3 mb-md-0">
+            <x-stat-card label="Total Magang" :value="$totalMagang" icon="fa-user-graduate" color="warning" />
         </div>
-        <div class="col-md-3">
-            <div class="card shadow-sm border-left-info">
-                <div class="card-body">
-                    <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Total Laporan</div>
-                    <div class="h5 mb-0 font-weight-bold">{{ $totalLaporan }}</div>
-                </div>
-            </div>
+        <div class="col-md-3 col-sm-6 mb-3 mb-md-0">
+            <x-stat-card label="Total Laporan" :value="$totalLaporan" icon="fa-book" color="info" />
         </div>
     </div>
 
@@ -38,7 +28,7 @@
     <!-- Table daftar magang -->
     <div class="card card-fluid shadow-sm">
         <div class="card-header bg-gradient-primary text-white d-flex justify-content-between">
-            <h6 class="mb-0 font-weight-bold">
+            <h6 class="mb-0 font-weight-bold text-white">
                 Daftar Magang
                 @if($selectedSeksi !== 'all')
                     &mdash; {{ $selectedSeksi->code() }}
@@ -55,7 +45,7 @@
                     <label class="mb-2 text-muted small">
                         <i class="fas fa-sitemap mr-1"></i>Unit / Seksi:
                     </label>
-                    <select name="seksi" class="form-control form-control-sm" onchange="this.form.submit()">
+                    <select name="seksi" class="form-control form-control-sm js-select" onchange="this.form.submit()">
                         <option value="all">Semua Unit</option>
                         @foreach($seksiList as $s)
                             <option value="{{ $s->value }}"
@@ -70,7 +60,7 @@
                     <label class="mb-2 text-muted small">
                         <i class="far fa-calendar mr-1"></i>Bulan:
                     </label>
-                    <select name="month" class="form-control form-control-sm" onchange="this.form.submit()">
+                    <select name="month" class="form-control form-control-sm js-select" onchange="this.form.submit()">
                         <option value="">Semua Bulan</option>
                         @foreach($months as $nomor => $nama)
                             <option value="{{ $nomor }}" {{ (string) $selectedMonth === (string) $nomor ? 'selected' : '' }}>
@@ -84,7 +74,7 @@
                     <label class="mb-2 text-muted small">
                         <i class="far fa-calendar-alt mr-1"></i>Tahun:
                     </label>
-                    <select name="year" class="form-control form-control-sm" onchange="this.form.submit()">
+                    <select name="year" class="form-control form-control-sm js-select" onchange="this.form.submit()">
                         <option value="">Semua Tahun</option>
                         @foreach($years as $tahun)
                             <option value="{{ $tahun }}" {{ (string) $selectedYear === (string) $tahun ? 'selected' : '' }}>
@@ -102,7 +92,7 @@
             </form>
         </div>
 
-        <div class="table-responsive">
+        <div class="table-responsive d-none d-md-block">
             <table class="table table-hover mb-0">
                 <thead class="thead-light">
                     <tr>
@@ -164,6 +154,46 @@
                 </tbody>
             </table>
         </div>
+
+        {{-- Versi kartu untuk HP (< md) --}}
+        <div class="d-md-none p-3">
+            @forelse($users as $u)
+                <div class="lap-card">
+                    <div class="d-flex align-items-center">
+                        <img src="{{ $u->avatar && $u->avatar !== '1' ? asset('storage/images/avatar/'.$u->avatar) : asset('default-avatar.png') }}"
+                             alt="{{ $u->name }}" class="rounded-circle" style="width:44px;height:44px;object-fit:cover;">
+                        <div class="ml-3 flex-grow-1 min-w-0">
+                            <div class="font-weight-bold text-dark text-truncate">{{ $u->name }}</div>
+                            <small class="text-muted">{{ $u->asal ?? '-' }}{{ $u->jurusan ? ' · '.$u->jurusan : '' }}</small>
+                        </div>
+                        @if($u->seksi)
+                            <span class="badge badge-{{ $u->seksi->color() }}">{{ $u->seksi->code() }}</span>
+                        @endif
+                    </div>
+                    <div class="d-flex align-items-center justify-content-between mt-3">
+                        <span class="text-sm text-muted"><i class="fas fa-book mr-1"></i>{{ $u->laporan_count ?? 0 }} laporan</span>
+                        <a href="{{ route('admin-laporan.user', array_filter([
+                                'user'  => $u->id,
+                                'month' => $selectedMonth,
+                                'year'  => $selectedYear,
+                           ])) }}" class="btn btn-sm btn-info"><i class="fas fa-eye mr-1"></i>Lihat Laporan</a>
+                    </div>
+                </div>
+            @empty
+                <div class="text-center text-muted py-4">Belum ada data magang</div>
+            @endforelse
+        </div>
     </div>
 </div>
 @endsection
+
+@push('styles')
+<style>
+    .lap-card {
+        border: 1px solid #edf0f5; border-radius: 14px;
+        padding: .9rem 1rem; margin-bottom: .75rem; background: #fff;
+        box-shadow: 0 2px 8px rgba(50,50,93,.04);
+    }
+    .lap-card:last-child { margin-bottom: 0; }
+</style>
+@endpush

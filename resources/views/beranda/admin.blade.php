@@ -29,78 +29,21 @@
 
     {{-- Kartu Ringkasan --}}
     <div class="row">
-        <div class="col-lg-3 col-sm-6">
-            <div class="card">
-                <div class="card-body">
-                    <div class="row align-items-center">
-                        <div class="col">
-                            <h6 class="text-muted text-sm mb-1">Magang Aktif</h6>
-                            <span class="h2 font-weight-bold mb-0">{{ $totalMagang }}</span>
-                        </div>
-                        <div class="col-auto">
-                            <div class="icon icon-shape bg-primary text-white rounded-circle shadow">
-                                <i class="fas fa-users"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="col-lg-3 col-sm-6 mb-4">
+            <x-stat-card label="Magang Aktif" :value="$totalMagang" icon="fa-users" color="primary" />
         </div>
-
-        <div class="col-lg-3 col-sm-6">
-            <div class="card">
-                <div class="card-body">
-                    <div class="row align-items-center">
-                        <div class="col">
-                            <h6 class="text-muted text-sm mb-1">Sudah Absen</h6>
-                            <span class="h2 font-weight-bold mb-0 text-success">{{ $sudahAbsen }}</span>
-                        </div>
-                        <div class="col-auto">
-                            <div class="icon icon-shape bg-success text-white rounded-circle shadow">
-                                <i class="fas fa-user-check"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="col-lg-3 col-sm-6 mb-4">
+            <x-stat-card label="Sudah Absen" :value="$sudahAbsen" icon="fa-user-check" color="success" />
         </div>
-
-        <div class="col-lg-3 col-sm-6">
-            <div class="card">
-                <div class="card-body">
-                    <div class="row align-items-center">
-                        <div class="col">
-                            <h6 class="text-muted text-sm mb-1">Belum Absen</h6>
-                            <span class="h2 font-weight-bold mb-0 {{ $hariKerja ? 'text-danger' : 'text-muted' }}">
-                                {{ $hariKerja ? $belumAbsen : '—' }}
-                            </span>
-                        </div>
-                        <div class="col-auto">
-                            <div class="icon icon-shape {{ $hariKerja ? 'bg-danger' : 'bg-secondary' }} text-white rounded-circle shadow">
-                                <i class="fas {{ $hariKerja ? 'fa-user-clock' : 'fa-mug-hot' }}"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="col-lg-3 col-sm-6 mb-4">
+            <x-stat-card
+                label="Belum Absen"
+                :value="$hariKerja ? $belumAbsen : '—'"
+                :icon="$hariKerja ? 'fa-user-clock' : 'fa-mug-hot'"
+                :color="$hariKerja ? 'danger' : 'secondary'" />
         </div>
-
-        <div class="col-lg-3 col-sm-6">
-            <div class="card">
-                <div class="card-body">
-                    <div class="row align-items-center">
-                        <div class="col">
-                            <h6 class="text-muted text-sm mb-1">Masuk Telat</h6>
-                            <span class="h2 font-weight-bold mb-0 text-warning">{{ $telat }}</span>
-                        </div>
-                        <div class="col-auto">
-                            <div class="icon icon-shape bg-warning text-white rounded-circle shadow">
-                                <i class="fas fa-exclamation-triangle"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="col-lg-3 col-sm-6 mb-4">
+            <x-stat-card label="Masuk Telat" :value="$telat" icon="fa-exclamation-triangle" color="warning" />
         </div>
     </div>
 

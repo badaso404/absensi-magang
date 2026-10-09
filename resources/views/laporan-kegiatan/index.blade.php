@@ -33,7 +33,7 @@
                     <label class="form-control-label text-muted small mb-1">
                         <i class="far fa-calendar mr-1"></i>Bulan
                     </label>
-                    <select name="month" class="form-control form-control-sm" onchange="this.form.submit()">
+                    <select name="month" class="form-control form-control-sm js-select" onchange="this.form.submit()">
                         <option value="">Semua Bulan</option>
                         @foreach($months as $num => $name)
                             <option value="{{ $num }}" {{ (string) $selectedMonth === (string) $num ? 'selected' : '' }}>
@@ -47,7 +47,7 @@
                     <label class="form-control-label text-muted small mb-1">
                         <i class="far fa-calendar-alt mr-1"></i>Tahun
                     </label>
-                    <select name="year" class="form-control form-control-sm" onchange="this.form.submit()">
+                    <select name="year" class="form-control form-control-sm js-select" onchange="this.form.submit()">
                         <option value="">Semua Tahun</option>
                         @foreach($years as $year)
                             <option value="{{ $year }}" {{ (string) $selectedYear === (string) $year ? 'selected' : '' }}>

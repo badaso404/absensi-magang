@@ -74,7 +74,9 @@
         </div>
 
         <div class="p-3">
-            <div class="table-responsive">
+            {{-- Tabel lengkap hanya di layar >= md; di HP dipakai kartu di bawah
+                 supaya tidak perlu scroll horizontal. --}}
+            <div class="table-responsive d-none d-md-block">
                 <table class="table table-hover align-items-center mb-0 table-absensi">
                     <thead>
                         <tr>
@@ -191,7 +193,7 @@
                         </tr>
                         @empty
                         <tr>
-                            <td colspan="6" class="text-center text-muted py-4">
+                            <td colspan="7" class="text-center text-muted py-4">
                                 <i class="fas fa-info-circle fa-2x mb-2"></i>
                                 <div>Belum ada data absensi</div>
                             </td>
@@ -199,6 +201,66 @@
                         @endforelse
                     </tbody>
                 </table>
+            </div>
+
+            {{-- Versi kartu untuk HP (< md) --}}
+            <div class="d-md-none">
+                @forelse($absensi as $a)
+                    <div class="riwayat-card"
+                         data-note="{{ $a->description ?? '' }}"
+                         data-lokasi="{{ $a->lokasi_user ?? '' }}"
+                         data-checked-in="{{ $a->checked_in_at?->format('H:i:s') ?? '' }}"
+                         data-checked-out="{{ $a->checked_out_at?->format('H:i:s') ?? '' }}">
+                        <div class="riwayat-card__head">
+                            <div>
+                                <div class="font-weight-bold text-dark">{{ \Carbon\Carbon::parse($a->created_at)->isoFormat('dddd') }}</div>
+                                <div class="text-xs text-muted">{{ \Carbon\Carbon::parse($a->created_at)->isoFormat('D MMMM Y') }}</div>
+                            </div>
+                            <span class="badge badge-pill badge-{{ optional($a->status)->color() ?? 'secondary' }}">
+                                <i class="fas {{ optional($a->status)->icon() ?? 'fa-info-circle' }} mr-1"></i>
+                                {{ optional($a->status)->text() ?? '-' }}
+                            </span>
+                        </div>
+                        <div class="riwayat-card__body">
+                            <div class="riwayat-card__cell">
+                                <span class="riwayat-card__k"><i class="fas fa-sign-in-alt text-success mr-1"></i>Masuk</span>
+                                <span class="riwayat-card__v text-{{ optional($a->checked_in_status)->color() ?? 'muted' }}">
+                                    {{ $a->checked_in_at ? \Carbon\Carbon::parse($a->checked_in_at)->format('H:i') : '-' }}
+                                </span>
+                                <span class="riwayat-card__k">{{ optional($a->checked_in_status)->text() ?? '-' }}</span>
+                            </div>
+                            <div class="riwayat-card__cell">
+                                <span class="riwayat-card__k"><i class="fas fa-sign-out-alt text-warning mr-1"></i>Pulang</span>
+                                <span class="riwayat-card__v text-{{ optional($a->checked_out_status)->color() ?? 'muted' }}">
+                                    {{ $a->checked_out_at ? \Carbon\Carbon::parse($a->checked_out_at)->format('H:i') : '-' }}
+                                </span>
+                                <span class="riwayat-card__k">{{ optional($a->checked_out_status)->text() ?? '-' }}</span>
+                            </div>
+                        </div>
+                        <div class="riwayat-card__foot">
+                            @if($a->wfhwfo)
+                                <span class="badge badge-{{ $a->wfhwfo == 'WFH' ? 'success' : 'primary' }}">{{ $a->wfhwfo }}</span>
+                            @else
+                                <span class="text-muted text-xs">Mode -</span>
+                            @endif
+                            @if($a->latitude && $a->longitude)
+                                <button class="btn btn-xs btn-outline-primary btn-map"
+                                        data-lat="{{ $a->latitude }}"
+                                        data-lon="{{ $a->longitude }}"
+                                        data-lokasi="{{ $a->lokasi_user ?? 'Lokasi Absen' }}">
+                                    <i class="fas fa-map-marked-alt mr-1"></i>Lihat Peta
+                                </button>
+                            @else
+                                <span class="text-xs text-muted"><i class="fas fa-map-marker-alt-slash"></i> Tanpa lokasi</span>
+                            @endif
+                        </div>
+                    </div>
+                @empty
+                    <div class="text-center text-muted py-4">
+                        <i class="fas fa-info-circle fa-2x mb-2"></i>
+                        <div>Belum ada data absensi</div>
+                    </div>
+                @endforelse
             </div>
         </div>
     </div>
@@ -329,6 +391,23 @@
     .badge-pill { border-radius: 999px; padding: .35rem .6rem; font-size: .85rem; }
 
     .cursor-pointer { cursor: pointer; }
+
+    /* ---- Kartu riwayat untuk HP ---- */
+    .riwayat-card {
+        border: 1px solid #edf0f5; border-radius: 14px;
+        padding: .85rem 1rem; margin-bottom: .75rem; background: #fff;
+        box-shadow: 0 2px 8px rgba(50,50,93,.04);
+    }
+    .riwayat-card:last-child { margin-bottom: 0; }
+    .riwayat-card__head { display: flex; justify-content: space-between; align-items: flex-start; }
+    .riwayat-card__body { display: flex; gap: .5rem; margin: .65rem 0; }
+    .riwayat-card__cell {
+        flex: 1; background: #f7f8fc; border-radius: 10px; padding: .5rem .65rem;
+        display: flex; flex-direction: column;
+    }
+    .riwayat-card__k { font-size: .7rem; color: #8898aa; }
+    .riwayat-card__v { font-size: 1.1rem; font-weight: 700; font-variant-numeric: tabular-nums; }
+    .riwayat-card__foot { display: flex; align-items: center; justify-content: space-between; gap: .5rem; }
 
     @media (max-width:767px){
         .d-none.d-md-table-cell { display: none !important; }

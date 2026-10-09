@@ -24,7 +24,7 @@
                     <label class="form-control-label text-muted small mb-1">
                         <i class="far fa-calendar mr-1"></i>Bulan
                     </label>
-                    <select name="month" class="form-control form-control-sm" onchange="this.form.submit()">
+                    <select name="month" class="form-control form-control-sm js-select" onchange="this.form.submit()">
                         <option value="">Semua Bulan</option>
                         @foreach($months as $num => $name)
                             <option value="{{ $num }}" {{ (string) $selectedMonth === (string) $num ? 'selected' : '' }}>
@@ -38,7 +38,7 @@
                     <label class="form-control-label text-muted small mb-1">
                         <i class="far fa-calendar-alt mr-1"></i>Tahun
                     </label>
-                    <select name="year" class="form-control form-control-sm" onchange="this.form.submit()">
+                    <select name="year" class="form-control form-control-sm js-select" onchange="this.form.submit()">
                         <option value="">Semua Tahun</option>
                         @foreach($years as $year)
                             <option value="{{ $year }}" {{ (string) $selectedYear === (string) $year ? 'selected' : '' }}>
@@ -77,7 +77,7 @@
                         <span class="badge badge-light">{{ $rekap->count() }} data</span>
                     </div>
                 </div>
-                <div class="table-responsive">
+                <div class="table-responsive d-none d-md-block">
                     <table class="table table-hover align-items-center mb-0">
                         <thead class="thead-light">
                             <tr>
@@ -213,10 +213,79 @@
                         </tbody>
                     </table>
                 </div>
+
+                {{-- Versi kartu untuk HP (< md) --}}
+                <div class="d-md-none p-3">
+                    @forelse($rekap as $r)
+                        <div class="rekap-card">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <div>
+                                    <div class="font-weight-bold text-primary">{{ \Carbon\Carbon::parse($r->created_at)->isoFormat('dddd') }}</div>
+                                    <small class="text-muted">{{ \Carbon\Carbon::parse($r->created_at)->isoFormat('D MMMM Y') }}</small>
+                                </div>
+                                <span class="badge badge-pill badge-{{ optional($r->status)->color() ?? 'secondary' }}">
+                                    {{ optional($r->status)->text() ?? '-' }}
+                                </span>
+                            </div>
+
+                            <div class="text-sm text-muted mb-2"><i class="far fa-user-circle mr-1"></i>{{ $r->user->name ?? '-' }}</div>
+
+                            <div class="rekap-card__grid">
+                                <div>
+                                    <span class="rekap-card__k"><i class="fas fa-sign-in-alt text-success mr-1"></i>Masuk</span>
+                                    <span class="font-weight-bold">{{ $r->checked_in_at ? \Carbon\Carbon::parse($r->checked_in_at)->format('H:i') : '-' }}</span>
+                                    <small class="text-{{ optional($r->checked_in_status)->color() ?? 'muted' }}">{{ optional($r->checked_in_status)->text() ?? '' }}</small>
+                                </div>
+                                <div>
+                                    <span class="rekap-card__k"><i class="fas fa-sign-out-alt text-warning mr-1"></i>Pulang</span>
+                                    <span class="font-weight-bold">{{ $r->checked_out_at ? \Carbon\Carbon::parse($r->checked_out_at)->format('H:i') : '-' }}</span>
+                                    <small class="text-{{ optional($r->checked_out_status)->color() ?? 'muted' }}">{{ optional($r->checked_out_status)->text() ?? '' }}</small>
+                                </div>
+                            </div>
+
+                            <div class="d-flex align-items-center justify-content-between mt-2">
+                                @if($r->wfhwfo)
+                                    <span class="badge badge-{{ $r->wfhwfo == 'WFH' ? 'success' : 'primary' }}">
+                                        <i class="fas fa-{{ $r->wfhwfo == 'WFH' ? 'home' : 'building' }} mr-1"></i>{{ $r->wfhwfo }}
+                                    </span>
+                                @else
+                                    <span class="text-muted text-xs">Mode -</span>
+                                @endif
+                                @if($r->latitude && $r->longitude)
+                                    <button class="btn btn-xs btn-outline-primary btn-map"
+                                            data-lat="{{ $r->latitude }}" data-lon="{{ $r->longitude }}"
+                                            data-lokasi="{{ $r->lokasi_user ?? 'Lokasi Absen' }}">
+                                        <i class="fas fa-map-marked-alt mr-1"></i>Peta
+                                    </button>
+                                @else
+                                    <span class="text-xs text-muted"><i class="fas fa-map-marker-alt-slash"></i> Tanpa lokasi</span>
+                                @endif
+                            </div>
+                        </div>
+                    @empty
+                        <div class="text-center text-muted py-4">
+                            <i class="fas fa-info-circle fa-2x mb-2 d-block"></i>
+                            <div>Belum ada data rekap absensi</div>
+                        </div>
+                    @endforelse
+                </div>
             </div>
         </div>
     </div>
 </div>
+
+@push('styles')
+<style>
+    .rekap-card {
+        border: 1px solid #edf0f5; border-radius: 14px;
+        padding: .9rem 1rem; margin-bottom: .75rem; background: #fff;
+        box-shadow: 0 2px 8px rgba(50,50,93,.04);
+    }
+    .rekap-card:last-child { margin-bottom: 0; }
+    .rekap-card__grid { display: grid; grid-template-columns: 1fr 1fr; gap: .5rem .75rem; font-size: .9rem; }
+    .rekap-card__k { display: block; font-size: .68rem; text-transform: uppercase; letter-spacing: .03em; color: #8898aa; font-weight: 700; }
+</style>
+@endpush
 
 <!-- Modal untuk Google Maps -->
 <div class="modal fade" id="mapModal" tabindex="-1" role="dialog" aria-labelledby="mapModalLabel" aria-hidden="true">

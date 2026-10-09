@@ -18,7 +18,7 @@
                 <li><i class="fa fa-user-friends"></i> Terhubung dengan rekan satu unit</li>
             </ul>
         </div>
-        <p class="login-brand__footer">&copy; 2026 by TomGan. All rights reserved.</p>
+        <p class="login-brand__footer">&copy; 2026 by Bgs. All rights reserved.</p>
     </div>
 
     {{-- Panel form --}}

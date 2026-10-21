@@ -21386,7 +21386,7 @@ textarea[resize=horizontal] {
     height: 430px;
     background-image: 
         linear-gradient(rgba(124, 58, 237, 0.6), rgba(124, 58, 237, 0.6)),
-        url("/images/bg-dashboard.jpeg");
+        url("../../images/bg-dashboard.jpeg");
     background-size: cover;
     background-position: center;
     border-bottom-left-radius: 2.5rem

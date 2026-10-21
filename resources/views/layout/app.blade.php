@@ -68,7 +68,7 @@
             rgba(88, 36, 226, 0.94) 0%,
             rgba(124, 58, 237, 0.86) 42%,
             rgba(58, 24, 152, 0.94) 100%),
-        url("/images/bg-dashboard.jpeg?v=2");
+        url("{{ asset('images/bg-dashboard.jpeg') }}?v=2");
     background-size: cover;
     /* Gedung berada di tengah foto; 45% memotong sebagian langit kosong di
        atas supaya banner yang pendek-lebar tetap memperlihatkan gedungnya. */
